@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - ./init-viajatcc.js:/docker-entrypoint-initdb.d/init-viajatcc.js:ro
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+
+  mongo-init:
+    image: mongo:6.0
+    container_name: mongo-init
+    depends_on:
+      - mongodb
+    entrypoint: >
+      bash -c "sleep 10;
+               mongo --host mongodb --eval 'rs.initiate(); rs.status();'"
+
+volumes:
+  mongo-data:
