@@ -9,7 +9,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-      - ./init-viajatcc.js:/docker-entrypoint-initdb.d/init-viajatcc.js:ro
+      - ./init-rs.js:/docker-entrypoint-initdb.d/init-rs.js:ro
     command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
 
   mongo-init:
@@ -19,7 +19,7 @@ services:
       - mongodb
     entrypoint: >
       bash -c "sleep 10;
-               mongo --host mongodb --eval 'rs.initiate(); rs.status();'"
-
+               mongo --host mongodb --eval \"load('/docker-entrypoint-initdb.d/init-rs.js')\""
+               
 volumes:
   mongo-data:

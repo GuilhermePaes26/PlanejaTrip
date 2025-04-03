@@ -24,8 +24,8 @@ export class UsersService {
   async findOne(id: string): Promise<User> {
     const user = await this.userModel
       .findById(id)
-      .populate('trips')
-      .populate('payments')
+      .populate('viagens')
+      .populate('pagamentos')
       .exec();
     if (!user) {
       throw new NotFoundException(`Usuário com ID "${id}" não encontrado`);
