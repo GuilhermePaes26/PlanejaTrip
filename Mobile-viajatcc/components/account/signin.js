@@ -1,7 +1,7 @@
 import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, ScrollView, TextInput, Button } from 'react-native';
 import Cadastro from './Cadastro';
 
 const Stack = createStackNavigator();
@@ -15,6 +15,7 @@ const SignIn = ({ navigation }) => {
       };
 
     return (
+        
 
         <View style={styles.container}>
             
@@ -39,7 +40,7 @@ const SignIn = ({ navigation }) => {
                         value={Senha}
                         onChangeText={setSenha}
                     />
-
+                    
                     <Text style={styles.textLinkCadastro} onPress={vaiParaCadastro}>Cadastrar uma conta</Text>
                     
                     <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>Entrar</Text></TouchableOpacity> 
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 80,
         borderRadius: 5,
-        color: '#A3CDFF'
+        // color: '#A3CDFF'
     },
     label: {
         display: 'flex',
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 15,
         textAlign: 'center',
+        color: '#FFFFFF',
     },
     button: {
         fontSize: 16,

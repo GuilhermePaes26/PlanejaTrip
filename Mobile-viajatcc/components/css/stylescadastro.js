@@ -12,6 +12,18 @@ const styles = StyleSheet.create({
   //   color: "#464237",
   //   fontSize: 20,
   // },
+  container: { //mantendo todo o fundo na cor azul
+    backgroundColor: '#233DDF', //azul escuro
+  },
+  titulo: { //formatando titulo "Criar conta"
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#FFFFFF',
+    fontStyle: 'bold'
+  },
+  text: { // deixando todas as letras brancas
+    color: '#FFFFFF',
+  },
   inputs: {
     borderWidth: 1, // Sempre mantém a borda visível
     borderColor: "#D2CEC5",
@@ -20,7 +32,8 @@ const styles = StyleSheet.create({
     height: 50,
     paddingLeft:10,
     paddingTop: 5,
-    fontSize: 20
+    fontSize: 20,
+    
   },
   inputSenha: {
     borderWidth: 1, // Sempre mantém a borda visível
@@ -59,8 +72,7 @@ const styles = StyleSheet.create({
     height: 30,
     marginTop: 43,
     marginLeft: -43,
-    backgroundColor: '#233DDF',
-  }
+  },
 })
 
 export default styles;
