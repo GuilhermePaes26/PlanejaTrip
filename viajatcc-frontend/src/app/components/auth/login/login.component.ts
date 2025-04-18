@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';  // Importe as classes necessárias
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
+  standalone: false,
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   logForm!: FormGroup;  // Defina a variável do FormGroup
   errorMessage: string = '';
 

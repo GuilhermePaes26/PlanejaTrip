@@ -3,11 +3,18 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "FrontEnd-viajatcc": {
+    "viajatcc-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
         }
       },
       "root": "",
@@ -17,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/front-end-viajatcc",
+            "outputPath": "dist/viajatcc-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -69,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "FrontEnd-viajatcc:build:production"
+              "buildTarget": "viajatcc-frontend:build:production"
             },
             "development": {
-              "buildTarget": "FrontEnd-viajatcc:build:development"
+              "buildTarget": "viajatcc-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -103,8 +110,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "41637248-6a46-474f-9599-f1c871a4657d"
   }
 }
