@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {path: 'auth',
@@ -12,7 +13,8 @@ const routes: Routes = [
       { path: 'signup', component: SignupComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' } // redireciona /auth → /auth/login
     ]},
-    {path:'', redirectTo: 'auth', pathMatch:'full'}
+    {path:'', redirectTo: 'auth', pathMatch:'full'},
+    {path:'home', component: HomeComponent}
 ];
 
 @NgModule({
