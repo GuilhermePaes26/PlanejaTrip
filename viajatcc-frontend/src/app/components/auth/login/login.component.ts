@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent {
   logForm!: FormGroup;  // Defina a variável do FormGroup
   errorMessage: string = '';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
     // Inicialize o formulário com os controles e validadores
@@ -25,7 +26,7 @@ export class LoginComponent {
   onLogin() {
     if (this.logForm.valid) {
       const { username, password } = this.logForm.value;
-      // Faça algo com os dados, como chamar um serviço de login, por exemplo
+      this.authService.login(username, password)
       console.log('Login com:', username, password);
     } else {
       this.errorMessage = 'Preencha todos os campos corretamente!';

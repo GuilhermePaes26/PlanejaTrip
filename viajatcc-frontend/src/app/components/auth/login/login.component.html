@@ -13,12 +13,12 @@
                     <input id="password" type="password" formControlName="password" placeholder="Digite sua senha"
                         class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md" [disabled]="logForm.invalid">  <!-- Botão desabilitado se o formulário for inválido -->
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md">  <!-- Botão desabilitado se o formulário for inválido -->
                     Entrar
                 </button>
             </form>
-            <p class="mt-4 text-sm">Não tem conta? <a href="registrar.html" class="text-blue-600">Crie uma agora</a></p>
-            <!-- <div *ngIf="errorMessage" class="text-red-500 text-sm mt-2">{{ errorMessage }}</div>  Mensagem de erro -->
+            <p class="mt-4 text-sm">Não tem conta? <a href="/auth/signup" class="text-blue-600">Crie uma agora</a></p>
+            <div *ngIf="errorMessage" class="text-red-500 text-sm mt-2">{{ errorMessage }}</div> 
         </div>
     </div>
     <div class="w-1/2 bg-blue-600 flex items-center justify-center text-white">
