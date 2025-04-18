@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
-
+import {
+  BrowserModule,
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +13,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
+import { TripsComponent } from './components/trips/trips.component';
 
 @NgModule({
   declarations: [
@@ -17,18 +21,17 @@ import { HomeComponent } from './components/home/home.component';
     LoginComponent,
     SignupComponent,
     AuthComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TripsComponent,
   ],
-  providers: [
-    provideClientHydration(withEventReplay())
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideClientHydration(withEventReplay())],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,21 @@
+<div class="trips-container">
+  <h1>Viagens Disponíveis</h1>
+
+  <div *ngIf="isLoading" class="loading">Carregando...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div class="trips-grid">
+    <div class="trip-card" *ngFor="let trip of trips">
+      <h2>{{ trip.nome }}</h2>
+      <p><strong>Data:</strong> {{ trip.data | date : "dd/MM/yyyy" }}</p>
+      <p><strong>Preço:</strong> R$ {{ trip.preco | number : "1.2-2" }}</p>
+      <p><strong>Passageiros:</strong> {{ trip.passageiros.length }}</p>
+
+      <div class="actions">
+        <button (click)="viewDetails(trip._id)">Ver Detalhes</button>
+        <button (click)="editTrip(trip._id)">Editar</button>
+        <button (click)="deleteTrip(trip._id)" class="delete">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>
