@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 export class SignupComponent {
   registerForm!: FormGroup
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private route: Router) { }
 
   ngOnInit(): void {
     // Inicialize o formulário com os controles e validadores
@@ -30,6 +31,7 @@ export class SignupComponent {
     console.log(name, password, cpf, );
     this.authService.signin(password, cpf, name, email, idade).subscribe({next: (response) => {
       console.log(response)
+      this.route.navigate(['/auth/login'])
     }})
   }
 }
