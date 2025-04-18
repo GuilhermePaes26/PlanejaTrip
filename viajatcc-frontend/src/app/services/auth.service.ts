@@ -8,8 +8,12 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
-  login(username: string, password: string) {
-    console.log('fuck')
+  login(email: string, password: string) {
+    const data = {
+      email,
+      password
+    }
+    return this.http.post<any>(`${this.apiUrl}/users/login`, data)
   }
   signin(senha: string, cpf: string, nome: string, email: string, idade: number) {
     const data = {
