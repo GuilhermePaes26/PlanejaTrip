@@ -30,7 +30,6 @@ export class SignupComponent {
 
     console.log(name, password, cpf, );
     this.authService.signin(password, cpf, name, email, idade).subscribe({next: (response) => {
-      console.log(response)
       this.route.navigate(['/auth/login'])
     }})
   }
