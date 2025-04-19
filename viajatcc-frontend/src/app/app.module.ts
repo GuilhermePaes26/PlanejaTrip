@@ -9,6 +9,10 @@ import { AuthComponent } from './components/auth/auth.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { TripsComponent } from './components/trips/trips.component';
+import { SidebarComponent } from './components/home/sidebar/sidebar.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -17,6 +21,7 @@ import { TripsComponent } from './components/trips/trips.component';
     SignupComponent,
     AuthComponent,
     HomeComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +30,9 @@ import { TripsComponent } from './components/trips/trips.component';
     ReactiveFormsModule,
     HttpClientModule,
     TripsComponent,
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule
   ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],

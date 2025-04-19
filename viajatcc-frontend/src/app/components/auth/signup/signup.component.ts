@@ -18,7 +18,7 @@ export class SignupComponent {
     // Inicialize o formulário com os controles e validadores
     this.registerForm = this.fb.group({
       cnpj: ['', [Validators.required]],   // Adicionando validadores
-      razao: [{value: '', disabled: true}, [Validators.required]],  // Adicionando validadores
+      razao: ['', [Validators.required]],  // Adicionando validadores
       password: ['', [Validators.required]],   // Adicionando validadores
       password_confirmation: ['', [Validators.required]],   // Adicionando validadores
       email: ['', [Validators.required]],   // Adicionando validadores 
@@ -26,10 +26,8 @@ export class SignupComponent {
     this.cnpj = this.registerForm.value.cnpj
   }
   onSubmit() {
-    const {name, password, cnpj, email} = this.registerForm.value
-
-    console.log(name, password, cnpj, );
-    this.authService.signin(password, cnpj, name, email).subscribe({next: (response) => {
+    const {razao, password, cnpj, email} = this.registerForm.value
+    this.authService.signin(password, cnpj, razao, email).subscribe({next: (response) => {
       this.route.navigate(['/auth/login'])
     }})
   }
@@ -42,7 +40,6 @@ export class SignupComponent {
       })
         .then(response => response.json())
         .then(data => {
-          console.log('Dados da empresa:', data);
           this.registerForm.patchValue({
             razao: data.company.name
           });

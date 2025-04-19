@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
+  menu: boolean = true;
+  onClick(bol: boolean) {
+    this.menu = bol
+  }
 }

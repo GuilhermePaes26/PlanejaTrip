@@ -22,7 +22,8 @@ export class AuthService {
       senha,
       cpf,
       nome,
-      email
+      email,
+      idade: 23
     }
     return this.http.post<any>(`${this.apiUrl}/users`, data)
   }
