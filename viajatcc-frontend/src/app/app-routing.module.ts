@@ -5,6 +5,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { TripsComponent } from './components/trips/trips.component';
+import { AuthGuard } from './components/auth/auth.guard';
 const routes: Routes = [
   {
     path: 'auth',
@@ -16,8 +17,8 @@ const routes: Routes = [
     ],
   },
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'trips', component: TripsComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'trips', component: TripsComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({

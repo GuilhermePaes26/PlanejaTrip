@@ -11,26 +11,48 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
   registerForm!: FormGroup
-
+  cnpj!: string
   constructor(private fb: FormBuilder, private authService: AuthService, private route: Router) { }
 
   ngOnInit(): void {
     // Inicialize o formulário com os controles e validadores
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required]],  // Adicionando validadores
+      cnpj: ['', [Validators.required]],   // Adicionando validadores
+      razao: [{value: '', disabled: true}, [Validators.required]],  // Adicionando validadores
       password: ['', [Validators.required]],   // Adicionando validadores
       password_confirmation: ['', [Validators.required]],   // Adicionando validadores
-      cpf: ['', [Validators.required]],   // Adicionando validadores
-      email: ['', [Validators.required]],   // Adicionando validadores
-      idade: [0, [Validators.required]],   // Adicionando validadores 
+      email: ['', [Validators.required]],   // Adicionando validadores 
     });
+    this.cnpj = this.registerForm.value.cnpj
   }
   onSubmit() {
-    const {name, password, cpf, email, idade} = this.registerForm.value
+    const {name, password, cnpj, email} = this.registerForm.value
 
-    console.log(name, password, cpf, );
-    this.authService.signin(password, cpf, name, email, idade).subscribe({next: (response) => {
+    console.log(name, password, cnpj, );
+    this.authService.signin(password, cnpj, name, email).subscribe({next: (response) => {
       this.route.navigate(['/auth/login'])
     }})
+  }
+  findcnpj() {
+    if (this.registerForm.value.cnpj.length == 14) {
+      fetch(`https://open.cnpja.com/office/${this.registerForm.value.cnpj}`, {
+        headers: {
+          Authorization: 'Bearer 711499ff-e472-46b9-b3fe-89dfc8209092-09cac35d-e7bb-46e9-a302-c35040e49b51'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Dados da empresa:', data);
+          this.registerForm.patchValue({
+            razao: data.company.name
+          });
+          this.registerForm.patchValue({
+            email: data.emails[0].address
+          });
+        })
+        .catch(error => {
+          console.error('Erro na requisição:', error);
+        });
+    }
   }
 }

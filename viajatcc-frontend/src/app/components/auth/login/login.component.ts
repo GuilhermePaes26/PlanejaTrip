@@ -30,6 +30,8 @@ export class LoginComponent {
       this.authService.login(username, password).subscribe({
         next: (response) => {
           if (response) {
+            console.log(response);
+            this.authService.saveToken(response._id)
             this.route.navigate(['/home'])
           } else {
             this.errorMessage = 'Usuário ou senha incorreto'

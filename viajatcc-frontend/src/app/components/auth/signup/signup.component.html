@@ -5,16 +5,12 @@
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
                 <div class="mb-4">
-                    <label class="block text-sm font-medium">Nome</label>
-                    <input type="text" formControlName="name" class="w-full px-4 py-2 border rounded-md">
+                    <label class="block text-sm font-medium">CNPJ</label>
+                    <input type="text"  formControlName="cnpj" class="w-full px-4 py-2 border rounded-md" (keyup)="findcnpj()">
                 </div>
                 <div class="mb-4">
-                    <label class="block text-sm font-medium">CPF</label>
-                    <input type="text" formControlName="cpf" class="w-full px-4 py-2 border rounded-md">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium">Idade</label>
-                    <input type="number" formControlName="idade" class="w-full px-4 py-2 border rounded-md">
+                    <label class="block text-sm font-medium">razão social</label>
+                    <input type="text" formControlName="razao" class="w-full px-4 py-2 border rounded-md">
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium">E-mail</label>
