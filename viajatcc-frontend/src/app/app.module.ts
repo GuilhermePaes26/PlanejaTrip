@@ -14,6 +14,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { TripsComponent } from './components/trips/trips.component';
+import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { TripsComponent } from './components/trips/trips.component';
     ReactiveFormsModule,
     HttpClientModule,
     TripsComponent,
+    TripDetailComponent,
   ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],

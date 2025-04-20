@@ -18,6 +18,13 @@ const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'trips', component: TripsComponent },
+  {
+    path: 'trips/:id',
+    loadComponent: () =>
+      import('./components/trip-detail/trip-detail.component').then(
+        (m) => m.TripDetailComponent
+      ),
+  },
 ];
 
 @NgModule({

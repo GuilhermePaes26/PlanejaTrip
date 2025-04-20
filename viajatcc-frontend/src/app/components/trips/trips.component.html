@@ -12,9 +12,13 @@
       <p><strong>Passageiros:</strong> {{ trip.passageiros.length }}</p>
 
       <div class="actions">
-        <button (click)="viewDetails(trip._id)">Ver Detalhes</button>
-        <button (click)="editTrip(trip._id)">Editar</button>
-        <button (click)="deleteTrip(trip._id)" class="delete">Excluir</button>
+        <button *ngIf="trip._id" (click)="viewDetails(trip._id)">
+          Ver Detalhes
+        </button>
+        <button *ngIf="trip._id" (click)="editTrip(trip._id)">Editar</button>
+        <button *ngIf="trip._id" (click)="deleteTrip(trip._id)" class="delete">
+          Excluir
+        </button>
       </div>
     </div>
   </div>
