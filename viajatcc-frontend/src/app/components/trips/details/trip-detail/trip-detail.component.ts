@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TripsService, Trip } from '../../services/trips.service';
-import { exportPassengersToExcel } from '../../utils/export-to-excel';
+import { TripsService, Trip } from '../../../../services/trips.service';
+import { exportPassengersToExcel } from '../../../../utils/export-to-excel';
 
 @Component({
   selector: 'app-trip-detail',

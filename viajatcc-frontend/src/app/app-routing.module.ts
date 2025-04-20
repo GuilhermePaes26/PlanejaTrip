@@ -4,7 +4,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
-import { TripsComponent } from './components/trips/trips.component';
+import { TripsComponent } from './components/trips/list/trips.component';
 const routes: Routes = [
   {
     path: 'auth',
@@ -21,8 +21,22 @@ const routes: Routes = [
   {
     path: 'trips/:id',
     loadComponent: () =>
-      import('./components/trip-detail/trip-detail.component').then(
-        (m) => m.TripDetailComponent
+      import(
+        './components/trips/details/trip-detail/trip-detail.component'
+      ).then((m) => m.TripDetailComponent),
+  },
+  {
+    path: 'trips/create',
+    loadComponent: () =>
+      import('./components/trips/form/form-trip/form-trip.component').then(
+        (m) => m.FormTripComponent
+      ),
+  },
+  {
+    path: 'trips/edit/:id',
+    loadComponent: () =>
+      import('./components/trips/form/form-trip/form-trip.component').then(
+        (m) => m.FormTripComponent
       ),
   },
 ];
