@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { TripsComponent } from './components/trips/list/trips.component';
 
 import { AuthGuard } from './components/auth/auth.guard';
+import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 const routes: Routes = [
   {
     path: 'auth',
@@ -18,35 +19,39 @@ const routes: Routes = [
     ],
   },
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'trips', component: TripsComponent },
   {
-    path: 'trips/:id',
-    loadComponent: () =>
-      import(
-        './components/trips/details/trip-detail/trip-detail.component'
-      ).then((m) => m.TripDetailComponent),
+    path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+      {path: 'dashboard', component:DashboardComponent, canActivate: [AuthGuard]},
+      {
+        path: 'trips', component: TripsComponent, children: [
+          {
+            path: ':id',
+            loadComponent: () =>
+              import(
+                './components/trips/details/trip-detail/trip-detail.component'
+              ).then((m) => m.TripDetailComponent),
+          },
+          {
+            path: 'create',
+            loadComponent: () =>
+              import('./components/trips/form/form-trip/form-trip.component').then(
+                (m) => m.FormTripComponent
+              ),
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import('./components/trips/form/form-trip/form-trip.component').then(
+                (m) => m.FormTripComponent
+              ),
+          },
+        ],
+      },],
   },
-  {
-    path: 'trips/create',
-    loadComponent: () =>
-      import('./components/trips/form/form-trip/form-trip.component').then(
-        (m) => m.FormTripComponent
-      ),
-  },
-  {
-    path: 'trips/edit/:id',
-    loadComponent: () =>
-      import('./components/trips/form/form-trip/form-trip.component').then(
-        (m) => m.FormTripComponent
-      ),
-  },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'trips', component: TripsComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

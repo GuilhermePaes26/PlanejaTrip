@@ -1,14 +1,20 @@
 <div class="layout">
-    <div class="sidebar" *ngIf="menu">
-        <button (click)="onClick(false)">
-            <mat-icon class="menu-button">menu</mat-icon>
-          </button>      
+  <div class="sidebar" *ngIf="menu">
+      <button (click)="onClick(false)">
+          <mat-icon class="menu-button">menu</mat-icon>
+        </button>      
         <app-sidebar></app-sidebar>
     </div>
-    <div class="home">
-        <button *ngIf="!menu"  (click)="onClick(true)">
-            <mat-icon class="menu-button">menu</mat-icon>
-          </button>    
-        home
+    <div class="home" *ngIf="home">  
+      <button (click)="onClick(true)" *ngIf="!menu">
+        <mat-icon class="menu-button">menu</mat-icon>
+      </button> 
+      <app-dashboard></app-dashboard>
+    </div>
+    <div class="trip" *ngIf="trips">
+      <button (click)="onClick(true)" *ngIf="!menu">
+        <mat-icon class="menu-button">menu</mat-icon>
+      </button> 
+      <router-outlet></router-outlet>
     </div>
 </div>

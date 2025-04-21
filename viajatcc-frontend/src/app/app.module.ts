@@ -20,6 +20,7 @@ import { SidebarComponent } from './components/home/sidebar/sidebar.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {MatButtonModule} from '@angular/material/button';
     AuthComponent,
     HomeComponent,
     SidebarComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
