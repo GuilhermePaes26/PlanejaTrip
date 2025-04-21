@@ -21,6 +21,7 @@ export class LoginComponent {
       username: ['', [Validators.required]],  // Adicionando validadores
       password: ['', [Validators.required]]   // Adicionando validadores
     });
+    
   }
 
   // Função que será chamada no submit do formulário
@@ -38,7 +39,6 @@ export class LoginComponent {
           }
         }
       })
-      console.log('Login com:', username, password);
     } else {
       this.errorMessage = 'Preencha todos os campos corretamente!';
     }

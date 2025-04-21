@@ -15,13 +15,12 @@ const routes: Routes = [
     component: AuthComponent,
     children: [
       { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignupComponent },
-      { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona /auth → /auth/login
+      { path: 'signup', component: SignupComponent }, // redireciona /auth → /auth/login
     ],
   },
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   {
-    path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+    path: 'home', component: HomeComponent, children: [
       {path: 'dashboard', component:DashboardComponent},
       {
         path: 'trips', children: [

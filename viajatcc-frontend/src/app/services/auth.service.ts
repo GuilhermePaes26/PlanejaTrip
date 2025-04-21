@@ -29,12 +29,12 @@ export class AuthService {
   }
   saveToken(id: string) {
     if (this.isBrowser) {
-      localStorage.setItem('authToken', id);
+      sessionStorage.setItem('authToken', id);
     }
   }
   getToken(): string | null {
     if (this.isBrowser) {
-      return localStorage.getItem('authToken');
+      return sessionStorage.getItem('authToken');
     }
     return null;
   }
