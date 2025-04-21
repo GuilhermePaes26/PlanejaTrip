@@ -36,11 +36,13 @@ export class TripsComponent implements OnInit {
   }
 
   viewDetails(id: string): void {
-    this.router.navigate(['/trips', id]);
+    console.log(id);
+    
+    this.router.navigate([`/home/trips/${id}`]);
   }
 
   editTrip(id: string): void {
-    this.router.navigate(['/trips/edit', id]);
+    this.router.navigate(['/home/trips/edit', id]);
   }
 
   deleteTrip(id: string): void {

@@ -21,6 +21,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
+import { TripRouterComponent } from './components/trips/trip-router/trip-router.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DashboardComponent } from './components/home/dashboard/dashboard.compon
     HomeComponent,
     SidebarComponent,
     DashboardComponent,
+    TripRouterComponent,
   ],
   imports: [
     BrowserModule,

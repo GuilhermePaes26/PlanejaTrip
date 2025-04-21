@@ -8,6 +8,7 @@ import { TripsComponent } from './components/trips/list/trips.component';
 
 import { AuthGuard } from './components/auth/auth.guard';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
+import { TripRouterComponent } from './components/trips/trip-router/trip-router.component';
 const routes: Routes = [
   {
     path: 'auth',
@@ -21,9 +22,17 @@ const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   {
     path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
-      {path: 'dashboard', component:DashboardComponent, canActivate: [AuthGuard]},
+      {path: 'dashboard', component:DashboardComponent},
       {
-        path: 'trips', component: TripsComponent, children: [
+        path: 'trips', children: [
+          {
+            path: '',
+            component: TripRouterComponent
+          },
+          {
+            path: 'list',
+            component: TripsComponent
+          },
           {
             path: ':id',
             loadComponent: () =>
