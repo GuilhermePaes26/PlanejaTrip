@@ -5,12 +5,10 @@
         </button>      
         <app-sidebar></app-sidebar>
     </div>
-    <div class="home" >  
+    <div class="home" >
       <button (click)="onClick(true)" *ngIf="!menu">
         <mat-icon class="menu-button">menu</mat-icon>
-      </button> 
-    </div>
-    <div class="trip" >
+      </button>   
       <router-outlet></router-outlet>
     </div>
 </div>

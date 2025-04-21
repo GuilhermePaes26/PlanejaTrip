@@ -62,11 +62,11 @@ export class FormTripComponent implements OnInit {
 
     if (this.isEditMode && this.tripId) {
       this.tripsService.updateTrip(this.tripId, tripData).subscribe(() => {
-        this.router.navigate(['/trips']);
+        this.router.navigate(['/home/trips/list']);
       });
     } else {
       this.tripsService.createTrip(tripData).subscribe(() => {
-        this.router.navigate(['/trips']);
+        this.router.navigate(['/home/trips/list']);
       });
     }
   }

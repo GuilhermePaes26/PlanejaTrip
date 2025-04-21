@@ -34,18 +34,18 @@ const routes: Routes = [
             component: TripsComponent
           },
           {
-            path: ':id',
-            loadComponent: () =>
-              import(
-                './components/trips/details/trip-detail/trip-detail.component'
-              ).then((m) => m.TripDetailComponent),
-          },
-          {
             path: 'create',
             loadComponent: () =>
               import('./components/trips/form/form-trip/form-trip.component').then(
                 (m) => m.FormTripComponent
               ),
+          },
+          {
+            path: ':id',
+            loadComponent: () =>
+              import(
+                './components/trips/details/trip-detail/trip-detail.component'
+              ).then((m) => m.TripDetailComponent),
           },
           {
             path: 'edit/:id',
