@@ -9,18 +9,20 @@ import { TripsComponent } from './components/trips/list/trips.component';
 import { AuthGuard } from './components/auth/auth.guard';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { TripRouterComponent } from './components/trips/trip-router/trip-router.component';
+import { AlreadyLoggedGuard } from './components/auth/already-logged.guard';
 const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent,
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignupComponent }, // redireciona /auth → /auth/login
+      { path: 'login', component: LoginComponent, canActivate: [AlreadyLoggedGuard] },
+      { path: 'signup', component: SignupComponent, canActivate: [AlreadyLoggedGuard] },
+      { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona /auth → /auth/login
     ],
   },
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   {
-    path: 'home', component: HomeComponent, children: [
+    path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
       {path: 'dashboard', component:DashboardComponent},
       {
         path: 'trips', children: [

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +8,28 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private apiUrl = 'http://localhost:3000';
   isBrowser!: boolean;
+
+  private authChecked = new BehaviorSubject<boolean>(false);
+  authChecked$ = this.authChecked.asObservable();
+
   constructor(private http: HttpClient) { 
     this.isBrowser = typeof window !== 'undefined';
+    if (this.isBrowser) {
+
+      this.checkAuth();
+    }
   }
+  
+  checkAuth() {
+    // Simula verificação (ex: token no storage)
+    const token = sessionStorage.getItem('authToken');
+    if (token) {
+      // pode fazer algo como validar na API se quiser
+    }
+    // Após checar, avisamos que terminou a verificação
+    this.authChecked.next(true);
+  }
+  
   login(email: string, password: string) {
     const data = {
       email,
@@ -40,6 +60,10 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!this.getToken();
+    if (this.isBrowser) {
+      return !!sessionStorage.getItem('authToken');
+    } else {
+      return false
+    }
   }
 }

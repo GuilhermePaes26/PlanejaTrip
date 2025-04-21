@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   logForm!: FormGroup;  // Defina a variável do FormGroup
   errorMessage: string = '';
+  isBrowser!: boolean;
+  token: string | null = ''
 
   constructor(private fb: FormBuilder, private authService: AuthService, private route: Router) { }
 
@@ -21,7 +23,6 @@ export class LoginComponent {
       username: ['', [Validators.required]],  // Adicionando validadores
       password: ['', [Validators.required]]   // Adicionando validadores
     });
-    
   }
 
   // Função que será chamada no submit do formulário

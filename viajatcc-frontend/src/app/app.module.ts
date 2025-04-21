@@ -22,6 +22,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { TripRouterComponent } from './components/trips/trip-router/trip-router.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { TripRouterComponent } from './components/trips/trip-router/trip-router.
     FormTripComponent,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule
   ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],
