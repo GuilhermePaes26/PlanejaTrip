@@ -9,7 +9,13 @@ export interface Trip {
   preco: number;
   data: string;
   onibus: string;
-  passageiros: string[];
+  passageiros: {
+    _id: string;
+    nome: string;
+    email: string;
+    cpf: string;
+    idade?: number;
+  }[];
 }
 
 @Injectable({

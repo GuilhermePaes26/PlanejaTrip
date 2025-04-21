@@ -4,7 +4,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
-import { TripsComponent } from './components/trips/trips.component';
+import { TripsComponent } from './components/trips/list/trips.component';
+
 import { AuthGuard } from './components/auth/auth.guard';
 const routes: Routes = [
   {
@@ -17,6 +18,29 @@ const routes: Routes = [
     ],
   },
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'trips', component: TripsComponent },
+  {
+    path: 'trips/:id',
+    loadComponent: () =>
+      import(
+        './components/trips/details/trip-detail/trip-detail.component'
+      ).then((m) => m.TripDetailComponent),
+  },
+  {
+    path: 'trips/create',
+    loadComponent: () =>
+      import('./components/trips/form/form-trip/form-trip.component').then(
+        (m) => m.FormTripComponent
+      ),
+  },
+  {
+    path: 'trips/edit/:id',
+    loadComponent: () =>
+      import('./components/trips/form/form-trip/form-trip.component').then(
+        (m) => m.FormTripComponent
+      ),
+  },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'trips', component: TripsComponent, canActivate: [AuthGuard]  },
 ];

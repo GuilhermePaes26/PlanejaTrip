@@ -1,0 +1,18 @@
+<div class="trip-detail-container">
+  <h1>Detalhes da Viagem</h1>
+
+  <div *ngIf="isLoading">Carregando...</div>
+  <div *ngIf="error">{{ error }}</div>
+
+  <div *ngIf="trip">
+    <h2>{{ trip.nome }}</h2>
+    <p><strong>Data:</strong> {{ trip.data | date : "dd/MM/yyyy" }}</p>
+    <p><strong>Preço:</strong> R$ {{ trip.preco | number : "1.2-2" }}</p>
+    <p><strong>Descrição:</strong> {{ trip.descricao || "Sem descrição" }}</p>
+    <p><strong>Passageiros:</strong> {{ trip.passageiros.length }}</p>
+    <p><strong>ID do ônibus:</strong> {{ trip.onibus }}</p>
+  </div>
+  <button class="generate-report" (click)="generateReport()">
+    Gerar Relatório
+  </button>
+</div>

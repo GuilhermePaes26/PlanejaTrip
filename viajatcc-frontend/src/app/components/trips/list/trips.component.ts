@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { TripsService, Trip } from '../../services/trips.service';
+import { TripsService, Trip } from '../../../services/trips.service';
 
 @Component({
   selector: 'app-trips',

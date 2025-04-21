@@ -1,0 +1,34 @@
+<div class="form-trip-container">
+  <h1>{{ isEditMode ? "Editar Viagem" : "Criar Nova Viagem" }}</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input id="nome" formControlName="nome" type="text" />
+    </div>
+
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" formControlName="descricao"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="preco">Preço</label>
+      <input id="preco" formControlName="preco" type="number" step="0.01" />
+    </div>
+
+    <div class="form-group">
+      <label for="data">Data</label>
+      <input id="data" formControlName="data" type="date" />
+    </div>
+
+    <div class="form-group">
+      <label for="onibus">ID do Ônibus</label>
+      <input id="onibus" formControlName="onibus" type="text" />
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">
+      {{ isEditMode ? "Salvar Alterações" : "Criar Viagem" }}
+    </button>
+  </form>
+</div>

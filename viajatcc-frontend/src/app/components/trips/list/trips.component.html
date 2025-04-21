@@ -11,10 +11,14 @@
       <p><strong>Preço:</strong> R$ {{ trip.preco | number : "1.2-2" }}</p>
       <p><strong>Passageiros:</strong> {{ trip.passageiros.length }}</p>
 
-      <div class="actions" *ngIf="trip._id">
-        <button (click)="viewDetails(trip._id)">Ver Detalhes</button>
-        <button (click)="editTrip(trip._id)">Editar</button>
-        <button (click)="deleteTrip(trip._id)" class="delete">Excluir</button>
+      <div class="actions">
+        <button *ngIf="trip._id" (click)="viewDetails(trip._id)">
+          Ver Detalhes
+        </button>
+        <button *ngIf="trip._id" (click)="editTrip(trip._id)">Editar</button>
+        <button *ngIf="trip._id" (click)="deleteTrip(trip._id)" class="delete">
+          Excluir
+        </button>
       </div>
     </div>
   </div>
