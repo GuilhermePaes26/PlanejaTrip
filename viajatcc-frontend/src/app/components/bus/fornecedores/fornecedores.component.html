@@ -19,7 +19,7 @@
                 <span>{{ supplier.telefone }}</span>
                 <span class="actions">
                     <button *ngIf="supplier._id">Editar</button>
-                    <button *ngIf="supplier._id" class="delete">Excluir</button>
+                    <button *ngIf="supplier._id" class="delete" (click)="deleteSupplier(supplier._id)">Excluir</button>
                 </span>
             </div>
         </div>

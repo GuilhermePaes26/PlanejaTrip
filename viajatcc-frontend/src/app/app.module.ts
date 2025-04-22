@@ -26,6 +26,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FornecedoresComponent } from './components/bus/fornecedores/fornecedores.component';
 import { UserComponent } from './components/user/user.component';
 import { CnpjPipe } from './cnpj.pipe';
+import { FormFornecedorComponent } from './components/bus/form-fornecedor/form-fornecedor.component';
+import { BusRouterComponent } from './components/bus/bus-router/bus-router.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { CnpjPipe } from './cnpj.pipe';
     FornecedoresComponent,
     UserComponent,
     CnpjPipe,
+    BusRouterComponent,
   ],
   imports: [
     BrowserModule,

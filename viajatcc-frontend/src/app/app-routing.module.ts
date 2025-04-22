@@ -12,6 +12,8 @@ import { TripRouterComponent } from './components/trips/trip-router/trip-router.
 import { AlreadyLoggedGuard } from './components/auth/already-logged.guard';
 import { FornecedoresComponent } from './components/bus/fornecedores/fornecedores.component';
 import { UserComponent } from './components/user/user.component';
+import { FormFornecedorComponent } from './components/bus/form-fornecedor/form-fornecedor.component';
+import { BusRouterComponent } from './components/bus/bus-router/bus-router.component';
 const routes: Routes = [
   {
     path: 'auth',
@@ -64,18 +66,17 @@ const routes: Routes = [
         path: 'bus', children: [
           {
             path: '',
-            component: FornecedoresComponent
+            component: BusRouterComponent
           },
           {
             path: 'list',
-            component: TripsComponent
+            component: FornecedoresComponent
           },
           {
             path: 'create',
             loadComponent: () =>
-              import('./components/trips/form/form-trip/form-trip.component').then(
-                (m) => m.FormTripComponent
-              ),
+              import('./components/bus/form-fornecedor/form-fornecedor.component').then(
+                (m) => m.FormFornecedorComponent),
           },
           {
             path: ':id',
