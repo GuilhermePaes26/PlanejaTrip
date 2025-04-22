@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { user } from '../../../services/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,4 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+  @Input() user!: user
 }

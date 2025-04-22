@@ -11,6 +11,7 @@ import { DashboardComponent } from './components/home/dashboard/dashboard.compon
 import { TripRouterComponent } from './components/trips/trip-router/trip-router.component';
 import { AlreadyLoggedGuard } from './components/auth/already-logged.guard';
 import { FornecedoresComponent } from './components/bus/fornecedores/fornecedores.component';
+import { UserComponent } from './components/user/user.component';
 const routes: Routes = [
   {
     path: 'auth',
@@ -25,6 +26,7 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
       {path: 'dashboard', component:DashboardComponent},
+      {path: 'users', component:UserComponent},
       {
         path: 'trips', children: [
           {

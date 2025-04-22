@@ -11,11 +11,35 @@
     background-color: #9ea0e5;
   }
   .menu-button {
+    margin: 5px;
     font-size: 40px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     color: #4a289e;
+    transition: color .35s ease, background-color 0.35s ease;
+    border-radius: 5px;
+
   }
+  .menu-button:hover {
+    color: #ffffff;
+    background-color: #4a289e;
+  }
+  .menu-button-sidebar {
+    margin: 5px;
+    margin-left: 5em;
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: #4a289e;
+    transition: color .35s ease, background-color 0.35s ease;
+    border-radius: 5px;
+
+  }
+  .menu-button-sidebar:hover {
+    background-color: #4a289e;
+    color: #ffffff;
+  }
+
   .home {
     width: 100%;
   }

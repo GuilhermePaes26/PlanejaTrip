@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { user, UserService } from '../../../services/user.service';
-import { AuthService } from '../../../services/auth.service';
-
+import { user, UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
+import { CnpjPipe } from '../../cnpj.pipe';
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-user',
   standalone: false,
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  templateUrl: './user.component.html',
+  styleUrl: './user.component.scss'
 })
-export class DashboardComponent {
+export class UserComponent {
   user!: user
   token: string | null = ''
   constructor(private userService: UserService, private authService: AuthService) {

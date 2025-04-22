@@ -24,6 +24,8 @@ import { DashboardComponent } from './components/home/dashboard/dashboard.compon
 import { TripRouterComponent } from './components/trips/trip-router/trip-router.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FornecedoresComponent } from './components/bus/fornecedores/fornecedores.component';
+import { UserComponent } from './components/user/user.component';
+import { CnpjPipe } from './cnpj.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { FornecedoresComponent } from './components/bus/fornecedores/fornecedore
     DashboardComponent,
     TripRouterComponent,
     FornecedoresComponent,
+    UserComponent,
+    CnpjPipe,
   ],
   imports: [
     BrowserModule,
