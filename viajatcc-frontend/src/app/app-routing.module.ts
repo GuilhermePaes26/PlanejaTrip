@@ -10,6 +10,7 @@ import { AuthGuard } from './components/auth/auth.guard';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { TripRouterComponent } from './components/trips/trip-router/trip-router.component';
 import { AlreadyLoggedGuard } from './components/auth/already-logged.guard';
+import { FornecedoresComponent } from './components/bus/fornecedores/fornecedores.component';
 const routes: Routes = [
   {
     path: 'auth',
@@ -56,7 +57,41 @@ const routes: Routes = [
               ),
           },
         ],
-      },],
+      },
+      {
+        path: 'bus', children: [
+          {
+            path: '',
+            component: FornecedoresComponent
+          },
+          {
+            path: 'list',
+            component: TripsComponent
+          },
+          {
+            path: 'create',
+            loadComponent: () =>
+              import('./components/trips/form/form-trip/form-trip.component').then(
+                (m) => m.FormTripComponent
+              ),
+          },
+          {
+            path: ':id',
+            loadComponent: () =>
+              import(
+                './components/trips/details/trip-detail/trip-detail.component'
+              ).then((m) => m.TripDetailComponent),
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import('./components/trips/form/form-trip/form-trip.component').then(
+                (m) => m.FormTripComponent
+              ),
+          },
+        ],
+      },
+    ],
   },
 ];
 

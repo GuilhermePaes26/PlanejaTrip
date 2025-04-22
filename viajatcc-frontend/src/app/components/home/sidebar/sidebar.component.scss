@@ -25,6 +25,7 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 100%;
 }
 
 li {
@@ -50,4 +51,9 @@ li a:hover {
 li h2 {
   font-size: 1.3em;
   font-weight: 600;
+}
+.account {
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: 20em;
 }

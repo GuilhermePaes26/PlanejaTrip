@@ -23,6 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { TripRouterComponent } from './components/trips/trip-router/trip-router.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { FornecedoresComponent } from './components/bus/fornecedores/fornecedores.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     SidebarComponent,
     DashboardComponent,
     TripRouterComponent,
+    FornecedoresComponent,
   ],
   imports: [
     BrowserModule,
