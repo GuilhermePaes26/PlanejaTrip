@@ -6,10 +6,28 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MinhasViagens from './viagem/MinhasViagens';
 import Viagens from './viagem/viagens';
 import Login from './account/Login';
+import { AsyncStorage } from 'react-native';
 
 const tab = createBottomTabNavigator();
 
-const Rotas = () => {
+// controle de login
+export default function Rotas() {
+    const [isLoggedIn, setIsLoggedIn] = userState(false); 
+
+    useEffect(() => {
+        const checkLoginStatus = async () => {
+            try {
+                const token = await AsyncStorage.getItem('userToken');
+                setIsLoggedIn(!!token);
+            } catch (error) {
+                console.error('Erro ao verificar o status de login', error);
+            }
+        };
+
+        checkLoginStatus();
+
+    }, []);
+
     return (
         <tab.Navigator
             initialRouteName="Home"
@@ -17,7 +35,6 @@ const Rotas = () => {
                 activeTintColor: '#b94646',
             }}
         >
-
             <tab.Screen
                 name="Home"
                 component={Viagens}
@@ -39,18 +56,43 @@ const Rotas = () => {
                     ),
                 }}
             />
-
-            <tab.Screen
-                name="Conta"
-                component={Login}
+            
+            {isLoggedIn ? (
+                <tab.Screen 
+                name="Perfil"
+                component={Perfil}
                 options={{
-                    tabBarLabel: 'Minha conta',
+                    tabBarLabel: 'Perfil',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account-circle" color={color} size={size} />
+
+                        
+                        <MaterialCommunityIcons name="profile-circle" color={color} size={size} />
                     ),
                 }}
-            />
+                /> ) : (
+                <tab.Screen
+                    name="Conta"
+                    component={Login}
+                    options={{
+                        tabBarLabel: 'Minha conta',
+                        tabBarIcon: ({ color, size }) => (
+
+                            
+                            <MaterialCommunityIcons name="account-circle" color={color} size={size} />
+                        ),
+                    }}
+                /> )
+                }
         </tab.Navigator>
     )
 }
-export default Rotas;
+                // screenOptions={({ route }) => ({
+                //     tabBarIcon: ({ color, size }) => {
+                //       let iconName = route.name === 'Início' ? 'home-outline' : 'person-outline';
+                //       return <Ionicons name='' size={size} color={color} />;
+                //     },
+                //     tabBarActiveTintColor: '#6200ea',
+                //     tabBarInactiveTintColor: 'gray',
+                // })}
+    
+// export default { Rotas };
