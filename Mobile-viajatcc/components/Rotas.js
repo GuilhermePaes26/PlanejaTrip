@@ -1,18 +1,22 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+// import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+// import { Text, View } from 'react-native';
+// import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MinhasViagens from './viagem/MinhasViagens';
 import Viagens from './viagem/viagens';
 import Login from './account/Login';
-import { AsyncStorage } from 'react-native';
+import Perfil from './account/Perfil';
+// import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // ✅ CORRETO
+
 
 const tab = createBottomTabNavigator();
 
 // controle de login
 export default function Rotas() {
-    const [isLoggedIn, setIsLoggedIn] = userState(false); 
+    const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
     useEffect(() => {
         const checkLoginStatus = async () => {

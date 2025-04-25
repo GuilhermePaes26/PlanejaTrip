@@ -9,7 +9,7 @@ export default function ProfileScreen() {
         style={styles.avatar}
       />
       <Text style={styles.name}>João Silva</Text>
-      <Text style={styles.email}>joao.silva@example.com</Text>
+      <Text style={styles.senha}>123456</Text>
     </View>
   );
 }
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
   },
-  email: {
+  senha: {
     fontSize: 16,
     color: '#666',
     marginTop: 8,
