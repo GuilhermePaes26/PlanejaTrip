@@ -1,19 +1,60 @@
-import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
+import { NavigationContainer, NavigationIndependentTree, useFocusEffect } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, ScrollView, TextInput, Button } from 'react-native';
 import Cadastro from './Cadastro';
 import SignIn from './signin';
+import Perfil from './Perfil'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
 const Login = ({ navigation }) => {
-    const [name, setName] = useState('');
-    const [Senha, setSenha] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [initialRoute, setInitialRoute] = useState(null);
+    let value = ''
+    useFocusEffect(
+        React.useCallback(() => {
+          const checkLoginStatus = async () => {
+            try {
+              const value = await AsyncStorage.getItem('isLoggedIn');
+              console.log('Login:', value);
+              setInitialRoute(value === 'true' ? 'perfil' : 'SignIn');
+            } catch (error) {
+              console.error('Erro ao verificar login fake', error);
+              setInitialRoute('SignIn');
+            }
+          };
+      
+          checkLoginStatus();
+        }, []) // ✅ dependências vazias aqui
+      );
+    console.log(initialRoute);
+
+    if (initialRoute == 'perfil') {
+        return (
+            <NavigationIndependentTree>
+                <Stack.Navigator initialRouteName={initialRoute}>
+                    <Stack.Screen name="perfil" component={Perfil} options={{ headerShown: false }} />
+                </Stack.Navigator>
+            </NavigationIndependentTree>
+        );
+    } else {
+        return (
+            <NavigationIndependentTree>
+                <Stack.Navigator initialRouteName={initialRoute}>
+                    <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
+                    <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
+                </Stack.Navigator>
+            </NavigationIndependentTree>
+        );
+
+    }
 
     return (
         <NavigationIndependentTree>
-            <Stack.Navigator initialRouteName="SignIn">
+            <Stack.Navigator initialRouteName={initialRoute}>
+                <Stack.Screen name="perfil" component={Perfil} options={{ headerShown: false }} />
                 <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
                 <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
             </Stack.Navigator>

@@ -1,7 +1,7 @@
 // import * as React from 'react';
 import React, { useState, useEffect } from 'react';
 // import { Text, View } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MinhasViagens from './viagem/MinhasViagens';
@@ -18,19 +18,22 @@ const tab = createBottomTabNavigator();
 export default function Rotas() {
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
-    useEffect(() => {
-        const checkLoginStatus = async () => {
+    useFocusEffect(
+        React.useCallback(() => {
+          const checkLoginStatus = async () => {
             try {
-                const token = await AsyncStorage.getItem('userToken');
-                setIsLoggedIn(!!token);
+              const value = await AsyncStorage.getItem('isLoggedIn');
+              console.log(value);
+              
+              setIsLoggedIn(value);
             } catch (error) {
-                console.error('Erro ao verificar o status de login', error);
+              console.error('Erro ao verificar login fake', error);
             }
-        };
-
-        checkLoginStatus();
-
-    }, []);
+          };
+      
+          checkLoginStatus();
+        }, [])
+      );
 
     return (
         <tab.Navigator
@@ -43,6 +46,7 @@ export default function Rotas() {
                 name="Home"
                 component={Viagens}
                 options={{
+                    headerShown: false, 
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="home" color={color} size={size} />
@@ -54,6 +58,7 @@ export default function Rotas() {
                 name="MinhasViagens"
                 component={MinhasViagens}
                 options={{
+                    headerShown: false, 
                     tabBarLabel: 'Minhas Viagens',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="map" color={color} size={size} />
@@ -61,23 +66,12 @@ export default function Rotas() {
                 }}
             />
             
-            {isLoggedIn ? (
-                <tab.Screen 
-                name="Perfil"
-                component={Perfil}
-                options={{
-                    tabBarLabel: 'Perfil',
-                    tabBarIcon: ({ color, size }) => (
-
-                        
-                        <MaterialCommunityIcons name="profile-circle" color={color} size={size} />
-                    ),
-                }}
-                /> ) : (
+            
                 <tab.Screen
                     name="Conta"
                     component={Login}
                     options={{
+                        headerShown: false, 
                         tabBarLabel: 'Minha conta',
                         tabBarIcon: ({ color, size }) => (
 
@@ -85,8 +79,7 @@ export default function Rotas() {
                             <MaterialCommunityIcons name="account-circle" color={color} size={size} />
                         ),
                     }}
-                /> )
-                }
+                /> 
         </tab.Navigator>
     )
 }

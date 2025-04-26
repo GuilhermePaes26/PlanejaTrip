@@ -1,4 +1,6 @@
-import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 const viagensFake = [
@@ -10,6 +12,23 @@ const viagensFake = [
 ];
 
 const Viagens = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  useFocusEffect(
+    React.useCallback(() => {
+      const checkLoginStatus = async () => {
+        try {
+          const value = await AsyncStorage.getItem('isLoggedIn');
+          console.log(value);
+          
+          setIsLoggedIn(value);
+        } catch (error) {
+          console.error('Erro ao verificar login fake', error);
+        }
+      };
+  
+      checkLoginStatus();
+    }, [])
+  );
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Viagens Disponíveis</Text>

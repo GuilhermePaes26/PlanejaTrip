@@ -1,8 +1,10 @@
-import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
+import { NavigationContainer, NavigationIndependentTree, useFocusEffect } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, ScrollView, TextInput, Button } from 'react-native';
 import Cadastro from './Cadastro';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Stack = createStackNavigator();
 
@@ -13,6 +15,20 @@ const SignIn = ({ navigation }) => {
     let vaiParaCadastro = () => {
         navigation.navigate("Cadastro");
       };
+    
+    let login = async () => {
+        if (name === 'jaeke' && Senha === '1234') {
+            try {
+                await AsyncStorage.setItem('isLoggedIn', 'true'); // simula login
+                console.log('Login fake bem-sucedido!');
+                navigation.navigate('Home'); // ou qualquer outra tela principal
+            } catch (e) {
+                console.error('Erro ao simular login', e);
+            }
+        } else {
+            console.warn('Usuário ou senha incorretos!');
+        }
+    }
 
     return (
         
@@ -43,7 +59,7 @@ const SignIn = ({ navigation }) => {
                     
                     <Text style={styles.textLinkCadastro} onPress={vaiParaCadastro}>Cadastrar uma conta</Text>
                     
-                    <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>Entrar</Text></TouchableOpacity> 
+                    <TouchableOpacity style={styles.button} onPress={login}><Text style={styles.buttonText}>Entrar</Text></TouchableOpacity> 
 
                 </View>
                 </View>        
