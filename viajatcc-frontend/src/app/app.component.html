@@ -1,0 +1,9 @@
+<ng-container *ngIf="authChecked; else loading">
+    <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #loading>
+    <div class="loading-screen" *ngIf="isBrowser">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

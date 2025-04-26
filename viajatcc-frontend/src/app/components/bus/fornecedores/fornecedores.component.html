@@ -1,0 +1,27 @@
+<div class="suppliers-container">
+    <h1>Fornecedores</h1>
+    <a href="/home/bus/create" class="button">Novo fornecedor</a>
+
+    <div *ngIf="isLoading" class="loading">Carregando...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <div class="suppliers-table-wrapper" *ngIf="suppliers.length > 0">
+        <div class="suppliers-table header">
+            <span>Viagem</span>
+            <span>endereco</span>
+            <span>telefone</span>
+            <span>Ações</span>
+        </div>
+        <div *ngFor="let supplier of suppliers">
+            <div class="suppliers-table row" *ngIf="supplier._id"  (click)="viewSupplier(supplier._id)">
+                <span>{{ supplier.nome }}</span>
+                <span>{{ supplier.endereco }}</span>
+                <span>{{ supplier.telefone }}</span>
+                <span class="actions">
+                    <button *ngIf="supplier._id">Editar</button>
+                    <button *ngIf="supplier._id" class="delete" (click)="deleteSupplier(supplier._id)">Excluir</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

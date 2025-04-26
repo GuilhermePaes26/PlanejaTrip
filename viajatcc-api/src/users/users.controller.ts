@@ -23,11 +23,23 @@ export class UsersController {
   async findAll() {
     return this.usersService.findAll();
   }
+  @Post('login')
+  async login(@Body() loginDto: any) {
+    console.log('chegou aqui');
+    const {email, password} = loginDto
+    const user = await this.usersService.findEmail(email)
+    if(user.senha == password) {
+      return user
+    } else {
+      return false
+    }
+  }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
+
 
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: any) {

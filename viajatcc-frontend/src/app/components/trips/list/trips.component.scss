@@ -1,0 +1,93 @@
+.trips-container {
+  padding: 2rem;
+  max-width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+  }
+  a {
+    text-align: center;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 2rem 0;
+    color: #ff4444;
+  }
+
+  .trips-table-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .trips-table {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr 2fr;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #ddd;
+
+    &.header {
+      font-weight: bold;
+      background-color: #f1f1f1;
+    }
+
+    &.row:hover {
+      background-color: #f9f9f9;
+    }
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+
+      button {
+        padding: 0.3rem 0.7rem;
+        font-size: 0.85rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:nth-child(1) {
+          background-color: #007bff;
+          color: white;
+        }
+
+        &:nth-child(2) {
+          background-color: #ffc107;
+          color: black;
+        }
+
+        &.delete {
+          background-color: #dc3545;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .button {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #4a289e;
+    color: white;
+  }
+}

@@ -1,0 +1,30 @@
+<div class="flex h-screen">
+    <div class="w-1/2 flex items-center justify-center">
+        <div class="w-96">
+            <h2 class="text-2xl font-bold mb-4">Faça seu login</h2>
+            <form [formGroup]="logForm" (ngSubmit)="onLogin()">  <!-- Formulário com formGroup -->
+                <div class="mb-4">
+                    <label for="username" class="block text-sm font-medium">Email:</label>
+                    <input id="username" formControlName="username" placeholder="Digite seu usuário"
+                        class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium">Senha:</label>
+                    <input id="password" type="password" formControlName="password" placeholder="Digite sua senha"
+                        class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md">  <!-- Botão desabilitado se o formulário for inválido -->
+                    Entrar
+                </button>
+            </form>
+            <p class="mt-4 text-sm">Não tem conta? <a href="/auth/signup" class="text-blue-600">Crie uma agora</a></p>
+            <div *ngIf="errorMessage" class="text-red-500 text-sm mt-2">{{ errorMessage }}</div> 
+        </div>
+    </div>
+    <div class="w-1/2 bg-blue-600 flex items-center justify-center text-white">
+        <div class="text-center">
+            <h2 class="text-xl font-bold">Bem-vindo de volta!</h2>
+            <p>A melhor experiência de login que você já teve.</p>
+        </div>
+    </div>
+</div>
