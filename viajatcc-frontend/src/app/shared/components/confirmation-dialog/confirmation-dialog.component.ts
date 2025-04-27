@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MatMenuModule, MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'app-confirmation-dialog',
+  standalone: false,
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.scss']
 })

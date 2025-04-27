@@ -28,6 +28,8 @@ import { UserComponent } from './components/user/user.component';
 import { CnpjPipe } from './cnpj.pipe';
 import { FormFornecedorComponent } from './components/bus/form-fornecedor/form-fornecedor.component';
 import { BusRouterComponent } from './components/bus/bus-router/bus-router.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { BusRouterComponent } from './components/bus/bus-router/bus-router.compo
     UserComponent,
     CnpjPipe,
     BusRouterComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { BusRouterComponent } from './components/bus/bus-router/bus-router.compo
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],

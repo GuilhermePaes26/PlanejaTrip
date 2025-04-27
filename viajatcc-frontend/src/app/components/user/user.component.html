@@ -4,6 +4,7 @@
       <p><span>Nome:</span> {{ user.nome }}</p>
       <p><span>Email:</span> {{ user.email }}</p>
       <p><span>CPF:</span> {{ user.cpf | cnpj }}</p>
+      <button class="button" (click)="logout()">Sair</button>
     </div>
   </div>
   
