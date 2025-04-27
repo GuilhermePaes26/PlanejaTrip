@@ -1,0 +1,9 @@
+<div class="message">
+    <div mat-dialog-content class="text-question">
+        <p class="question">{{ data }}</p>
+    </div>
+    <div mat-dialog-actions class="button-message">
+        <button mat-raised-button (click)="onConfirm(false)">Não</button>
+        <button mat-raised-button (click)="onConfirm(true)" color="primary">Sim</button>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+.message{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.message .text-question{
+    width: 100%;
+    margin: 0;
+}
+.message .text-question .question{
+    width: 100%;
+    text-align: center;
+}
+.message .button-message{
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+}
