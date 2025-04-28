@@ -30,6 +30,7 @@ import { FormFornecedorComponent } from './components/bus/form-fornecedor/form-f
 import { BusRouterComponent } from './components/bus/bus-router/bus-router.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
+import { SnackbarComponent } from './shared/components/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ConfirmationDialogComponent } from './shared/components/confirmation-di
     UserComponent,
     CnpjPipe,
     BusRouterComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    SnackbarComponent
   ],
   imports: [
     BrowserModule,

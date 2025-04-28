@@ -1,19 +1,22 @@
 <form [formGroup]="supplierForm" (ngSubmit)="onsubmit()" class="form-container">
-    <div class="form-group">
-      <label for="nome">Nome</label>
-      <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome">
-    </div>
-  
-    <div class="form-group">
-      <label for="endereco">Endereço</label>
-      <input id="endereco" type="text" formControlName="endereco" placeholder="Digite o endereço">
-    </div>
-  
-    <div class="form-group">
-      <label for="telefone">Telefone</label>
-      <input id="telefone" type="text" formControlName="telefone" placeholder="Digite o telefone">
-    </div>
-  
-    <button type="submit" class="submit-button">Salvar</button>
-  </form>
-  
+  <div class="form-group">
+    <label for="cnpj">CNPJ</label>
+    <input type="text" id="cnpj" formControlName="cnpj"  (keyup)="findcnpj()">
+  </div>
+  <div class="form-group">
+    <label for="nome">Nome</label>
+    <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome">
+  </div>
+
+  <div class="form-group">
+    <label for="endereco">Endereço</label>
+    <input id="endereco" type="text" formControlName="endereco" placeholder="Digite o endereço">
+  </div>
+
+  <div class="form-group">
+    <label for="telefone">Telefone</label>
+    <input id="telefone" type="text" formControlName="telefone" placeholder="Digite o telefone">
+  </div>
+
+  <button type="submit" class="submit-button">Salvar</button>
+</form>

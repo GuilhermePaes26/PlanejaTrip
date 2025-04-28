@@ -3,18 +3,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-snackbar',
+  standalone: false,
   templateUrl: './snackbar.component.html',
   styleUrls: ['./snackbar.component.scss']
 })
 export class SnackbarComponent implements OnInit {
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
   }
 
   openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action);
+    this._snackBar.open(message, action);
   }
 
 }

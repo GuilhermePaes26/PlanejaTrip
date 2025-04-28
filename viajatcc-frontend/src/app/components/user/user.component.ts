@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { CnpjPipe } from '../../cnpj.pipe';
 import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SnackbarComponent } from '../../shared/components/snackbar/snackbar.component';
 @Component({
   selector: 'app-user',
   standalone: false,
@@ -14,7 +15,7 @@ export class UserComponent {
   user!: user
   token: string | null = ''
 
-  constructor(private userService: UserService, private authService: AuthService, private dialog: MatDialog) {
+  constructor(private userService: UserService, private authService: AuthService, private dialog: MatDialog, private snackBar: SnackbarComponent) {
     this.token = this.authService.getToken()
     this.userService.getUser(this.token).subscribe({
       next: (response) => {
@@ -28,6 +29,7 @@ export class UserComponent {
     }).afterClosed().toPromise()
     console.log(confirm)
     if (confirm) {
+      
       sessionStorage.removeItem('authToken')
       window.location.reload()
     }

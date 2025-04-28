@@ -1,6 +1,6 @@
 <div class="suppliers-container">
     <h1>Fornecedores</h1>
-    <a href="/home/bus/create" class="button">Novo fornecedor</a>
+    <button class="button" (click)="createSupplier()">Novo fornecedor</button>
 
     <div *ngIf="isLoading" class="loading">Carregando...</div>
     <div *ngIf="error" class="error">{{ error }}</div>
