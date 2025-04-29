@@ -14,6 +14,7 @@ import { FornecedoresComponent } from './components/bus/fornecedores/fornecedore
 import { UserComponent } from './components/user/user.component';
 import { FormFornecedorComponent } from './components/bus/form-fornecedor/form-fornecedor.component';
 import { BusRouterComponent } from './components/bus/bus-router/bus-router.component';
+import { SupplierDetailComponent } from './components/bus/supplier-detail/supplier-detail.component';
 const routes: Routes = [
   {
     path: 'auth',
@@ -80,10 +81,7 @@ const routes: Routes = [
           },
           {
             path: ':id',
-            loadComponent: () =>
-              import(
-                './components/trips/details/trip-detail/trip-detail.component'
-              ).then((m) => m.TripDetailComponent),
+            component: SupplierDetailComponent
           },
           {
             path: 'edit/:id',

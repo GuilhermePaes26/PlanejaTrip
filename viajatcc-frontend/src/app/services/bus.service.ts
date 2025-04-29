@@ -29,6 +29,9 @@ export class BusService {
   createSupplier(supplier: supplier): Observable<supplier> {
     return this.http.post<supplier>(this.apiUrl, supplier)
   }
+  getSupplier(id: string | null): Observable<supplier> {
+    return this.http.get<supplier>(this.apiUrl + `/${id}`)
+  }
   deleteSupplier(id: string) {
     return this.http.delete(this.apiUrl + `/${id}`)
   }

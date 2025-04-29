@@ -31,6 +31,7 @@ import { BusRouterComponent } from './components/bus/bus-router/bus-router.compo
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
 import { SnackbarComponent } from './shared/components/snackbar/snackbar.component';
+import { SupplierDetailComponent } from './components/bus/supplier-detail/supplier-detail.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SnackbarComponent } from './shared/components/snackbar/snackbar.compone
     CnpjPipe,
     BusRouterComponent,
     ConfirmationDialogComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    SupplierDetailComponent
   ],
   imports: [
     BrowserModule,

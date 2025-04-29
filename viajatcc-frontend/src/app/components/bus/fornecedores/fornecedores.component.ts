@@ -30,7 +30,7 @@ export class FornecedoresComponent {
     })
   }
   viewSupplier(id: string) {
-    console.log(id);
+    this.router.navigate([`/home/bus/${id}`])
 
   }
   async createSupplier() {
