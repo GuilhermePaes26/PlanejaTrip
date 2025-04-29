@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UUID } from 'crypto';
 import { Observable } from 'rxjs';
 
 export interface supplier {
@@ -7,6 +8,12 @@ export interface supplier {
   nome: string;
   endereco: string;
   telefone: string;
+}
+export interface bus {
+  _id?: string;
+  capacidade: number;
+  valor: number;
+  fornecedor_id: UUID;
 }
 
 @Injectable({
@@ -25,7 +32,7 @@ export class BusService {
   deleteSupplier(id: string) {
     return this.http.delete(this.apiUrl + `/${id}`)
   }
-  findBus(): any {
-    return this.http.get(this.apiUrlBus)
+  findBus(): Observable<bus[]> {
+    return this.http.get<bus[]>(this.apiUrlBus)
   }
 }

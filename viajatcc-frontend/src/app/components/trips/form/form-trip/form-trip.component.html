@@ -25,10 +25,7 @@
     <div class="form-group">
       <label for="onibus">Seleciona a capacidade do ônibus</label>
       <select name="onibus" id="">
-        <option value="">72</option>
-        <option value="">72</option>
-        <option value="">72</option>
-        <option value="">72</option>
+        <option value="bus._id" *ngFor="let bus of buses">{{bus.capacidade}} - R$ {{bus.valor}}</option>
       </select>
     </div>
 
