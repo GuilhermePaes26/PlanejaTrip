@@ -14,6 +14,7 @@ export interface supplier {
 })
 export class BusService {
   private readonly apiUrl = 'http://localhost:3000/suppliers';
+  private readonly apiUrlBus = 'http://localhost:3000/buses';
   constructor(private http: HttpClient) { }
   getSuppliers() {
     return this.http.get<supplier[]>(this.apiUrl)
@@ -23,5 +24,8 @@ export class BusService {
   }
   deleteSupplier(id: string) {
     return this.http.delete(this.apiUrl + `/${id}`)
+  }
+  findBus(): any {
+    return this.http.get(this.apiUrlBus)
   }
 }

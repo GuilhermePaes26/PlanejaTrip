@@ -8,6 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TripsService } from '../../../../services/trips.service';
+import { BusService } from '../../../../services/bus.service';
 
 @Component({
   selector: 'app-form-trip',
@@ -25,7 +26,8 @@ export class FormTripComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private tripsService: TripsService
+    private tripsService: TripsService,
+    private busService: BusService
   ) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
@@ -34,11 +36,16 @@ export class FormTripComponent implements OnInit {
       data: ['', Validators.required],
       onibus: ['', Validators.required],
     });
+    this.busService.findBus().subscribe({
+      next: (response : any) => {
+        console.log(response)
+      }
+    })
   }
 
   ngOnInit(): void {
     this.tripId = this.route.snapshot.paramMap.get('id');
-
+    
     if (this.tripId) {
       this.isEditMode = true;
 
