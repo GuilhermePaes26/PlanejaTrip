@@ -10,7 +10,7 @@
     <p><strong>Preço:</strong> R$ {{ trip.preco | number : "1.2-2" }}</p>
     <p><strong>Descrição:</strong> {{ trip.descricao || "Sem descrição" }}</p>
     <p><strong>Passageiros:</strong> {{ trip.passageiros.length }}</p>
-    <p><strong>ID do ônibus:</strong> {{ trip.onibus }}</p>
+    <p><strong>Lotação máxima: </strong>{{trip.onibus.capacidade}}</p>
   </div>
   <button class="generate-report" (click)="generateReport()">
     Gerar Relatório

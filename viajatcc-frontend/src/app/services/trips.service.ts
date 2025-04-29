@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { bus } from './bus.service';
+import { user } from './user.service';
 
 export interface Trip {
   _id?: string;
@@ -8,14 +10,8 @@ export interface Trip {
   descricao?: string;
   preco: number;
   data: string;
-  onibus: string;
-  passageiros: {
-    _id: string;
-    nome: string;
-    email: string;
-    cpf: string;
-    idade?: number;
-  }[];
+  onibus: bus;
+  passageiros: user[];
 }
 
 @Injectable({

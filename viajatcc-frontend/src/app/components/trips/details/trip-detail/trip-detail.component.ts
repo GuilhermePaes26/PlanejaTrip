@@ -26,6 +26,8 @@ export class TripDetailComponent implements OnInit {
     if (id) {
       this.tripsService.getTrip(id).subscribe({
         next: (data) => {
+          console.log(data);
+          
           this.trip = data;
           this.isLoading = false;
         },
