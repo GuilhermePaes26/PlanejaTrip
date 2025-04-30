@@ -22,6 +22,8 @@ export class SupplierDetailComponent {
   }
   criarOnibus() {
     this.dialog.open(DialogCreateBusComponent, {data: this.supplier._id})
+    console.log(this.supplier._id);
+    
   }
   editarOnibus(id: string) {
 

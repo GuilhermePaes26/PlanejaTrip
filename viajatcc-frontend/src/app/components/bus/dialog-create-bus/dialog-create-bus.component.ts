@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BusService } from '../../../services/bus.service';
+import { bus, BusService } from '../../../services/bus.service';
 import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -20,11 +20,23 @@ export class DialogCreateBusComponent {
       capacidade: [0, Validators.required],
       valor: [0, Validators.required]
     })
-    console.log(data);
     
   }
   onSubmit() {
-
+    const {capacidade, valor} = this.busForm.value
+    const fornecedor_id = this.data
+    const bus: bus = {
+      capacidade,
+      valor,
+      fornecedor_id
+    }
+    this.busService.createBus(bus).subscribe({
+      next: (response) => {
+        this.dialog.closeAll()
+        window.location.reload()
+      }
+    })
+    
   }
 
 }

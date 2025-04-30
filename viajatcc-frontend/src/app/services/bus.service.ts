@@ -39,4 +39,7 @@ export class BusService {
   findBus(): Observable<bus[]> {
     return this.http.get<bus[]>(this.apiUrlBus)
   }
+  createBus(bus: bus) {
+    return this.http.post<bus>(this.apiUrlBus, bus)
+  }
 }
