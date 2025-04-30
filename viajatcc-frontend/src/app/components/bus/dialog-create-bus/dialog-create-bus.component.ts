@@ -25,6 +25,8 @@ export class DialogCreateBusComponent {
   onSubmit() {
     const {capacidade, valor} = this.busForm.value
     const fornecedor_id = this.data
+    console.log(fornecedor_id);
+    
     const bus: bus = {
       capacidade,
       valor,

@@ -44,9 +44,8 @@ export class FormTripComponent implements OnInit {
     this.tripId = this.route.snapshot.paramMap.get('id');
     this.busService.findBus().subscribe({
       next: (response) => {
-        this.buses = response
-        console.log(response);
-        
+        const bus = response.filter(bus => bus.fornecedor_id !== null);
+        this.buses = bus
       }
     })
     if (this.tripId) {
@@ -58,8 +57,7 @@ export class FormTripComponent implements OnInit {
           descricao: trip.descricao,
           preco: trip.preco,
           data: trip.data,
-          onibus:
-            typeof trip.onibus === 'string' ? trip.onibus : trip.onibus._id,
+          onibus: trip.onibus._id
         });
       });
     }
