@@ -30,6 +30,9 @@ export class BusService {
   createSupplier(supplier: supplier): Observable<supplier> {
     return this.http.post<supplier>(this.apiUrl, supplier)
   }
+  updateSupplier(supplier: supplier, id: string | undefined): Observable<supplier> {
+    return this.http.put<supplier>(this.apiUrl+ `/${id}`, supplier)
+  }
   getSupplier(id: string | null): Observable<supplier> {
     return this.http.get<supplier>(this.apiUrl + `/${id}`)
   }

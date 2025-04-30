@@ -32,6 +32,9 @@ export class FornecedoresComponent {
   async createSupplier() {
     this.dialog.open(FormFornecedorComponent, {width: '600px'}).afterClosed().toPromise()
   }
+  updateSupplier(supplier:supplier) {
+    this.dialog.open(FormFornecedorComponent, {data: supplier})
+  }
   async deleteSupplier(id: string) {
     const confirm = await this.dialog.open(ConfirmationDialogComponent, {
       data: 'Tem certeza que deseja excluir este fornecedor?'

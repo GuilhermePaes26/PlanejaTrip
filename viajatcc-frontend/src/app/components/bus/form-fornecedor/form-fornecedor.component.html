@@ -1,5 +1,5 @@
 <form [formGroup]="supplierForm" (ngSubmit)="onsubmit()" class="form-container">
-  <div class="form-group">
+  <div class="form-group" *ngIf="!editMode">
     <label for="cnpj">CNPJ</label>
     <input type="text" id="cnpj" formControlName="cnpj"  (keyup)="findcnpj()">
   </div>
