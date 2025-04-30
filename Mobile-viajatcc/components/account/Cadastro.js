@@ -23,13 +23,7 @@ export default function Cadastro({ navigation }) {
       const res = await fetch("http://10.0.2.2:3000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nome,
-          email,
-          senha,
-          cpf,
-          idade: Number(idade),
-        }),
+        body: JSON.stringify({ nome, email, senha, cpf, idade: Number(idade) }),
       });
       if (!res.ok) throw new Error();
       Alert.alert("Sucesso", "Conta criada!", [{ text: "OK", onPress: () => navigation.replace("SignIn") }]);
@@ -41,52 +35,47 @@ export default function Cadastro({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
-        <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
+        <ScrollView contentContainerStyle={styles.scrollContent}>
           <Text style={styles.title}>Criar Conta</Text>
-
-          <View style={styles.field}>
-            <Text style={styles.label}>Nome:</Text>
-            <TextInput style={styles.input} placeholder="Seu nome" placeholderTextColor="#999" value={nome} onChangeText={setNome} />
-          </View>
-
-          <View style={styles.field}>
-            <Text style={styles.label}>Email:</Text>
-            <TextInput style={styles.input} placeholder="email@exemplo.com" placeholderTextColor="#999" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} />
-          </View>
-
+          <Field label="Nome" value={nome} onChange={setNome} />
+          <Field label="Email" value={email} onChange={setEmail} keyboardType="email-address" />
           <View style={styles.field}>
             <Text style={styles.label}>Senha:</Text>
             <View style={styles.passwordContainer}>
               <TextInput style={styles.input} placeholder="••••••••" placeholderTextColor="#999" secureTextEntry={!senhaVisivel} value={senha} onChangeText={setSenha} />
-              <TouchableOpacity onPress={() => setSenhaVisivel((v) => !v)} style={styles.eyeIcon}>
-                <Entypo name={senhaVisivel ? "eye-with-line" : "eye"} size={20} color="#666" />
-              </TouchableOpacity>
+              <Entypo name={senhaVisivel ? "eye-with-line" : "eye"} size={20} color="#666" style={styles.eyeIcon} onPress={() => setSenhaVisivel((v) => !v)} />
             </View>
           </View>
-
-          <View style={styles.field}>
-            <Text style={styles.label}>CPF:</Text>
-            <TextInput style={styles.input} placeholder="000.000.000-00" placeholderTextColor="#999" keyboardType="numeric" value={cpf} onChangeText={setCpf} />
-          </View>
-
-          <View style={styles.field}>
-            <Text style={styles.label}>Idade:</Text>
-            <TextInput style={styles.input} placeholder="Sua idade" placeholderTextColor="#999" keyboardType="numeric" value={idade} onChangeText={setIdade} />
-          </View>
-
+          <Field label="CPF" value={cpf} onChange={setCpf} keyboardType="numeric" />
+          <Field label="Idade" value={idade} onChange={setIdade} keyboardType="numeric" />
           <View style={styles.termsContainer}>
             <TouchableOpacity style={styles.checkbox} onPress={() => setTermos((t) => !t)}>
               {termos && <View style={styles.checkboxChecked} />}
             </TouchableOpacity>
             <Text style={styles.termsText}>Concordo com os Termos e Condições</Text>
           </View>
+          <View style={styles.actionsContainer}>
+            <TouchableOpacity style={[styles.button, !termos && styles.buttonDisabled]} onPress={handleRegister} disabled={!termos}>
+              <Text style={styles.buttonText}>Cadastrar Conta</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.button, !termos && styles.buttonDisabled]} onPress={handleRegister} disabled={!termos}>
-            <Text style={styles.buttonText}>Cadastrar Conta</Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.linkButton} onPress={() => navigation.replace("SignIn")}>
+              <Text style={styles.linkButtonText}>Já tenho conta</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
+  );
+}
+
+// componente auxiliar para campo simples
+function Field({ label, value, onChange, keyboardType }) {
+  return (
+    <View style={styles.field}>
+      <Text style={styles.label}>{label}:</Text>
+      <TextInput style={styles.input} placeholder={label} placeholderTextColor="#999" keyboardType={keyboardType || "default"} value={value} onChangeText={onChange} />
+    </View>
   );
 }
 
@@ -137,9 +126,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 30,
-    marginLeft: 5,
   },
   checkbox: {
+    marginLeft: 5,
     width: 20,
     height: 20,
     borderWidth: 1,
@@ -158,19 +147,35 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 14,
   },
-  button: {
+  actionsContainer: {
     marginLeft: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  button: {
+    flex: 1,
     backgroundColor: "#FFBB12",
     borderRadius: 5,
     paddingVertical: 14,
     alignItems: "center",
+    marginRight: 10,
   },
   buttonDisabled: {
-    backgroundColor: "#BBB",
+    backgroundColor: "#AAA",
   },
   buttonText: {
     color: "#233DDF",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  linkButton: {
+    paddingVertical: 14,
+    paddingHorizontal: 12,
+  },
+  linkButtonText: {
+    color: "#FFF",
+    fontSize: 16,
+    textDecorationLine: "underline",
   },
 });
