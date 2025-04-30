@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 
 export type SupplierDocument = Supplier & Document;
 
-@Schema()
+@Schema({ toJSON: { virtuals: true }, toObject: { virtuals: true } }) // 👈 habilita virtuals
 export class Supplier {
   @Prop({ required: true })
   nome: string;
@@ -17,3 +17,10 @@ export class Supplier {
 }
 
 export const SupplierSchema = SchemaFactory.createForClass(Supplier);
+
+// 👇 virtual populate aqui
+SupplierSchema.virtual('onibus', {
+  ref: 'Bus', // precisa ser igual ao nome do model do ônibus
+  localField: '_id',
+  foreignField: 'fornecedor_id',
+});
