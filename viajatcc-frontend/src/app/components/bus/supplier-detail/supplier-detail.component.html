@@ -18,7 +18,7 @@
         <span>{{ onibus.valor }}</span>
         <span class="actions">
           <button *ngIf="onibus._id">Editar</button>
-          <button *ngIf="onibus._id" class="delete">Excluir</button>
+          <button *ngIf="onibus._id" class="delete" (click)="excluirOnibus( onibus._id )">Excluir</button>
         </span>
       </div>
     </div>

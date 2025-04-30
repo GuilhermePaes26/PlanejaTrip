@@ -42,4 +42,7 @@ export class BusService {
   createBus(bus: bus) {
     return this.http.post<bus>(this.apiUrlBus, bus)
   }
+  deleteBus(id: string) {
+    return this.http.delete(this.apiUrlBus + `/${id}`)
+  }
 }
