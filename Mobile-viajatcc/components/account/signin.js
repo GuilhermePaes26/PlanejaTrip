@@ -44,7 +44,7 @@ export default function SignIn({ navigation }) {
 
       <View style={styles.decoration}>
         <View style={styles.alinhamento}>
-          <Text style={styles.label}>Usuário</Text>
+          <Text style={styles.label}>Email de Usuário</Text>
           <TextInput style={styles.input} value={name} onChangeText={setName} />
 
           <Text style={styles.label}>Senha</Text>
