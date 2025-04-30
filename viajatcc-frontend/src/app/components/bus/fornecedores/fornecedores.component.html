@@ -13,8 +13,8 @@
             <span>Ações</span>
         </div>
         <div *ngFor="let supplier of suppliers">
-            <div class="suppliers-table row" *ngIf="supplier._id"  (click)="viewSupplier(supplier._id)">
-                <span>{{ supplier.nome }}</span>
+            <div class="suppliers-table row" *ngIf="supplier._id"  >
+                <span (click)="viewSupplier(supplier._id)" class="viewDetail">{{ supplier.nome }}</span>
                 <span>{{ supplier.endereco }}</span>
                 <span>{{ supplier.telefone }}</span>
                 <span class="actions">

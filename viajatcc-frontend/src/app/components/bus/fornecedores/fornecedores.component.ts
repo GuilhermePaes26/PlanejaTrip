@@ -29,10 +29,6 @@ export class FornecedoresComponent {
       }
     })
   }
-  viewSupplier(id: string) {
-    this.router.navigate([`/home/bus/${id}`])
-
-  }
   async createSupplier() {
     this.dialog.open(FormFornecedorComponent, {width: '600px'}).afterClosed().toPromise()
   }
@@ -50,5 +46,9 @@ export class FornecedoresComponent {
         }
       })
     }
+  }
+  viewSupplier(id: string) {
+    this.router.navigate([`/home/bus/${id}`])
+
   }
 }

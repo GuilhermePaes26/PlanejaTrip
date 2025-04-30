@@ -44,13 +44,19 @@
   
       &.row:hover {
         background-color: #f9f9f9;
-        cursor: pointer;
       }
   
       span {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+      }
+
+      .viewDetail {
+        cursor: pointer;
+      }
+      .viewDetail:hover {
+        font-weight: 600;
       }
   
       .actions {
