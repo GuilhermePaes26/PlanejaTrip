@@ -18,6 +18,11 @@ export class Bus {
     required: true,
   })
   fornecedor_id: string;
+  @Prop({
+    type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Trip' }],
+    default: [],
+  })
+  viagens: string[];
 }
 
 export const BusSchema = SchemaFactory.createForClass(Bus);
