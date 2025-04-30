@@ -1,4 +1,3 @@
-// Cadastro.js
 import React, { useState } from "react";
 import { SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { Entypo } from "@expo/vector-icons";
