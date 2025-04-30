@@ -1,95 +1,33 @@
-// import * as React from 'react';
-import React, { useState, useEffect } from 'react';
-// import { Text, View } from 'react-native';
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MinhasViagens from './viagem/MinhasViagens';
-import Viagens from './viagem/viagens';
-import Login from './account/Login';
-import Perfil from './account/Perfil';
-// import { AsyncStorage } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // ✅ CORRETO
+// Rotas.js
+import React, { useState, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import RotasAuth from "./account/RotasAuth";
+import AppTabs    from "./RotasTabs";
 
-const tab = createBottomTabNavigator();
+const Root = createStackNavigator();
 
-// controle de login
 export default function Rotas() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [initial, setInitial] = useState(null);
 
-    useFocusEffect(
-        React.useCallback(() => {
-          const checkLoginStatus = async () => {
-            try {
-              const value = await AsyncStorage.getItem('isLoggedIn');
-              console.log(value);
-              
-              setIsLoggedIn(value);
-            } catch (error) {
-              console.error('Erro ao verificar login fake', error);
-            }
-          };
-      
-          checkLoginStatus();
-        }, [])
-      );
+  useEffect(() => {
+    AsyncStorage.getItem("isLoggedIn")
+      .then(val => setInitial(val === "true" ? "App" : "Auth"))
+      .catch(() => setInitial("Auth"));
+  }, []);
 
-    return (
-        <tab.Navigator
-            initialRouteName="Home"
-            tabBarOptions={{
-                activeTintColor: '#b94646',
-            }}
-        >
-            <tab.Screen
-                name="Home"
-                component={Viagens}
-                options={{
-                    headerShown: false, 
-                    tabBarLabel: 'Home',
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="home" color={color} size={size} />
-                    ),
-                }}
-            />
+  if (initial === null) {
+    return null; // ou um <ActivityIndicator/>
+  }
 
-            <tab.Screen
-                name="MinhasViagens"
-                component={MinhasViagens}
-                options={{
-                    headerShown: false, 
-                    tabBarLabel: 'Minhas Viagens',
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="map" color={color} size={size} />
-                    ),
-                }}
-            />
-            
-            
-                <tab.Screen
-                    name="Conta"
-                    component={Login}
-                    options={{
-                        headerShown: false, 
-                        tabBarLabel: 'Minha conta',
-                        tabBarIcon: ({ color, size }) => (
-
-                            
-                            <MaterialCommunityIcons name="account-circle" color={color} size={size} />
-                        ),
-                    }}
-                /> 
-        </tab.Navigator>
-    )
+  return (
+    <NavigationContainer>
+      <Root.Navigator initialRouteName={initial} screenOptions={{ headerShown: false }}>
+        <Root.Screen name="Auth" component={RotasAuth} />
+        <Root.Screen name="App"  component={AppTabs}  />
+      </Root.Navigator>
+    </NavigationContainer>
+  );
 }
-                // screenOptions={({ route }) => ({
-                //     tabBarIcon: ({ color, size }) => {
-                //       let iconName = route.name === 'Início' ? 'home-outline' : 'person-outline';
-                //       return <Ionicons name='' size={size} color={color} />;
-                //     },
-                //     tabBarActiveTintColor: '#6200ea',
-                //     tabBarInactiveTintColor: 'gray',
-                // })}
-    
-// export default { Rotas };
