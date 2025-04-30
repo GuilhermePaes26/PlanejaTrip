@@ -1,4 +1,4 @@
-import {View, StyleSheet, Button, TextInput, Text, TouchableOpacity, ScrollView} from 'react-native';
+import {View, StyleSheet, Button, TextInput, Text, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
 import {useState, useEffect} from "react";
 import React from "react";
 import { InputNome, InputEmail, InputSenha, InputNumero, InputRua, InputCidade } from './cadastro/input.js';
@@ -41,53 +41,55 @@ export default function Cadastro({navigator}) {
   }, [cep]);
 
   return (
-    <View>
-      <ViewLinha></ViewLinha>
-      <ViewTitulo></ViewTitulo>
-      <View style={styles.viewPrincipal}>
-      <ViewNomeEmailSenha>
-        <InputNome/>
-        <InputEmail/>
-        <ViewSenha>
-          <InputSenha senha={senha} setSenha={setSenha} senhaVisivel={senhaVisivel}/>
-          <TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)} style={styles.iconeSenhaVisivel}>
-                <Entypo name={senhaVisivel ? "eye-with-line" : "eye"} size={20} color="#D2CEC5" />
-          </TouchableOpacity>
-        </ViewSenha>
-      </ViewNomeEmailSenha>
+    <ScrollView>
 
-      <ViewCepNum>
-        <View style={styles.viewInputs}>
-          <Text style={styles.label} >CEP:</Text>
-         <TextInput 
-            style={[styles.inputCep, { borderColor: isCepFocused ? 'yellow' : '#D2CEC5' }]}
-            type="number" 
-            maxLength={8} 
-            name="CEP" 
-            value={cep} 
-            onChangeText={setCep}
-            keyboardType="numeric"
-            onFocus={() => setIsCepFocused(true)} 
-            onBlur={() => setIsCepFocused(false)} 
-          />
+      <View style={styles.container}>
+        <Text style={styles.titulo}>Criar Conta</Text>
+
+        <View>
+        <ViewNomeEmailSenha>
+          <InputNome/>
+          <InputEmail/>
+          <ViewSenha>
+            <InputSenha senha={senha} setSenha={setSenha} senhaVisivel={senhaVisivel}/>
+            <TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)} style={styles.iconeSenhaVisivel}>
+                  <Entypo name={senhaVisivel ? "eye-with-line" : "eye"} size={20} color="#D2CEC5" />
+            </TouchableOpacity>
+          </ViewSenha>
+        </ViewNomeEmailSenha>
+
+        <ViewCepNum>
+          <View style={styles.viewInputs}>
+            <Text style={styles.label} >CEP:</Text>
+          <TextInput 
+              style={[styles.inputCep]}
+              type="number" 
+              maxLength={8} 
+              name="CEP" 
+              value={cep} 
+              onChangeText={setCep}
+              keyboardType="numeric"
+              onFocus={() => setIsCepFocused(true)} 
+              onBlur={() => setIsCepFocused(false)} 
+            />
+
+          </View>
+          <InputNumero/>
+        </ViewCepNum>
+
+        <ViewRuaCidade>
+          <InputRua rua={valorRua}/>
+          <InputCidade cidade={valorCidade}/>
+        </ViewRuaCidade>
+
+        <ViewCheckBox></ViewCheckBox>
+        <ViewBotaoCadastro>
+          <BotaoCadastro style={styles.container}></BotaoCadastro>
+        </ViewBotaoCadastro>
 
         </View>
-        <InputNumero/>
-      </ViewCepNum>
-
-      <ViewRuaCidade>
-        <InputRua rua={valorRua}/>
-        <InputCidade cidade={valorCidade}/>
-      </ViewRuaCidade>
-
-      <ViewCheckBox></ViewCheckBox>
-      <ViewBotaoCadastro>
-        <BotaoCadastro></BotaoCadastro>
-      </ViewBotaoCadastro>
       </View>
-    </View>
-
-    
+    </ScrollView>
   );
   
 }

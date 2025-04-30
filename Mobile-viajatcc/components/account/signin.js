@@ -1,8 +1,10 @@
-import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
+import { NavigationContainer, NavigationIndependentTree, useFocusEffect } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, ScrollView, TextInput, Button } from 'react-native';
 import Cadastro from './Cadastro';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Stack = createStackNavigator();
 
@@ -13,8 +15,23 @@ const SignIn = ({ navigation }) => {
     let vaiParaCadastro = () => {
         navigation.navigate("Cadastro");
       };
+    
+    let login = async () => {
+        if (name === 'jaeke' && Senha === '1234') {
+            try {
+                await AsyncStorage.setItem('isLoggedIn', 'true'); // simula login
+                console.log('Login fake bem-sucedido!');
+                navigation.navigate('Home'); // ou qualquer outra tela principal
+            } catch (e) {
+                console.error('Erro ao simular login', e);
+            }
+        } else {
+            console.warn('Usuário ou senha incorretos!');
+        }
+    }
 
     return (
+        
 
         <View style={styles.container}>
             
@@ -39,10 +56,10 @@ const SignIn = ({ navigation }) => {
                         value={Senha}
                         onChangeText={setSenha}
                     />
-
+                    
                     <Text style={styles.textLinkCadastro} onPress={vaiParaCadastro}>Cadastrar uma conta</Text>
                     
-                    <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>Entrar</Text></TouchableOpacity> 
+                    <TouchableOpacity style={styles.button} onPress={login}><Text style={styles.buttonText}>Entrar</Text></TouchableOpacity> 
 
                 </View>
                 </View>        
@@ -84,7 +101,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 80,
         borderRadius: 5,
-        color: '#A3CDFF'
+        // color: '#A3CDFF'
     },
     label: {
         display: 'flex',
@@ -92,6 +109,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 15,
         textAlign: 'center',
+        color: '#FFFFFF',
     },
     button: {
         fontSize: 16,
