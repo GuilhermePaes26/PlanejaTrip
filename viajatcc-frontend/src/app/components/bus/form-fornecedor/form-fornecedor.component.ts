@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BusService, supplier } from '../../../services/bus.service';
+import { bus, BusService, supplier } from '../../../services/bus.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -34,10 +34,12 @@ export class FormFornecedorComponent implements OnInit {
   }
   onsubmit() {
     const {nome, endereco, telefone} = this.supplierForm.value
+    const onibus: bus[] = []
     const data: supplier = {
       nome,
       endereco,
-      telefone
+      telefone,
+      onibus
     }
     this.busService.createSupplier(data).subscribe({
       next: response => {

@@ -8,6 +8,7 @@ export interface supplier {
   nome: string;
   endereco: string;
   telefone: string;
+  onibus: bus[];
 }
 export interface bus {
   _id?: string;

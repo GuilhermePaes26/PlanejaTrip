@@ -32,6 +32,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
 import { SnackbarComponent } from './shared/components/snackbar/snackbar.component';
 import { SupplierDetailComponent } from './components/bus/supplier-detail/supplier-detail.component';
+import { DialogCreateBusComponent } from './components/bus/dialog-create-bus/dialog-create-bus.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { SupplierDetailComponent } from './components/bus/supplier-detail/suppli
     BusRouterComponent,
     ConfirmationDialogComponent,
     SnackbarComponent,
-    SupplierDetailComponent
+    SupplierDetailComponent,
+    DialogCreateBusComponent
   ],
   imports: [
     BrowserModule,
