@@ -45,6 +45,8 @@ export class FormTripComponent implements OnInit {
     this.busService.findBus().subscribe({
       next: (response) => {
         this.buses = response
+        console.log(response);
+        
       }
     })
     if (this.tripId) {

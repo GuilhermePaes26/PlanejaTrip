@@ -14,7 +14,7 @@ export interface bus {
   _id?: string;
   capacidade: number;
   valor: number;
-  fornecedor_id: UUID;
+  fornecedor_id: supplier;
 }
 
 @Injectable({
