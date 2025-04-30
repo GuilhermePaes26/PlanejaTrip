@@ -1,5 +1,4 @@
-import {StyleSheet} from "react-native";
-
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   // telaPrincipal:{
@@ -12,17 +11,20 @@ const styles = StyleSheet.create({
   //   color: "#464237",
   //   fontSize: 20,
   // },
-  container: { //mantendo todo o fundo na cor azul
-    backgroundColor: '#233DDF', //azul escuro
+  container: {
+    //mantendo todo o fundo na cor azul
+    backgroundColor: "#233DDF", //azul escuro
   },
-  titulo: { //formatando titulo "Criar conta"
+  titulo: {
+    //formatando titulo "Criar conta"
     fontSize: 20,
-    textAlign: 'center',
-    color: '#FFFFFF',
-    fontStyle: 'bold'
+    textAlign: "center",
+    color: "#FFFFFF",
+    fontStyle: "bold",
   },
-  text: { // deixando todas as letras brancas
-    color: '#FFFFFF',
+  text: {
+    // deixando todas as letras brancas
+    color: "#FFFFFF",
   },
   inputs: {
     borderWidth: 1, // Sempre mantém a borda visível
@@ -30,10 +32,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#F9F8F6",
     borderRadius: 3,
     height: 50,
-    paddingLeft:10,
+    paddingLeft: 10,
     paddingTop: 5,
     fontSize: 20,
-    
   },
   inputSenha: {
     borderWidth: 1, // Sempre mantém a borda visível
@@ -42,9 +43,9 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     width: 304,
     height: 50,
-    paddingLeft:10,
+    paddingLeft: 10,
     paddingTop: 5,
-    fontSize: 20
+    fontSize: 20,
   },
   inputNumero: {
     borderWidth: 1, // Sempre mantém a borda visível
@@ -73,6 +74,6 @@ const styles = StyleSheet.create({
     marginTop: 43,
     marginLeft: -43,
   },
-})
+});
 
 export default styles;
