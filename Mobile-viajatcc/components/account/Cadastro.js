@@ -19,6 +19,7 @@ export default function Cadastro({ navigation }) {
       return Alert.alert("Erro", "Você deve aceitar os termos");
     }
     try {
+      // Trocar ip, ip etec: http://10.67.168.160:3000/users
       const res = await fetch("http://10.0.2.2:3000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
