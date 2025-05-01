@@ -33,7 +33,7 @@ export class FornecedoresComponent {
     this.dialog.open(FormFornecedorComponent, {width: '600px'}).afterClosed().toPromise()
   }
   updateSupplier(supplier:supplier) {
-    this.dialog.open(FormFornecedorComponent, {data: supplier})
+    this.dialog.open(FormFornecedorComponent, {data: supplier, width: '600px'})
   }
   async deleteSupplier(id: string) {
     const confirm = await this.dialog.open(ConfirmationDialogComponent, {
