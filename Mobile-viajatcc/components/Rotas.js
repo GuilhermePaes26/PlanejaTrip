@@ -1,56 +1,30 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MinhasViagens from './viagem/MinhasViagens';
-import Viagens from './viagem/viagens';
-import Login from './account/Login';
+// Rotas.js
+import React, { useState, useEffect } from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const tab = createBottomTabNavigator();
+import RotasAuth from "./account/RotasAuth";
+import AppTabs from "./RotasTabs";
 
-const Rotas = () => {
-    return (
-        <tab.Navigator
-            initialRouteName="Home"
-            tabBarOptions={{
-                activeTintColor: '#b94646',
-            }}
-        >
+const Root = createStackNavigator();
 
-            <tab.Screen
-                name="Home"
-                component={Viagens}
-                options={{
-                    tabBarLabel: 'Home',
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="home" color={color} size={size} />
-                    ),
-                }}
-            />
+export default function Rotas() {
+  const [initial, setInitial] = useState(null);
 
-            <tab.Screen
-                name="MinhasViagens"
-                component={MinhasViagens}
-                options={{
-                    tabBarLabel: 'Minhas Viagens',
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="map" color={color} size={size} />
-                    ),
-                }}
-            />
+  useEffect(() => {
+    AsyncStorage.getItem("isLoggedIn")
+      .then((val) => setInitial(val === "true" ? "App" : "Auth"))
+      .catch(() => setInitial("Auth"));
+  }, []);
 
-            <tab.Screen
-                name="Conta"
-                component={Login}
-                options={{
-                    tabBarLabel: 'Minha conta',
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account-circle" color={color} size={size} />
-                    ),
-                }}
-            />
-        </tab.Navigator>
-    )
+  if (initial === null) {
+    return null; // ou um loader
+  }
+
+  return (
+    <Root.Navigator initialRouteName={initial} screenOptions={{ headerShown: false }}>
+      <Root.Screen name="Auth" component={RotasAuth} />
+      <Root.Screen name="App" component={AppTabs} />
+    </Root.Navigator>
+  );
 }
-export default Rotas;

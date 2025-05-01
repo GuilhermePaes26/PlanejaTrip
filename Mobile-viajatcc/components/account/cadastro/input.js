@@ -8,9 +8,9 @@ export function InputNome() {
 
   return (
     <View style={styles.viewInputs}>
-      <Text style={styles.label}>Nome:</Text>
+      <Text style={styles.text}>Nome:</Text>
       <TextInput
-        style={[styles.inputs, { borderColor: isFocused ? 'yellow' : '#D2CEC5' }]}
+        style={[styles.inputs, { borderColor: isFocused ? 'white' : '#FFFFFF' }]}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         
@@ -25,7 +25,7 @@ export function InputEmail() {
 
   return (
     <View style={styles.viewInputs}>
-      <Text style={styles.label}>Email:</Text>
+      <Text style={styles.text}>Email:</Text>
       <TextInput
         style={[styles.inputs, { borderColor: isFocused ? 'yellow' : '#D2CEC5' }]}
         onFocus={() => setIsFocused(true)}
@@ -43,7 +43,7 @@ export function InputSenha({ senha, setSenha, senhaVisivel }) {
   
   return (
     <View style={styles.viewInputs}>
-      <Text style={styles.label}>Senha:</Text>
+      <Text style={styles.text}>Senha:</Text>
       <TextInput
         style={[styles.inputSenha, { borderColor: isFocused ? 'yellow' : '#D2CEC5' }]}
         onFocus={() => setIsFocused(true)}
@@ -63,7 +63,7 @@ export function InputNumero() {
 
   return (
     <View style={styles.viewInputs}>
-      <Text style={styles.label}>Número:</Text>
+      <Text style={styles.text}>Número:</Text>
       <TextInput
         style={[styles.inputNumero, { borderColor: isFocused ? 'yellow' : '#D2CEC5' }]}
         onFocus={() => setIsFocused(true)}
@@ -81,7 +81,7 @@ export function InputRua({ rua }) {
 
   return (
     <View style={styles.viewInputs}>
-      <Text style={styles.label}>Rua:</Text>
+      <Text style={styles.text}>Rua:</Text>
       <TextInput
         style={[styles.inputs, { borderColor: isFocused ? 'yellow' : '#D2CEC5' }]}
         onFocus={() => setIsFocused(true)}
@@ -99,7 +99,7 @@ export function InputCidade({ cidade }) {
 
   return (
     <View style={styles.viewInputs}>
-      <Text style={styles.label}>Cidade:</Text>
+      <Text style={styles.text}>Cidade:</Text>
       <TextInput
         style={[styles.inputs, { borderColor: isFocused ? 'yellow' : '#D2CEC5' }]}
         onFocus={() => setIsFocused(true)}
