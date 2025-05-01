@@ -1,6 +1,6 @@
 <div class="suppliers-container">
     <h1>Fornecedores</h1>
-    <a href="/home/bus/create" class="button">Novo fornecedor</a>
+    <button class="button" (click)="createSupplier()">Novo fornecedor</button>
 
     <div *ngIf="isLoading" class="loading">Carregando...</div>
     <div *ngIf="error" class="error">{{ error }}</div>
@@ -13,12 +13,12 @@
             <span>Ações</span>
         </div>
         <div *ngFor="let supplier of suppliers">
-            <div class="suppliers-table row" *ngIf="supplier._id"  (click)="viewSupplier(supplier._id)">
-                <span>{{ supplier.nome }}</span>
+            <div class="suppliers-table row" *ngIf="supplier._id"  >
+                <span (click)="viewSupplier(supplier._id)" class="viewDetail">{{ supplier.nome }}</span>
                 <span>{{ supplier.endereco }}</span>
                 <span>{{ supplier.telefone }}</span>
                 <span class="actions">
-                    <button *ngIf="supplier._id">Editar</button>
+                    <button *ngIf="supplier._id" (click)="updateSupplier(supplier)">Editar</button>
                     <button *ngIf="supplier._id" class="delete" (click)="deleteSupplier(supplier._id)">Excluir</button>
                 </span>
             </div>

@@ -41,9 +41,7 @@ export class SignupComponent {
         .then(response => response.json())
         .then(data => {
           this.registerForm.patchValue({
-            razao: data.company.name
-          });
-          this.registerForm.patchValue({
+            razao: data.company.name,
             email: data.emails[0].address
           });
         })

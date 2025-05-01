@@ -1,0 +1,11 @@
+<form [formGroup]="busForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-group">
+        <label for="capacidade">capacidade</label>
+        <input type="number" formControlName="capacidade">
+    </div>
+    <div class="form-group">
+        <label for="valor">valor</label>
+        <input type="number" formControlName="valor">
+    </div>
+    <button type="submit" class="submit-button">Salvar</button>
+</form>

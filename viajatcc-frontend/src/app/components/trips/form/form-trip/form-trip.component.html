@@ -3,7 +3,7 @@
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="nome">Nome</label>
+      <label for="nome">Destino</label>
       <input id="nome" formControlName="nome" type="text" />
     </div>
 
@@ -23,8 +23,11 @@
     </div>
 
     <div class="form-group">
-      <label for="onibus">ID do Ônibus</label>
-      <input id="onibus" formControlName="onibus" type="text" />
+      <label for="onibus">Seleciona a capacidade do ônibus</label>
+      <select formControlName="onibus" id="">
+        <option value="{{bus._id}}" *ngFor="let bus of buses">{{bus.capacidade}} - R$ {{bus.valor}} - {{bus.fornecedor_id.nome}}</option>
+      </select>
+      <p>Onibus ainda não cadastrado? <a href="/home/bus/list">Clique aqui!</a></p>
     </div>
 
     <button type="submit" [disabled]="form.invalid">

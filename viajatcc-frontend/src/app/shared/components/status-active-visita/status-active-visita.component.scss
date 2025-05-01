@@ -1,0 +1,18 @@
+.status-indicator {
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(45deg, #c62828, #ff8a80);
+    border-radius: 50%;
+    animation: blink 2s infinite;
+}
+
+
+@keyframes blink {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+}

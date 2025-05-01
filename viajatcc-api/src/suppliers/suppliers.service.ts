@@ -20,7 +20,7 @@ export class SuppliersService {
   }
 
   async findOne(id: string): Promise<Supplier> {
-    const supplier = await this.supplierModel.findById(id).exec();
+    const supplier = await this.supplierModel.findById(id).populate('onibus').exec();
     if (!supplier) {
       throw new NotFoundException(`Fornecedor com ID "${id}" não encontrado`);
     }

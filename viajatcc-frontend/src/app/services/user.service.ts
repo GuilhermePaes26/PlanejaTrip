@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Trip } from './trips.service';
 
 export interface user {
   _id: string,
@@ -8,7 +9,7 @@ export interface user {
   nome: string,
   email: string,
   idade: number,
-  viagens: {},
+  viagens: Trip,
   pagamentos: {},
 }
 

@@ -1,0 +1,26 @@
+<div class="supplier-card">
+  <h2>{{ supplier.nome }}</h2>
+  <p><strong>Telefone:</strong> {{ supplier.telefone }}</p>
+  <p><strong>Endereço:</strong> {{ supplier.endereco }}</p>
+
+</div>
+<div class="suppliers-container">
+  <button class="button" (click)="criarOnibus()">Novo Ônibus</button>
+  <div class="suppliers-table-wrapper">
+    <div class="suppliers-table header">
+      <span>Valor</span>
+      <span>Capacidade</span>
+      <span>Ações</span>
+    </div>
+    <div *ngFor="let onibus of supplier.onibus">
+      <div class="suppliers-table row" *ngIf="onibus._id">
+        <span>{{ onibus.capacidade }}</span>
+        <span>{{ onibus.valor }}</span>
+        <span class="actions">
+          <button *ngIf="onibus._id">Editar</button>
+          <button *ngIf="onibus._id" class="delete" (click)="excluirOnibus( onibus._id )">Excluir</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

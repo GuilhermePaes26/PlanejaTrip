@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { TripsService, Trip } from '../../../services/trips.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-trips',
@@ -15,7 +17,7 @@ export class TripsComponent implements OnInit {
   isLoading = true;
   error = '';
 
-  constructor(private tripsService: TripsService, private router: Router) {}
+  constructor(private tripsService: TripsService, private router: Router, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.fetchTrips();
@@ -45,8 +47,11 @@ export class TripsComponent implements OnInit {
     this.router.navigate(['/home/trips/edit', id]);
   }
 
-  deleteTrip(id: string): void {
-    if (confirm('Tem certeza que deseja excluir esta viagem?')) {
+  async deleteTrip(id: string) {
+    const confirm = await this.dialog.open(ConfirmationDialogComponent, {
+      data: 'Tem certeza que deseja excluir esta viagem? O dinheiro dos passageiros será estornado!'
+    }).afterClosed().toPromise()
+    if (confirm) {
       this.tripsService.deleteTrip(id).subscribe({
         next: () => this.fetchTrips(),
         error: (err) => console.error('Erro ao excluir', err),
