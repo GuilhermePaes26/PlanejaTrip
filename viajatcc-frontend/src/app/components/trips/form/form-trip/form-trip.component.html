@@ -24,8 +24,10 @@
 
     <div class="form-group">
       <label for="pontoDePartida">Ponto de partida</label>
-      <input id="pontoDePartida" formControlName="pontoDePartida" type="text" />
-      <button (click)="openMaps()"><mat-icon>location_on</mat-icon></button>
+      <div style="display: flex;flex-direction: row;">
+        <input id="pontoDePartida" formControlName="pontoDePartida" type="text" readonly />
+        <button (click)="openMaps()" ><mat-icon class="big-icon">location_on</mat-icon></button>
+      </div>
     </div>
 
     <div class="form-group">
@@ -37,7 +39,7 @@
       <p>Onibus ainda não cadastrado? <a href="/home/bus/list">Clique aqui!</a></p>
     </div>
 
-    <button type="submit" [disabled]="form.invalid">
+    <button type="submit" class="button" [disabled]="form.invalid">
       {{ isEditMode ? "Salvar Alterações" : "Criar Viagem" }}
     </button>
   </form>
