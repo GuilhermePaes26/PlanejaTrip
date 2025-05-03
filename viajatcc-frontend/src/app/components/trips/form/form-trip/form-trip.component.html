@@ -23,6 +23,11 @@
     </div>
 
     <div class="form-group">
+      <label for="pontoDePartida">Ponto de partida</label>
+      <input id="pontoDePartida" formControlName="pontoDePartida" type="text" />
+    </div>
+
+    <div class="form-group">
       <label for="onibus">Seleciona a capacidade do ônibus</label>
       <select formControlName="onibus" id="">
         <option value="{{bus._id}}" *ngFor="let bus of buses">{{bus.capacidade}} - R$ {{bus.valor}} - {{bus.fornecedor_id.nome}}</option>

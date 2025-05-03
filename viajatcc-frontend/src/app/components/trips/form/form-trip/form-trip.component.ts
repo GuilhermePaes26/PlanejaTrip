@@ -35,6 +35,7 @@ export class FormTripComponent implements OnInit {
       descricao: [''],
       preco: [0, [Validators.required, Validators.min(0)]],
       data: ['', Validators.required],
+      pontoDePartida: ['', Validators.required],
       onibus: ['', Validators.required],
     });
     
