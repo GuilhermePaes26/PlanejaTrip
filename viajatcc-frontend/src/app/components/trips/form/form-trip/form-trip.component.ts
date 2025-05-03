@@ -9,11 +9,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TripsService } from '../../../../services/trips.service';
 import { bus, BusService } from '../../../../services/bus.service';
+import { HttpClient } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogMapsComponent } from '../dialog-maps/dialog-maps.component';
 
 @Component({
   selector: 'app-form-trip',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatIconModule],
   templateUrl: './form-trip.component.html',
   styleUrls: ['./form-trip.component.scss'],
 })
@@ -28,7 +32,8 @@ export class FormTripComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tripsService: TripsService,
-    private busService: BusService
+    private busService: BusService,
+    private dialog: MatDialog
   ) {
     this.form = this.fb.group({
       nome: ['', Validators.required],
@@ -62,6 +67,10 @@ export class FormTripComponent implements OnInit {
         });
       });
     }
+  }
+
+  openMaps() {
+    this.dialog.open(DialogMapsComponent,  {width: '800px'})
   }
 
   onSubmit(): void {

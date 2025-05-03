@@ -33,6 +33,7 @@ import { ConfirmationDialogComponent } from './shared/components/confirmation-di
 import { SnackbarComponent } from './shared/components/snackbar/snackbar.component';
 import { SupplierDetailComponent } from './components/bus/supplier-detail/supplier-detail.component';
 import { DialogCreateBusComponent } from './components/bus/dialog-create-bus/dialog-create-bus.component';
+import { DialogMapsComponent } from './components/trips/form/dialog-maps/dialog-maps.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { DialogCreateBusComponent } from './components/bus/dialog-create-bus/dia
     ConfirmationDialogComponent,
     SnackbarComponent,
     SupplierDetailComponent,
-    DialogCreateBusComponent
+    DialogCreateBusComponent,
+    DialogMapsComponent
   ],
   imports: [
     BrowserModule,
