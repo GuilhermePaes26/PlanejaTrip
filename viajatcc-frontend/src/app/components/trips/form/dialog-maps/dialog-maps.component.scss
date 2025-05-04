@@ -56,6 +56,12 @@
   ::ng-deep input[type="button"].button-secondary:hover {
     background-color: #d2e3fc;
   }
+  ::ng-deep input[type="button"].button-disabled {
+    background-color: rgb(112, 112, 112);
+    color: #000000;
+    cursor: default;
+  }
+  
   
   #response-container {
     background-color: #fff;

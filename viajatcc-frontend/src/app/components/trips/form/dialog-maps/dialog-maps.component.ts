@@ -30,7 +30,7 @@ export class DialogMapsComponent implements AfterViewInit  {
         resolve();
       } else {
         const script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=SUA_API_KEY&callback=initMap';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCk-pBIR5GShm-kpY2z_Wawi99IshxVM6s&callback=initMap';
         script.async = true;
         script.defer = true;
         (window as any).initMap = () => resolve();
@@ -43,7 +43,9 @@ export class DialogMapsComponent implements AfterViewInit  {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 10,
       center: { lat: -23.4045877, lng: -46.4196069 },
-      mapTypeControl: false
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: false,
     });
 
 
@@ -51,6 +53,7 @@ export class DialogMapsComponent implements AfterViewInit  {
 
     const inputText = document.createElement('input');
     inputText.type = 'text';
+    inputText.id = 'inputText'
     inputText.placeholder = 'Coloque o endereço';
     inputText.classList.add('input')
 
@@ -68,26 +71,18 @@ export class DialogMapsComponent implements AfterViewInit  {
 
     const clearButton = document.createElement('input');
     clearButton.type = 'button';
-    clearButton.value = 'Clear';
+    clearButton.value = 'Limpar';
     clearButton.classList.add('button', 'button-secondary');
 
     this.response = document.createElement('pre');
     this.response.id = 'response';
     this.response.innerText = '';
 
-    this.responseDiv = document.createElement('div');
-    this.responseDiv.id = 'response-container';
-    this.responseDiv.appendChild(this.response);
-
-    const instructionsElement = document.createElement('p');
-    instructionsElement.id = 'instructions';
-    instructionsElement.innerHTML = '<strong>Instructions</strong>: Enter an address in the textbox to geocode or click on the map to reverse geocode.';
 
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(ConfirmButton);
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
-    this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(instructionsElement);
     this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(this.responseDiv);
 
     this.marker = new google.maps.Marker({
@@ -123,6 +118,8 @@ export class DialogMapsComponent implements AfterViewInit  {
       .then((result) => {
         const { results } = result;
         console.log(result)
+        const inputText = document.getElementById('inputText')  as HTMLInputElement
+        inputText.value = result.results[0].formatted_address
         this.map.setCenter(results[0].geometry.location);
         this.map.setZoom(16)
         this.marker.setPosition(results[0].geometry.location);
