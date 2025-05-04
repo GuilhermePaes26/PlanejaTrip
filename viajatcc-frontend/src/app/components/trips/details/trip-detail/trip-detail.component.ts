@@ -5,11 +5,12 @@ import { TripsService, Trip } from '../../../../services/trips.service';
 import { exportPassengersToExcel } from '../../../../utils/export-to-excel';
 import { CnpjPipe } from '../../../../cnpj.pipe';
 import { CpfOuCnpjPipe } from '../../../../shared/pipes/cpf-ou-cnpj.pipe';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-trip-detail',
   standalone: true,
-  imports: [CommonModule, CpfOuCnpjPipe],
+  imports: [CommonModule, CpfOuCnpjPipe, MatIcon],
   templateUrl: './trip-detail.component.html',
   styleUrls: ['./trip-detail.component.scss'],
 })

@@ -1,40 +1,52 @@
 <div class="trip-detail-container">
   <h1>Detalhes da Viagem</h1>
 
-  <div *ngIf="isLoading">Carregando...</div>
-  <div *ngIf="error">{{ error }}</div>
+<div *ngIf="isLoading">Carregando...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
 
-  <div *ngIf="trip">
+<div *ngIf="trip" class="trip-info-container">
+
+  <!-- 🔹 Informações Gerais -->
+  <div class="info-card">
     <h2>{{ trip.nome }}</h2>
-    <p><strong>Data:</strong> {{ trip.data | date : "dd/MM/yyyy" }}</p>
-    <p><strong>Preço:</strong> R$ {{ trip.preco | number : "1.2-2" }}</p>
-    <p><strong>Descrição:</strong> {{ trip.descricao || "Sem descrição" }}</p>
-    <p><strong>Passageiros:</strong> {{ trip.passageiros.length }}</p>
-    <p><strong>Lotação máxima: </strong>{{trip.onibus.capacidade}}</p>
+    <p><strong>Data:</strong> {{ trip.data | date: 'dd/MM/yyyy' }}</p>
+    <p><strong>Preço por passageiro:</strong> R$ {{ trip.preco | number: '1.2-2' }}</p>
+    <p><strong>Descrição:</strong> {{ trip.descricao || 'Sem descrição' }}</p>
   </div>
-  <button class="generate-report" (click)="generateReport()">
-    Gerar Relatório
-  </button>
+
+  <!-- 🚌 Informações do Ônibus -->
+  <div class="info-card">
+    <h3>Ônibus</h3>
+    <p><strong>Capacidade:</strong> {{ trip.onibus.capacidade }}</p>
+    <p><strong>Valor do aluguel:</strong> R$ {{ trip.onibus.valor }}</p>
+  </div>
+
+  <!-- 👥 Resumo dos Passageiros -->
+  <div class="info-card">
+    <h3>Passageiros</h3>
+    <p><strong>Total:</strong> {{ trip.passageiros.length }}</p>
+  </div>
 </div>
+
+<button class="generate-report" (click)="generateReport()"><mat-icon>description</mat-icon>&nbsp; Gerar Relatório</button>
+</div>
+
+<!-- Passageiros -->
 <div class="trips-container" *ngIf="trip">
-  <div class="trips-table-wrapper" >
-    <div class="trips-table header">
+  <h2>Passageiros</h2>
+  <div class="trips-table">
+    <div class="trips-row header">
       <span>Nome</span>
       <span>CPF</span>
       <span>Email</span>
       <span>Idade</span>
     </div>
 
-    <div class="trips-table row" *ngFor="let passenger of trip.passageiros">
+    <div class="trips-row" *ngFor="let passenger of trip.passageiros">
       <span>{{ passenger.nome }}</span>
       <span>{{ passenger.cpf | cpfOuCnpj }}</span>
       <span>{{ passenger.email }}</span>
       <span>{{ passenger.idade }}</span>
-      <!-- <span class="actions">
-      <button *ngIf="passenger._id"  (click)="viewDetails(passenger._id)">Ver</button>
-      <button *ngIf="passenger._id"  (click)="editpassenger(passenger._id)">Editar</button>
-      <button *ngIf="passenger._id"  (click)="deletepassenger(passenger._id)" class="delete">Excluir</button>
-    </span> -->
     </div>
   </div>
 </div>
