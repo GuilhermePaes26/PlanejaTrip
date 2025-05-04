@@ -16,3 +16,25 @@
     Gerar Relatório
   </button>
 </div>
+<div class="trips-container" *ngIf="trip">
+  <div class="trips-table-wrapper" >
+    <div class="trips-table header">
+      <span>Nome</span>
+      <span>CPF</span>
+      <span>Email</span>
+      <span>Idade</span>
+    </div>
+
+    <div class="trips-table row" *ngFor="let passenger of trip.passageiros">
+      <span>{{ passenger.nome }}</span>
+      <span>{{ passenger.cpf | cpfOuCnpj }}</span>
+      <span>{{ passenger.email }}</span>
+      <span>{{ passenger.idade }}</span>
+      <!-- <span class="actions">
+      <button *ngIf="passenger._id"  (click)="viewDetails(passenger._id)">Ver</button>
+      <button *ngIf="passenger._id"  (click)="editpassenger(passenger._id)">Editar</button>
+      <button *ngIf="passenger._id"  (click)="deletepassenger(passenger._id)" class="delete">Excluir</button>
+    </span> -->
+    </div>
+  </div>
+</div>

@@ -3,11 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TripsService, Trip } from '../../../../services/trips.service';
 import { exportPassengersToExcel } from '../../../../utils/export-to-excel';
+import { CnpjPipe } from '../../../../cnpj.pipe';
+import { CpfOuCnpjPipe } from '../../../../shared/pipes/cpf-ou-cnpj.pipe';
 
 @Component({
   selector: 'app-trip-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CpfOuCnpjPipe],
   templateUrl: './trip-detail.component.html',
   styleUrls: ['./trip-detail.component.scss'],
 })
