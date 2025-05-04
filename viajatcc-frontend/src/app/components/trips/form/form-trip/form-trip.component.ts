@@ -70,7 +70,12 @@ export class FormTripComponent implements OnInit {
   }
 
   openMaps() {
-    this.dialog.open(DialogMapsComponent,  {width: '800px'})
+    this.dialog.open(DialogMapsComponent,  {width: '800px'}).afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(result)
+        this.form.patchValue({pontoDePartida: result.namePoint})
+      }
+    })
   }
 
   onSubmit(): void {

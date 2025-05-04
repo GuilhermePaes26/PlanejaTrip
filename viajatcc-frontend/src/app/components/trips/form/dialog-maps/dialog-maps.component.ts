@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-maps',
@@ -14,6 +15,8 @@ export class DialogMapsComponent implements AfterViewInit  {
   geocoder!: google.maps.Geocoder;
   responseDiv!: HTMLElement;
   response!: HTMLElement;
+
+  constructor(private dialog: MatDialogRef<DialogMapsComponent>) {}
 
   ngAfterViewInit(): void {
     this.loadGoogleMapsScript().then(() => {
@@ -53,8 +56,15 @@ export class DialogMapsComponent implements AfterViewInit  {
 
     const submitButton = document.createElement('input');
     submitButton.type = 'button';
-    submitButton.value = 'Geocode';
+    submitButton.value = 'Buscar';
     submitButton.classList.add('button', 'button-primary');
+
+    const ConfirmButton = document.createElement('input');
+    ConfirmButton.type = 'button';
+    ConfirmButton.value = 'Confirmar';
+    ConfirmButton.id = 'confirm'
+    ConfirmButton.classList.add( 'button-disabled');
+    ConfirmButton.disabled = true;
 
     const clearButton = document.createElement('input');
     clearButton.type = 'button';
@@ -75,6 +85,7 @@ export class DialogMapsComponent implements AfterViewInit  {
 
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
+    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(ConfirmButton);
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
     this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(instructionsElement);
     this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(this.responseDiv);
@@ -89,6 +100,9 @@ export class DialogMapsComponent implements AfterViewInit  {
 
     submitButton.addEventListener('click', () => {
       this.geocode({ address: inputText.value });
+    });
+    ConfirmButton.addEventListener('click', () => {
+      this.geocodeConfirm({ address: inputText.value }, inputText.value);
     });
 
     clearButton.addEventListener('click', () => {
@@ -108,10 +122,25 @@ export class DialogMapsComponent implements AfterViewInit  {
       .geocode(request)
       .then((result) => {
         const { results } = result;
+        console.log(result)
         this.map.setCenter(results[0].geometry.location);
+        this.map.setZoom(16)
         this.marker.setPosition(results[0].geometry.location);
         this.marker.setMap(this.map);
-        this.response.innerText = JSON.stringify(result, null, 2);
+        const confirm = document.getElementById('confirm')  as HTMLInputElement
+        confirm?.classList.remove('button-disabled')
+        confirm?.classList.add('button-primary')
+        confirm.disabled = false
+      })
+      .catch((e) => {
+        alert('Geocode was not successful: ' + e);
+      });
+  }
+  geocodeConfirm(request: google.maps.GeocoderRequest, namePoint: string){
+    this.clear();
+    this.geocoder.geocode(request).then((result) => {
+        const { results } = result;
+        this.dialog.close({result: results[0], namePoint})
       })
       .catch((e) => {
         alert('Geocode was not successful: ' + e);
