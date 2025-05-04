@@ -22,11 +22,12 @@
       <input id="data" formControlName="data" type="date" />
     </div>
 
-    <div class="form-group">
-      <label for="pontoDePartida">Ponto de partida</label>
-      <div style="display: flex;flex-direction: row;">
-        <input id="pontoDePartida" formControlName="pontoDePartida" type="text" readonly />
-        <button (click)="openMaps()" ><mat-icon class="big-icon">location_on</mat-icon></button>
+    <div class="form-group" >
+      <label for="pontoDePartida">{{ isEditMode ? "Ponto de partida (não é possível alterar ponto de partida)" : "Ponto de partida " }}</label>
+      <input id="pontoDePartida" *ngIf="isEditMode" formControlName="startPoint.namePoint" type="text" value="{{this.form.value.startPoint.namePoint}}" readonly />
+      <div style="display: flex;flex-direction: row;" *ngIf="!isEditMode">
+        <input id="pontoDePartida" formControlName="startPoint.namePoint" type="text" value="{{this.form.value.startPoint.namePoint}}" readonly />
+        <button type="button" (click)="openMaps()"><mat-icon class="big-icon">location_on</mat-icon></button>
       </div>
     </div>
 

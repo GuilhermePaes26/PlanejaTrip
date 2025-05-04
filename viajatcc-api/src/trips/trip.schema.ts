@@ -28,20 +28,13 @@ export class Trip {
   passageiros: string[];
   @Prop({
     type: {
+      namePoint: { type: String, required: true },
       lat: { type: Number, required: true },
       lng: { type: Number, required: true },
     },
     required: true,
   })
   startPoint: { lat: number; lng: number };
-  @Prop({
-    type: {
-      lat: { type: Number, required: true },
-      lng: { type: Number, required: true },
-    },
-    required: true,
-  })
-  endPoint: { lat: number; lng: number };
 }
 
 export const TripSchema = SchemaFactory.createForClass(Trip);

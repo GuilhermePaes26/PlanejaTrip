@@ -26,6 +26,8 @@ export class FormTripComponent implements OnInit {
   isEditMode = false;
   tripId: string | null = null;
   buses: bus[] = []
+  lat: number = 0
+  lng: number = 0
 
   constructor(
     private fb: FormBuilder,
@@ -40,7 +42,7 @@ export class FormTripComponent implements OnInit {
       descricao: [''],
       preco: [0, [Validators.required, Validators.min(0)]],
       data: ['', Validators.required],
-      pontoDePartida: ['', Validators.required],
+      startPoint: [{namePoint: '', lat: 0, lng: 0}],
       onibus: ['', Validators.required],
     });
     
@@ -63,6 +65,11 @@ export class FormTripComponent implements OnInit {
           descricao: trip.descricao,
           preco: trip.preco,
           data: trip.data,
+          startPoint: {
+            namePoint: trip.startPoint.namePoint,
+            lat: trip.startPoint.lat,
+            lng: trip.startPoint.lng
+          },
           onibus: trip.onibus._id
         });
       });
@@ -73,7 +80,15 @@ export class FormTripComponent implements OnInit {
     this.dialog.open(DialogMapsComponent,  {width: '800px'}).afterClosed().subscribe((result) => {
       if (result) {
         console.log(result)
-        this.form.patchValue({pontoDePartida: result.namePoint})
+        this.form.patchValue({
+          startPoint: {
+            namePoint: result.namePoint,
+            lat: result.result.navigation_points[0].location.latitude,
+            lng: result.result.navigation_points[0].location.longitude,
+          }
+        })
+        console.log(this.form.value.startPoint);
+        
       }
     })
   }

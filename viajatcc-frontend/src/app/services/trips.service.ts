@@ -12,6 +12,7 @@ export interface Trip {
   data: string;
   onibus: bus;
   passageiros: user[];
+  startPoint: {namePoint: string, lat: number, lng: number}
 }
 
 @Injectable({
@@ -31,6 +32,8 @@ export class TripsService {
   }
 
   createTrip(trip: Trip): Observable<Trip> {
+    console.log(trip);
+    
     return this.http.post<Trip>(this.apiUrl, trip);
   }
 
