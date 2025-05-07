@@ -1,21 +1,22 @@
 .bar {
     width: 80%;
+    margin: 0 15%;
 }
 
 .bars {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 60%;
 }
 
 .pie {
-    width: 35%;
+    width: 45%;
 }
 
 .layout {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 90%;
 }
 
 .progress {
@@ -23,12 +24,6 @@
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.1);
 }
-
-::ng-deep .mat-progress-bar-fill::after {
-    background: linear-gradient(90deg, #ff6a00, #ee0979);
-    /* degrade legal */
-}
-
 
 .progressDiv {
     width: 90%;

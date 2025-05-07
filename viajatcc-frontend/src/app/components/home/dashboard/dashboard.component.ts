@@ -27,8 +27,16 @@ export class DashboardComponent {
   barChartData = {
     labels: ['Janeiro', 'Fevereiro', 'Março'],
     datasets: [
-      { data: [65, 59, 80], label: 'Vendas' },
-      { data: [28, 48, 40], label: 'Lucros' }
+      { data: [65, 59, 80], label: 'Vendas', backgroundColor: ['#132166'] },
+      { data: [28, 48, 40], label: 'Lucros', backgroundColor: ['#233DFF'] },
+      
+    ]
+  };
+  barChartDataIdade = {
+    labels: ['01 a 18', '19 a 30', '31 a 50', '50+'],
+    datasets: [
+      { data: [65, 88 , 59, 80], label: 'Idade dos passageiros', backgroundColor: ['#132166'] },
+      
     ]
   };
 
@@ -37,7 +45,7 @@ export class DashboardComponent {
     datasets: [
       {
         data: [1200, 500, 300],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        backgroundColor: ['#132166', '#233DFF', '#4a289e']
       }
     ]
   };
