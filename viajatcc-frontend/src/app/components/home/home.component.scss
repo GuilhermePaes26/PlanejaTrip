@@ -1,48 +1,57 @@
 .layout {
-    display: flex;
-    flex-direction: row;
-    height: 100vh; /* altura total da viewport */
-    width: 100%;
-  }
-  
-  .sidebar {
-    height: 100vh; /* ocupa toda a altura da viewport */
-    width: 20%;
-    background-color: #9ea0e5;
-    display: flex;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  /* altura total da viewport */
+  width: 100%;
+}
+
+.sidebar {
+  width: 20%;
+  background-color: #9ea0e5;
+  display: flex;
+  overflow: hidden;
   flex-direction: column;
   justify-content: flex-start;
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.534);
-  }
-  .menu-button {
-    margin: 5px;
-    font-size: 40px;
-    width: 40px;
-    height: 40px;
-    color: #4a289e;
-    transition: color .35s ease, background-color 0.35s ease;
-    border-radius: 5px;
+  position: sticky; // mantém no topo se necessário
+  top: 0;
+}
 
-  }
-  .menu-button:hover {
-    color: #ffffff;
-    background-color: #4a289e;
-  }
-  .menu-button-sidebar {
-    margin-left: 80%;
-    font-size: 40px;
-    width: 40px;
-    height: 40px;
-    color: #4a289e;
-    transition: color .35s ease, background-color 0.35s ease;
-    border-radius: 5px;
+.menu-button {
+  margin: 5px;
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #4a289e;
+  transition: color .35s ease, background-color 0.35s ease;
+  border-radius: 5px;
 
-  }
-  .menu-button-sidebar:hover {
-    background-color: #4a289e;
-    color: #ffffff;
-  }
+}
 
-  .home {
-    width: 100%;
-  }
+.menu-button:hover {
+  color: #ffffff;
+  background-color: #4a289e;
+}
+
+.menu-button-sidebar {
+  margin-left: 80%;
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #4a289e;
+  transition: color .35s ease, background-color 0.35s ease;
+  border-radius: 5px;
+
+}
+
+.menu-button-sidebar:hover {
+  background-color: #4a289e;
+  color: #ffffff;
+}
+
+.home {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+}
