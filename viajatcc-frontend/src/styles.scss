@@ -1,4 +1,14 @@
+@use '@angular/material' as mat;
 
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.progress-bar-overrides((
+    active-indicator-color: rgb(95, 11, 67),
+    track-color: rgb(140, 140, 140),
+    active-indicator-height: 12px,
+    track-height: 12px,
+  ));
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

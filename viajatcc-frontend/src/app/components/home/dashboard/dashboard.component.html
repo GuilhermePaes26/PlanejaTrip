@@ -1,2 +1,32 @@
-<h1>Olá, {{ user.nome}}! Ainda não tem nada aqui</h1>
-<h6>Mas, um dia terá ❤</h6>
+<div class="progressDiv">
+  <h1 style="margin-bottom: 10px;">Meta mensal</h1>
+
+  <div class="valores">
+    <h2>R$ 7.200,00</h2>
+    <h2>R$ 16.000,00</h2>
+  </div>
+
+  <mat-progress-bar
+    class="progress"
+    color="primary"
+    mode="determinate"
+    value="45">
+  </mat-progress-bar>
+</div>
+
+<div class="layout">
+  <div class="pie">
+    <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" [type]="'pie'">
+    </canvas>
+  </div>
+  <div class="bars">
+    <div class="bar">
+      <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="'bar'">
+      </canvas>
+    </div>
+    <div class="bar">
+      <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="'bar'">
+      </canvas>
+    </div>
+  </div>
+</div>

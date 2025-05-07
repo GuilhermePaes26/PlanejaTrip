@@ -34,7 +34,8 @@ import { SnackbarComponent } from './shared/components/snackbar/snackbar.compone
 import { SupplierDetailComponent } from './components/bus/supplier-detail/supplier-detail.component';
 import { DialogCreateBusComponent } from './components/bus/dialog-create-bus/dialog-create-bus.component';
 import { DialogMapsComponent } from './components/trips/form/dialog-maps/dialog-maps.component';
-
+import {NgChartsModule} from 'ng2-charts'
+import { MatProgressBar } from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +70,9 @@ import { DialogMapsComponent } from './components/trips/form/dialog-maps/dialog-
     MatButtonModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    NgChartsModule,
+    MatDialogModule,
+    MatProgressBar
   ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],
