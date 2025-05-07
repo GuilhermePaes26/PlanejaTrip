@@ -4,11 +4,12 @@ import { RouterModule, Router } from '@angular/router';
 import { TripsService, Trip } from '../../../services/trips.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-trips',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatProgressBar],
   templateUrl: './trips.component.html',
   styleUrls: ['./trips.component.scss'],
 })

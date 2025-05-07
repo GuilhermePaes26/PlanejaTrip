@@ -2,7 +2,7 @@
     <h1>Fornecedores</h1>
     <button class="button" (click)="createSupplier()">Novo fornecedor</button>
 
-    <div *ngIf="isLoading" class="loading">Carregando...</div>
+    <div *ngIf="isLoading" class="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
     <div *ngIf="error" class="error">{{ error }}</div>
 
     <div class="suppliers-table-wrapper" *ngIf="suppliers.length > 0">

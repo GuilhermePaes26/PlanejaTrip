@@ -2,7 +2,7 @@
   <h1>Viagens Disponíveis</h1>
   <a href="/home/trips/create" class="button">Criar viagem</a>
 
-  <div *ngIf="isLoading" class="loading">Carregando...</div>
+  <div *ngIf="isLoading" class="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
   <div *ngIf="error" class="error">{{ error }}</div>
 
   <div class="trips-table-wrapper" *ngIf="trips.length > 0">
