@@ -1,13 +1,26 @@
 /* eslint-disable prettier/prettier */
-import { Injectable, NotFoundException } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel, InjectConnection } from '@nestjs/mongoose';
 import { Model, Connection } from 'mongoose';
+import Stripe from 'stripe';
 import { Payment, PaymentDocument } from './payment.schema';
 import { User, UserDocument } from '../users/user.schema';
 import { Trip, TripDocument } from '../trips/trip.schema';
+import { CreatePaymentDto } from './dto/create-payment.dto';
+import { CreatePaymentIntentDto } from './dto/create-payment-intent.dto';
 
 @Injectable()
 export class PaymentsService {
+  private stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-04-30.basil',
+  });
+
   constructor(
     @InjectModel(Payment.name) private paymentModel: Model<PaymentDocument>,
     @InjectModel(User.name) private userModel: Model<UserDocument>,
@@ -15,12 +28,27 @@ export class PaymentsService {
     @InjectConnection() private readonly connection: Connection,
   ) {}
 
-  async create(createPaymentDto: any): Promise<Payment> {
+  async createPaymentIntent(
+    dto: CreatePaymentIntentDto,
+  ): Promise<{ clientSecret: string }> {
+    try {
+      const paymentIntent = await this.stripe.paymentIntents.create({
+        amount: dto.amount,
+        currency: dto.currency,
+      });
+      return { clientSecret: paymentIntent.client_secret };
+    } catch (err) {
+      throw new InternalServerErrorException('Erro ao criar PaymentIntent');
+    }
+  }
+
+  async create(createPaymentDto: CreatePaymentDto): Promise<Payment> {
     const session = await this.connection.startSession();
     session.startTransaction();
     try {
       const createdPayment = new this.paymentModel(createPaymentDto);
       const savedPayment = await createdPayment.save({ session });
+
       await this.userModel.findByIdAndUpdate(
         createPaymentDto.usuario_id,
         {

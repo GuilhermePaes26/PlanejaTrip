@@ -9,13 +9,22 @@ import {
   Param,
 } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
+import { CreatePaymentDto } from './dto/create-payment.dto';
+import { CreatePaymentIntentDto } from './dto/create-payment-intent.dto';
 
 @Controller('payments')
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
+  @Post('create-payment-intent')
+  async createPaymentIntent(
+    @Body() dto: CreatePaymentIntentDto,
+  ): Promise<{ clientSecret: string }> {
+    return this.paymentsService.createPaymentIntent(dto);
+  }
+
   @Post()
-  async create(@Body() createPaymentDto: any) {
+  async create(@Body() createPaymentDto: CreatePaymentDto) {
     return this.paymentsService.create(createPaymentDto);
   }
 
