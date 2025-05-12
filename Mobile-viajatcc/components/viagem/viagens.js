@@ -5,7 +5,7 @@ import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Alert } from
 
 const placeholderImage = require("../../assets/IlhaComprida.jpg");
 
-const Viagens = () => {
+const Viagens = ({ navigation }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [trips, setTrips] = useState([]);
 
@@ -44,14 +44,19 @@ const Viagens = () => {
       <Text style={styles.title}>Viagens Disponíveis</Text>
       <FlatList
         data={trips}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <View style={styles.viagemItem}>
             <Image source={placeholderImage} style={styles.imagem} />
             <Text style={styles.destino}>{item.nome}</Text>
             <Text style={styles.data}>Data: {item.data}</Text>
             <Text style={styles.valor}>Valor: R${item.preco}</Text>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                navigation.navigate("DetalhesViagem", { tripId: item._id });
+              }}
+            >
               <Text style={styles.buttonText}>Comprar</Text>
             </TouchableOpacity>
           </View>
