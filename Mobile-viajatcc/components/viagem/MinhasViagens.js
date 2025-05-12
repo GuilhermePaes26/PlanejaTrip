@@ -1,17 +1,21 @@
-import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-const route = createStackNavigator()
+import React, { useState } from 'react';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Modal, Button, Image } from 'react-native';
 
 const viagens = [
-  { id: '1', destino: 'Rio de Janeiro', data: '12/04/2024' },
-  { id: '2', destino: 'São Paulo', data: '18/05/2024' },
-  { id: '3', destino: 'Salvador', data: '22/06/2024' },
+  { id: '1', destino: 'Rio de Janeiro', data: '12/04/2024', imagem: require('../../assets/rio.jpg') },
+  { id: '2', destino: 'São Paulo', data: '18/05/2024', imagem: require('../../assets/rio.jpg') },
+  { id: '3', destino: 'Salvador', data: '22/06/2024', imagem: require('../../assets/rio.jpg') },
 ];
 
-const MinhasViagens = ({navigation}) => {
+const MinhasViagens = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [viagemSelecionada, setViagemSelecionada] = useState(null);
+
+  const abrirModal = (viagem) => {
+    setViagemSelecionada(viagem);
+    setModalVisible(true);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Minhas Viagens</Text>
@@ -19,15 +23,46 @@ const MinhasViagens = ({navigation}) => {
         data={viagens}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.viagemItem} onPress={() => navigation.navigate(`Viagens`)}>
+          <TouchableOpacity style={styles.viagemItem} onPress={() => abrirModal(item)}>
             <Text style={styles.destino}>{item.destino}</Text>
             <Text style={styles.data}>Data: {item.data}</Text>
           </TouchableOpacity>
         )}
       />
+
       <TouchableOpacity style={styles.butt}>
-      <Text>Ver mais</Text>
+        <Text>Ver mais</Text>
       </TouchableOpacity>
+
+      {/* Modal */}
+      <Modal
+        visible={modalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            {viagemSelecionada && (
+              <>
+                <Text style={styles.modalTitle}>{viagemSelecionada.destino}</Text>
+                <Text style={styles.modalData}>Data: {viagemSelecionada.data}</Text>
+                <Image
+  source={
+    typeof viagemSelecionada.imagem === 'string'
+      ? { uri: viagemSelecionada.imagem }
+      : viagemSelecionada.imagem
+  }
+  style={styles.modalImage}
+  resizeMode="cover"
+/>
+
+              </>
+            )}
+            <Button title="Fechar" onPress={() => setModalVisible(false)} />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -62,17 +97,41 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555',
   },
-  botaomais: {
-    height: 12,
-    width: 10,
-  },  
-  button: {
+  butt: {
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    width: '85%',
+    elevation: 5,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  modalData: {
     fontSize: 16,
-    backgroundColor: 'lightblue',
-    padding:10,
-    borderRadius:5,
+    marginBottom: 12,
+    color: '#333',
+  },
+  modalImage: {
     width: '100%',
+    height: 200,
+    borderRadius: 10,
+    marginBottom: 15,
   },
 });
 
-export default MinhasViagens
+export default MinhasViagens;
