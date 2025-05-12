@@ -9,7 +9,7 @@ import Rotas from "./components/Rotas";
 
 export default function App() {
   return (
-    <StripeProvider publishableKey="pk_test_51RO3m2Pl2DwyQUxPW4aWMXiRoJtgtbrgAmcsOl7myKI5KVJA05EdM7Pl62CKCKNpzV1mdAEoetQNB6hHHgdJyJaq00zc0MR6ne">
+    <StripeProvider>
       <NavigationContainer>
         <Rotas />
       </NavigationContainer>
