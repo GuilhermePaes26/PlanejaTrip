@@ -1,51 +1,62 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFocusEffect } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
-const viagensFake = [
-  { id: '1', destino: 'Ilha Comprida', data: '12/04/2024', valor: '80,00' ,imagem: require('../../assets/IlhaComprida.jpg') },
-  { id: '2', destino: 'Londres', data: '18/05/2024', valor: '2200,00' ,imagem: require('../../assets/londres.jpg') },
-  { id: '3', destino: 'Roma', data: '22/06/2024',valor: '1500,00' , imagem: require('../../assets/roma.jpg') },
-  { id: '4', destino: 'Roma', data: '22/06/2024',valor: '1500,00' , imagem: require('../../assets/roma.jpg') },
-  { id: '5', destino: 'Roma', data: '22/06/2024',valor: '1510,00' , imagem: require('../../assets/roma.jpg') },
-];
+const placeholderImage = require("../../assets/IlhaComprida.jpg");
 
 const Viagens = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [trips, setTrips] = useState([]);
+
   useFocusEffect(
     React.useCallback(() => {
-      const checkLoginStatus = async () => {
+      (async () => {
         try {
-          const value = await AsyncStorage.getItem('isLoggedIn');
-          console.log(value);
-          
-          setIsLoggedIn(value);
+          const value = await AsyncStorage.getItem("isLoggedIn");
+          setIsLoggedIn(!!value);
         } catch (error) {
-          console.error('Erro ao verificar login fake', error);
+          console.error("Erro ao verificar login", error);
         }
-      };
-  
-      checkLoginStatus();
+      })();
     }, [])
   );
+
+  // 2) Busca trips do servidor
+  useFocusEffect(
+    React.useCallback(() => {
+      (async () => {
+        try {
+          const res = await fetch("http://10.0.2.2:3000/trips");
+          if (!res.ok) throw new Error(`Status ${res.status}`);
+          const data = await res.json();
+          setTrips(data);
+        } catch (error) {
+          console.error("Erro ao buscar viagens", error);
+          Alert.alert("Erro", "Não foi possível carregar viagens.");
+        }
+      })();
+    }, [])
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Viagens Disponíveis</Text>
       <FlatList
-        data={viagensFake}
+        data={trips}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          // <View style={styles.transparencia}>
-            <View style={styles.viagemItem}>
-              <Image source={item.imagem} style={styles.imagem} />  
-              <Text style={styles.destino}>{item.destino}</Text>
-              <Text style={styles.data}>Data: {item.data}</Text>
-              <Text style={styles.valor}>Valor: R${item.valor}</Text>
-              <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>Comprar</Text></TouchableOpacity>
-            </View>
-          // </View>
+          <View style={styles.viagemItem}>
+            <Image source={placeholderImage} style={styles.imagem} />
+            <Text style={styles.destino}>{item.nome}</Text>
+            <Text style={styles.data}>Data: {item.data}</Text>
+            <Text style={styles.valor}>Valor: R${item.preco}</Text>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Comprar</Text>
+            </TouchableOpacity>
+          </View>
         )}
+        ListEmptyComponent={<Text style={{ textAlign: "center", marginTop: 20 }}>Nenhuma viagem encontrada.</Text>}
       />
     </View>
   );
@@ -55,59 +66,54 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#A3CDFF',
+    backgroundColor: "#A3CDFF",
   },
   title: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 15,
-    textAlign: 'center',
-  },
-
-  transparencia: {
-    opacity: 0.5,
+    textAlign: "center",
   },
   viagemItem: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 15,
     marginVertical: 8,
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
-    alignItems: 'center',
+    alignItems: "center",
   },
   imagem: {
-    width: '100%',
+    width: "100%",
     height: 150,
     borderRadius: 10,
     marginBottom: 10,
   },
   destino: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   data: {
     fontSize: 16,
-    color: '#555',
+    color: "#555",
   },
   valor: {
     fontSize: 16,
-    color: 'green',
+    color: "green",
   },
   button: {
-    fontSize: 16,
-    backgroundColor: 'lightblue',
-    padding:10,
-    borderRadius:5,
-    width: '100%',
+    backgroundColor: "lightblue",
+    padding: 10,
+    borderRadius: 5,
+    width: "100%",
   },
   buttonText: {
-    textAlign: 'center',
-    fontWeight:'bold',
-    fontSize: 18
-  }
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 18,
+  },
 });
 
 export default Viagens;
