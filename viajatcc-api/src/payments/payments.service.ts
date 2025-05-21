@@ -64,7 +64,7 @@ export class PaymentsService {
         payment_method_types: ['card'],
       });
     } catch (err: any) {
-      console.error('❌ Erro no PaymentIntent:', err);
+      console.error('ERRO NO PAG:', err);
       throw new BadRequestException(err.message);
     }
 
@@ -72,7 +72,6 @@ export class PaymentsService {
       throw new BadRequestException('Pagamento não aprovado');
     }
 
-    // 2) Persiste no Mongo dentro de transação
     const session = await this.connection.startSession();
     session.startTransaction();
     try {

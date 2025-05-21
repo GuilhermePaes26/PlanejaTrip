@@ -18,9 +18,6 @@ import { ProcessPaymentDto } from './dto/process-payment.dto';
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
-  /**
-   * Cria um PaymentIntent no Stripe e retorna o clientSecret
-   */
   @Post('create-payment-intent')
   async createPaymentIntent(
     @Body() dto: CreatePaymentIntentDto,
@@ -28,10 +25,6 @@ export class PaymentsController {
     return this.paymentsService.createPaymentIntent(dto);
   }
 
-  /**
-   * Recebe dados do cartão e já confirma o pagamento com Stripe,
-   * em seguida persiste o registro do Payment no Mongo.
-   */
   @Post('process')
   async processPayment(@Body() dto: ProcessPaymentDto) {
     try {
@@ -41,9 +34,6 @@ export class PaymentsController {
     }
   }
 
-  /**
-   * Endpoint genérico para criar manualmente um Payment
-   */
   @Post()
   async create(@Body() createPaymentDto: CreatePaymentDto) {
     return this.paymentsService.create(createPaymentDto);
