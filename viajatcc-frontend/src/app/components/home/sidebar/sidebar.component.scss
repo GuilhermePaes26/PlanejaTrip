@@ -1,61 +1,97 @@
-* {
-  color: white;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #1e1e1e; /* fundo escuro geral */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.menu-button {
-  margin: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: white;
-  font-size: 24px;
-}
-
-ul {
-  list-style: none;
-  margin-top: 40px;
+.sidebar-nav {
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(180deg, #1c2b64, #1f62b3);
+  position: fixed;
+  left: 0;
+  top: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  height: 90vh;
-  overflow: hidden;
+  justify-content: space-between;
 }
 
-li {
-  transition: background-color 0.3s ease, padding-left 0.3s ease;
-}
-
-li a {
+/* NAV LINKS - distribuídos igualmente */
+.nav-links {
+  flex: 1;
   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.nav-links ul {
+  list-style: none;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0; // usamos space-evenly acima
+}
+
+.nav-links li {
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links li a {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  padding: 15px 30px;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 10px;
   text-decoration: none;
-  color: white;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+  color: #138bec;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(38, 112, 173, 0.3);
 }
 
-li a:hover {
+.nav-links li a:hover {
   background-color: #a3cdff;
-  color: #1e1e1e;
-  padding-left: 40px;
+  color: #1c2b64;
 }
 
-li h2 {
-  font-size: 1.3em;
-  font-weight: 600;
-}
-.account {
-  justify-self: flex-end;
+.nav-links mat-icon,
+.nav-links .material-symbols-outlined {
+  font-size: 28px;
   
-  margin-top: auto;
-  margin-bottom: 1em;
+}
+
+.nav-links li h2 {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 0;
+  color: #138bec;
+}
+/* "Minha conta" no fim */
+.sidebar-nav .account {
+  padding: 20px 10px;
+  text-align: center;
+
+  a {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #138bec;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #a3cdff;
+      color: #1c2b64;
+    }
+  }
+
+  mat-icon,
+  .material-symbols-outlined {
+    font-size: 28px;
+    margin-bottom: 4%;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: #138bec;
+  }
 }
