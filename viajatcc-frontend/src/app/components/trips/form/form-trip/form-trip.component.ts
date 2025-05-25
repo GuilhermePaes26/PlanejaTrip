@@ -113,7 +113,6 @@ export class FormTripComponent implements OnInit {
     formData.append('preco', trip.preco.toString());
     formData.append('data', trip.data);
     formData.append('onibus', trip.onibus);
-    // ponto de partida
     formData.append('startPoint[namePoint]', trip.startPoint.namePoint);
     formData.append('startPoint[lat]', trip.startPoint.lat.toString());
     formData.append('startPoint[lng]', trip.startPoint.lng.toString());

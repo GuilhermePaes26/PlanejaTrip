@@ -45,7 +45,16 @@ export class TripsController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateTripDto: any) {
+  @UseInterceptors(FileInterceptor('image', { dest: './uploads' }))
+  async update(
+    @Param('id') id: string,
+    @UploadedFile() file: Express.Multer.File,
+    @Body() updateTripDto: any,
+  ) {
+    if (file) {
+      const url = await this.cloudinary.uploadImage(file.path);
+      updateTripDto.imgLink = url;
+    }
     return this.tripsService.update(id, updateTripDto);
   }
 
