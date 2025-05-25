@@ -1,10 +1,25 @@
 <div class="user-info-container">
-    <h2>Minhas Informações</h2>
-    <div class="user-card">
-      <p><span>Nome:</span> {{ user.nome }}</p>
-      <p><span>Email:</span> {{ user.email }}</p>
-      <p><span>CPF:</span> {{ user.cpf | cnpj }}</p>
-      <button class="button" (click)="logout()">Sair</button>
+  <h2>Minhas Informações</h2>
+  <div class="user-card">
+    <div class="avatar-container">
+      <label for="fileInput">
+        <img
+          [src]="user.imgLink ? user.imgLink : 'assets/default-avatar.jpg'"
+          alt="Foto de perfil"
+          class="avatar"
+        />
+      </label>
+      <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        (change)="onFileSelected($event)"
+        hidden
+      />
     </div>
+    <p><span>Nome:</span> {{ user.nome }}</p>
+    <p><span>Email:</span> {{ user.email }}</p>
+    <p><span>CPF:</span> {{ user.cpf | cnpj }}</p>
+    <button class="button" (click)="logout()">Sair</button>
   </div>
-  
+</div>

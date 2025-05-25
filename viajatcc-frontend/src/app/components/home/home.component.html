@@ -12,8 +12,11 @@
     </button>
     <div class="topbar">
       <div class="user-info">
-        <span>Olá, {{ nome }}</span>
-        <button class="logout" (click)="logout()">Sair</button>
+        <div class="user-text">
+          <span class="username">Olá, {{ nome }}</span>
+          <button class="signout" (click)="logout()">Sair</button>
+        </div>
+        <img [src]="imageUser" alt="Avatar do Usuário" class="avatar-small" />
       </div>
     </div>
     <router-outlet></router-outlet>

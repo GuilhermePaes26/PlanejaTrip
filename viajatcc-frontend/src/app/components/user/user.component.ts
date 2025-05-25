@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UserComponent {
   user!: user;
   token: string | null = '';
+  selectedFile: File | null = null;
 
   constructor(
     private userService: UserService,
@@ -41,5 +42,26 @@ export class UserComponent {
       localStorage.removeItem('userName');
       window.location.reload();
     }
+  }
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) return;
+
+    this.selectedFile = input.files[0];
+    const formData = new FormData();
+    formData.append('image', this.selectedFile, this.selectedFile.name);
+    this.userService.updateUser(this.user._id!, formData).subscribe({
+      next: (updatedUser) => {
+        this.user = updatedUser;
+        this.snackBar.open('Foto de perfil atualizada!', 'OK', {
+          duration: 2000,
+        });
+      },
+      error: () => {
+        this.snackBar.open('Erro ao atualizar foto. Tente novamente.', 'OK', {
+          duration: 2000,
+        });
+      },
+    });
   }
 }

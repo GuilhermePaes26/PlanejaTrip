@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: row;
   height: 100vh;
-  /* altura total da viewport */
   width: 100%;
 }
 
@@ -14,7 +13,7 @@
   flex-direction: column;
   justify-content: flex-start;
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.534);
-  position: sticky; // mantém no topo se necessário
+  position: sticky;
   top: 0;
 }
 
@@ -49,12 +48,12 @@
 }
 
 .home {
-  width: 100%;
   flex: 1;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
+
 .topbar {
-  width: 100%;
   height: 60px;
   background: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -62,28 +61,45 @@
   justify-content: flex-end;
   align-items: center;
   padding: 0 2rem;
+}
 
-  .user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
+.user-info {
+  display: flex;
+  align-items: center;
+}
 
-    span {
-      color: #1f62b3;
-      font-size: 1rem;
-    }
-    .logout {
-      font-size: 0.75rem;
-      background: none;
-      border: none;
-      color: #6c94de;
-      cursor: pointer;
-      transition: color 0.3s;
-      &:hover {
-        color: #1c2b64;
-        text-decoration: underline;
-      }
-    }
-  }
+.user-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 1rem;
+}
+
+.username {
+  color: #1f62b3;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.signout {
+  font-size: 0.75rem;
+  background: none;
+  border: none;
+  color: #6c94de;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+.signout:hover {
+  color: #1c2b64;
+  text-decoration: underline;
+}
+
+.avatar-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
 }

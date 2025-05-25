@@ -39,6 +39,10 @@ export class LoginComponent {
             console.log(response);
             this.authService.saveToken(response._id);
             localStorage.setItem('userName', response.nome);
+            localStorage.setItem(
+              'imageUser',
+              response.imgLink || 'assets/default-avatar.jpg'
+            );
             this.route.navigate(['/home/dashboard']);
           } else {
             this.errorMessage = 'Usuário ou senha incorreto';

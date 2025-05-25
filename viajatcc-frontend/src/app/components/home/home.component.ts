@@ -15,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class HomeComponent {
   nome: string = '';
+  imageUser: string = '';
   home: boolean = false;
   trips: boolean = false;
   menu: boolean = true;
@@ -40,6 +41,8 @@ export class HomeComponent {
   }
   ngOnInit() {
     this.nome = localStorage.getItem('userName') || '';
+    this.imageUser =
+      localStorage.getItem('imageUser') || 'assets/default-avatar.jpg';
   }
   async logout() {
     const confirm = await this.dialog

@@ -32,6 +32,9 @@ export class User {
     default: [],
   })
   pagamentos: string[];
+
+  @Prop()
+  imgLink?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

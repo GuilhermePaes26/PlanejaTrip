@@ -7,15 +7,30 @@ import {
   Delete,
   Body,
   Param,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly cloudinary: CloudinaryService,
+  ) {}
 
   @Post()
-  async create(@Body() createUserDto: any) {
+  @UseInterceptors(FileInterceptor('image', { dest: './uploads' }))
+  async create(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() createUserDto: any,
+  ) {
+    if (file) {
+      const url = await this.cloudinary.uploadImage(file.path);
+      createUserDto.imgLink = url;
+    }
     return this.usersService.create(createUserDto);
   }
 
@@ -26,12 +41,12 @@ export class UsersController {
   @Post('login')
   async login(@Body() loginDto: any) {
     console.log('chegou aqui');
-    const {email, password} = loginDto
-    const user = await this.usersService.findEmail(email)
-    if(user.senha == password) {
-      return user
+    const { email, password } = loginDto;
+    const user = await this.usersService.findEmail(email);
+    if (user.senha == password) {
+      return user;
     } else {
-      return false
+      return false;
     }
   }
 
@@ -40,9 +55,16 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
-
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateUserDto: any) {
+  @UseInterceptors(FileInterceptor('image', { dest: './uploads' }))
+  async update(
+    @Param('id') id: string,
+    @UploadedFile() file: Express.Multer.File,
+    @Body() updateUserDto: any,
+  ) {
+    if (file) {
+      updateUserDto.imgLink = await this.cloudinary.uploadImage(file.path);
+    }
     return this.usersService.update(id, updateUserDto);
   }
 
