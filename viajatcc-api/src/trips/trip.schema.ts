@@ -35,6 +35,9 @@ export class Trip {
     required: true,
   })
   startPoint: { lat: number; lng: number };
+
+  @Prop({ required: false })
+  imgLink?: string;
 }
 
 export const TripSchema = SchemaFactory.createForClass(Trip);

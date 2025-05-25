@@ -7,15 +7,30 @@ import {
   Delete,
   Body,
   Param,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { TripsService } from './trips.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Controller('trips')
 export class TripsController {
-  constructor(private readonly tripsService: TripsService) {}
+  constructor(
+    private readonly tripsService: TripsService,
+    private readonly cloudinary: CloudinaryService,
+  ) {}
 
   @Post()
-  async create(@Body() createTripDto: any) {
+  @UseInterceptors(FileInterceptor('image', { dest: './uploads' }))
+  async create(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() createTripDto: any,
+  ) {
+    if (file) {
+      const url = await this.cloudinary.uploadImage(file.path);
+      createTripDto.imgLink = url;
+    }
     return this.tripsService.create(createTripDto);
   }
 
