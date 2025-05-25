@@ -72,7 +72,7 @@ const MinhasViagens = () => {
               <>
                 <Text style={styles.modalTitle}>{viagemSelecionada.nome}</Text>
                 <Text style={styles.modalData}>Data: {viagemSelecionada.data}</Text>
-                <Image source={require("../../assets/rio.jpg")} style={styles.modalImage} resizeMode="cover" />
+                <Image source={{ uri: viagemSelecionada.imgLink }} style={styles.modalImage} resizeMode="cover" />
               </>
             )}
             <Button title="Fechar" onPress={() => setModalVisible(false)} />

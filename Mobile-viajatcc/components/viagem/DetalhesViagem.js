@@ -71,7 +71,7 @@ export default function DetalhesViagem({ route, navigation }) {
         <Text style={styles.title}>{trip.nome}</Text>
         <Text style={styles.label}>Descrição:</Text>
         <Text style={styles.text}>{trip.descricao || "—"}</Text>
-        <Image source={require("../../assets/IlhaComprida.jpg")} style={styles.image} />
+        <Image source={{ uri: trip.imgLink }} style={styles.image} />
         <Text style={styles.label}>Data:</Text>
         <Text style={styles.text}>{trip.data}</Text>
         <Text style={styles.label}>Preço:</Text>

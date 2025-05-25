@@ -12,7 +12,8 @@ export interface Trip {
   data: string;
   onibus: bus;
   passageiros: user[];
-  startPoint: {namePoint: string, lat: number, lng: number}
+  startPoint: { namePoint: string; lat: number; lng: number };
+  imgLink?: string;
 }
 
 @Injectable({
@@ -31,13 +32,13 @@ export class TripsService {
     return this.http.get<Trip>(`${this.apiUrl}/${id}`);
   }
 
-  createTrip(trip: Trip): Observable<Trip> {
+  createTrip(trip: FormData): Observable<Trip> {
     console.log(trip);
-    
+
     return this.http.post<Trip>(this.apiUrl, trip);
   }
 
-  updateTrip(id: string, trip: Trip): Observable<Trip> {
+  updateTrip(id: string, trip: FormData): Observable<Trip> {
     return this.http.put<Trip>(`${this.apiUrl}/${id}`, trip);
   }
 

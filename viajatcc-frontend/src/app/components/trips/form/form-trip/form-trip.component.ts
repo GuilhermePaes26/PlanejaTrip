@@ -25,9 +25,10 @@ export class FormTripComponent implements OnInit {
   form: FormGroup;
   isEditMode = false;
   tripId: string | null = null;
-  buses: bus[] = []
-  lat: number = 0
-  lng: number = 0
+  buses: bus[] = [];
+  lat: number = 0;
+  lng: number = 0;
+  selectedFile: File | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -42,20 +43,26 @@ export class FormTripComponent implements OnInit {
       descricao: [''],
       preco: [0, [Validators.required, Validators.min(0)]],
       data: ['', Validators.required],
-      startPoint: [{namePoint: '', lat: 0, lng: 0}],
+      startPoint: [{ namePoint: '', lat: 0, lng: 0 }],
       onibus: ['', Validators.required],
     });
-    
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
   }
 
   ngOnInit(): void {
     this.tripId = this.route.snapshot.paramMap.get('id');
     this.busService.findBus().subscribe({
       next: (response) => {
-        const bus = response.filter(bus => bus.fornecedor_id !== null);
-        this.buses = bus
-      }
-    })
+        const bus = response.filter((bus) => bus.fornecedor_id !== null);
+        this.buses = bus;
+      },
+    });
     if (this.tripId) {
       this.isEditMode = true;
 
@@ -68,44 +75,61 @@ export class FormTripComponent implements OnInit {
           startPoint: {
             namePoint: trip.startPoint.namePoint,
             lat: trip.startPoint.lat,
-            lng: trip.startPoint.lng
+            lng: trip.startPoint.lng,
           },
-          onibus: trip.onibus._id
+          onibus: trip.onibus._id,
         });
       });
     }
   }
 
   openMaps() {
-    this.dialog.open(DialogMapsComponent,  {width: '800px'}).afterClosed().subscribe((result) => {
-      if (result) {
-        console.log(result)
-        this.form.patchValue({
-          startPoint: {
-            namePoint: result.namePoint,
-            lat: result.result.navigation_points[0].location.latitude,
-            lng: result.result.navigation_points[0].location.longitude,
-          }
-        })
-        console.log(this.form.value.startPoint);
-        
-      }
-    })
+    this.dialog
+      .open(DialogMapsComponent, { width: '800px' })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          console.log(result);
+          this.form.patchValue({
+            startPoint: {
+              namePoint: result.namePoint,
+              lat: result.result.navigation_points[0].location.latitude,
+              lng: result.result.navigation_points[0].location.longitude,
+            },
+          });
+          console.log(this.form.value.startPoint);
+        }
+      });
   }
 
   onSubmit(): void {
     if (this.form.invalid) return;
 
-    const tripData = this.form.value;
+    // monta multipart/form-data
+    const formData = new FormData();
+    const trip = this.form.value;
+    formData.append('nome', trip.nome);
+    formData.append('descricao', trip.descricao);
+    formData.append('preco', trip.preco.toString());
+    formData.append('data', trip.data);
+    formData.append('onibus', trip.onibus);
+    // ponto de partida
+    formData.append('startPoint[namePoint]', trip.startPoint.namePoint);
+    formData.append('startPoint[lat]', trip.startPoint.lat.toString());
+    formData.append('startPoint[lng]', trip.startPoint.lng.toString());
+
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile, this.selectedFile.name);
+    }
 
     if (this.isEditMode && this.tripId) {
-      this.tripsService.updateTrip(this.tripId, tripData).subscribe(() => {
-        this.router.navigate(['/home/trips/list']);
-      });
+      this.tripsService
+        .updateTrip(this.tripId, formData)
+        .subscribe(() => this.router.navigate(['/home/trips/list']));
     } else {
-      this.tripsService.createTrip(tripData).subscribe(() => {
-        this.router.navigate(['/home/trips/list']);
-      });
+      this.tripsService
+        .createTrip(formData)
+        .subscribe(() => this.router.navigate(['/home/trips/list']));
     }
   }
 }

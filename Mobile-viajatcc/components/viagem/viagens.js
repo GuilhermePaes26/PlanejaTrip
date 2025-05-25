@@ -47,7 +47,7 @@ const Viagens = ({ navigation }) => {
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <View style={styles.viagemItem}>
-            <Image source={placeholderImage} style={styles.imagem} />
+            <Image source={{ uri: item.imgLink }} style={styles.imagem} />
             <Text style={styles.destino}>{item.nome}</Text>
             <Text style={styles.data}>Data: {item.data}</Text>
             <Text style={styles.valor}>Valor: R${item.preco}</Text>
