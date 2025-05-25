@@ -1,14 +1,21 @@
 <div class="layout">
   <div class="sidebar" *ngIf="menu">
-      <button (click)="onClick(false)">
-          <mat-icon class="menu-button-sidebar">close</mat-icon>
-        </button>      
-        <app-sidebar [user]="user"></app-sidebar>
+    <button (click)="onClick(false)">
+      <mat-icon class="menu-button-sidebar">close</mat-icon>
+    </button>
+    <app-sidebar [user]="user"></app-sidebar>
+  </div>
+
+  <div class="home">
+    <button (click)="onClick(true)" *ngIf="!menu">
+      <mat-icon class="menu-button">menu</mat-icon>
+    </button>
+    <div class="topbar">
+      <div class="user-info">
+        <span>Olá, Teste</span>
+        <button class="logout" (click)="logout()">Sair</button>
+      </div>
     </div>
-    <div class="home" >
-      <button (click)="onClick(true)" *ngIf="!menu">
-        <mat-icon class="menu-button">menu</mat-icon>
-      </button>   
-      <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
+  </div>
 </div>

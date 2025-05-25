@@ -1,58 +1,89 @@
-.bar {
-    width: 80%;
-    margin: 0 15%;
+.dashboard {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: #f5f7fa;
+  height: 93%;
 }
 
-.bars {
-    display: flex;
-    flex-direction: column;
-    width: 60%;
+.card-meta {
+  background: #1e3c72;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
 }
 
-.pie {
-    width: 45%;
+/* ===== Cards Grid ===== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
-.layout {
-    display: flex;
-    flex-direction: row;
-    width: 90%;
-}
+/* ===== Card Genérico ===== */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
-.progress {
-    height: 20px;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.progressDiv {
-    width: 90%;
-    margin: 2% auto;
-    padding: 20px;
-    border-radius: 15px;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    /* degrade bonito */
-    color: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.valores {
+  &-header {
+    padding: 0.75rem 1rem;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-}
+    align-items: center;
+    background: #1e4b92;
+    color: #fff;
 
-.valores h2 {
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-.progressDiv h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    color: #ffffff;
-    text-align: center;
+    h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .card-close {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      transition: color 0.2s;
+      &:hover {
+        color: rgba(255, 255, 255, 1);
+      }
+    }
   }
-  
+
+  &-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .valores {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+
+      h4 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #1e4b92;
+      }
+    }
+
+    .progress {
+      height: 16px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    canvas {
+      max-height: 320px;
+      width: 100% !important;
+    }
+  }
+}

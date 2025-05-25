@@ -7,21 +7,25 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   standalone: false,
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  logForm!: FormGroup;  // Defina a variável do FormGroup
+  logForm!: FormGroup; // Defina a variável do FormGroup
   errorMessage: string = '';
   isBrowser!: boolean;
-  token: string | null = ''
+  token: string | null = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private route: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
     // Inicialize o formulário com os controles e validadores
     this.logForm = this.fb.group({
-      username: ['', [Validators.required]],  // Adicionando validadores
-      password: ['', [Validators.required]]   // Adicionando validadores
+      username: ['', [Validators.required]], // Adicionando validadores
+      password: ['', [Validators.required]], // Adicionando validadores
     });
   }
 
@@ -33,13 +37,13 @@ export class LoginComponent {
         next: (response) => {
           if (response) {
             console.log(response);
-            this.authService.saveToken(response._id)
-            this.route.navigate(['/home'])
+            this.authService.saveToken(response._id);
+            this.route.navigate(['/home/dashboard']);
           } else {
-            this.errorMessage = 'Usuário ou senha incorreto'
+            this.errorMessage = 'Usuário ou senha incorreto';
           }
-        }
-      })
+        },
+      });
     } else {
       this.errorMessage = 'Preencha todos os campos corretamente!';
     }

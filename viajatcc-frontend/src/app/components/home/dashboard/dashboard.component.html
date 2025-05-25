@@ -1,32 +1,77 @@
-<div class="progressDiv">
-  <h1 style="margin-bottom: 10px;">Meta mensal</h1>
-
-  <div class="valores">
-    <h2>R$ 7.200,00</h2>
-    <h2>R$ 16.000,00</h2>
+<!-- <div class="topbar">
+  <div class="user-info">
+    <span>Olá, testee</span>
+    <button class="logout">Sair</button>
   </div>
-
-  <mat-progress-bar
-    class="progress"
-    color="primary"
-    mode="determinate"
-    value="45">
-  </mat-progress-bar>
-</div>
-
-<div class="layout">
-  <div class="pie">
-    <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" [type]="'pie'">
-    </canvas>
-  </div>
-  <div class="bars">
-    <div class="bar">
-      <canvas baseChart [data]="barChartDataIdade" [options]="barChartOptions" [type]="'bar'">
-      </canvas>
+</div> -->
+<main class="dashboard">
+  <section class="card card-meta">
+    <header class="card-header">
+      <h3>Meta Mensal</h3>
+      <button class="card-close">×</button>
+    </header>
+    <div class="card-content">
+      <div class="valores">
+        <h4>R$ 7.200,00</h4>
+        <h4>R$ 16.000,00</h4>
+      </div>
+      <mat-progress-bar
+        class="progress"
+        color="primary"
+        mode="determinate"
+        value="45"
+      >
+      </mat-progress-bar>
     </div>
-    <div class="bar">
-      <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="'bar'">
-      </canvas>
+  </section>
+
+  <section class="cards-grid">
+    <div class="card">
+      <header class="card-header">
+        <h3>Distribuição de Gastos</h3>
+        <button class="card-close">×</button>
+      </header>
+      <div class="card-content">
+        <canvas
+          baseChart
+          [data]="pieChartData"
+          [options]="pieChartOptions"
+          type="pie"
+        >
+        </canvas>
+      </div>
     </div>
-  </div>
-</div>
+
+    <div class="card">
+      <header class="card-header">
+        <h3>Idade dos Passageiros</h3>
+        <button class="card-close">×</button>
+      </header>
+      <div class="card-content">
+        <canvas
+          baseChart
+          [data]="barChartDataIdade"
+          [options]="barChartOptions"
+          [type]="'bar'"
+        >
+        </canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <header class="card-header">
+        <h3>Vendas vs Lucros</h3>
+        <button class="card-close">×</button>
+      </header>
+      <div class="card-content">
+        <canvas
+          baseChart
+          [data]="barChartData"
+          [options]="barChartOptions"
+          [type]="'bar'"
+        >
+        </canvas>
+      </div>
+    </div>
+  </section>
+</main>

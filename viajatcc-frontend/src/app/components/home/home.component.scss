@@ -8,7 +8,7 @@
 
 .sidebar {
   width: 16%;
-  background: linear-gradient(180deg, #1c2b64, #1f62b3); 
+  background: linear-gradient(180deg, #1c2b64, #1f62b3);
   display: flex;
   overflow: hidden;
   flex-direction: column;
@@ -24,9 +24,8 @@
   width: 40px;
   height: 40px;
   color: #4a289e;
-  transition: color .35s ease, background-color 0.35s ease;
+  transition: color 0.35s ease, background-color 0.35s ease;
   border-radius: 5px;
-
 }
 
 .menu-button:hover {
@@ -40,9 +39,8 @@
   width: 40px;
   height: 40px;
   color: #4a289e;
-  transition: color .35s ease, background-color 0.35s ease;
+  transition: color 0.35s ease, background-color 0.35s ease;
   border-radius: 5px;
-
 }
 
 .menu-button-sidebar:hover {
@@ -54,4 +52,38 @@
   width: 100%;
   flex: 1;
   overflow-y: auto;
+}
+.topbar {
+  width: 100%;
+  height: 60px;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 2rem;
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+
+    span {
+      color: #1f62b3;
+      font-size: 1rem;
+    }
+    .logout {
+      font-size: 0.75rem;
+      background: none;
+      border: none;
+      color: #6c94de;
+      cursor: pointer;
+      transition: color 0.3s;
+      &:hover {
+        color: #1c2b64;
+        text-decoration: underline;
+      }
+    }
+  }
 }

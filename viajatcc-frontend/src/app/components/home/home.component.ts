@@ -3,29 +3,51 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { user, UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
+import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
   standalone: false,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  home: boolean = false
-  trips: boolean = false
+  home: boolean = false;
+  trips: boolean = false;
   menu: boolean = true;
-  user!: user
-  token: string | null = ''
+  user!: user;
+  token: string | null = '';
   onClick(bol: boolean) {
-    this.menu = bol
+    this.menu = bol;
   }
 
-  constructor(private router: Router, private userService: UserService, private authService: AuthService) {
-    this.token = this.authService.getToken()
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
+    this.token = this.authService.getToken();
     this.userService.getUser(this.token).subscribe({
       next: (response) => {
-        this.user = response
-      }
-    })
+        this.user = response;
+      },
+    });
+  }
+  async logout() {
+    const confirm = await this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: 'Deseja realmente sair da conta?',
+      })
+      .afterClosed()
+      .toPromise();
+    console.log(confirm);
+    if (confirm) {
+      sessionStorage.removeItem('authToken');
+      window.location.reload();
+    }
   }
 }
