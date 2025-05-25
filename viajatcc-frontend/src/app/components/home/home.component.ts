@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  nome: string = '';
   home: boolean = false;
   trips: boolean = false;
   menu: boolean = true;
@@ -37,6 +38,9 @@ export class HomeComponent {
       },
     });
   }
+  ngOnInit() {
+    this.nome = localStorage.getItem('userName') || '';
+  }
   async logout() {
     const confirm = await this.dialog
       .open(ConfirmationDialogComponent, {
@@ -47,6 +51,7 @@ export class HomeComponent {
     console.log(confirm);
     if (confirm) {
       sessionStorage.removeItem('authToken');
+      localStorage.removeItem('userName');
       window.location.reload();
     }
   }

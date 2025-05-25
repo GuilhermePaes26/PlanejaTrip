@@ -38,6 +38,7 @@ export class LoginComponent {
           if (response) {
             console.log(response);
             this.authService.saveToken(response._id);
+            localStorage.setItem('userName', response.nome);
             this.route.navigate(['/home/dashboard']);
           } else {
             this.errorMessage = 'Usuário ou senha incorreto';

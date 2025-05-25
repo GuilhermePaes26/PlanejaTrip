@@ -9,29 +9,37 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-user',
   standalone: false,
   templateUrl: './user.component.html',
-  styleUrl: './user.component.scss'
+  styleUrl: './user.component.scss',
 })
 export class UserComponent {
-  user!: user
-  token: string | null = ''
+  user!: user;
+  token: string | null = '';
 
-  constructor(private userService: UserService, private authService: AuthService, private dialog: MatDialog, private snackBar: MatSnackBar) {
-    this.token = this.authService.getToken()
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
+    this.token = this.authService.getToken();
     this.userService.getUser(this.token).subscribe({
       next: (response) => {
-        this.user = response
-      }
-    })
+        this.user = response;
+      },
+    });
   }
   async logout() {
-    const confirm = await this.dialog.open(ConfirmationDialogComponent, {
-      data: 'Deseja realmente sair da conta?'
-    }).afterClosed().toPromise()
-    console.log(confirm)
+    const confirm = await this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: 'Deseja realmente sair da conta?',
+      })
+      .afterClosed()
+      .toPromise();
+    console.log(confirm);
     if (confirm) {
-      
-      sessionStorage.removeItem('authToken')
-      window.location.reload()
+      sessionStorage.removeItem('authToken');
+      localStorage.removeItem('userName');
+      window.location.reload();
     }
   }
 }
