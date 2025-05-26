@@ -3,6 +3,7 @@
   flex-direction: row;
   height: 100vh;
   width: 100%;
+  transition: all 0.3s ease;
 }
 
 .sidebar {
@@ -15,9 +16,22 @@
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.534);
   position: sticky;
   top: 0;
+  transition: width 0.3s ease;
+}
+
+.sidebar.closed {
+  width: 0;
+
 }
 
 .menu-button {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+
+}
+
+.menu-ico {
   margin: 5px;
   font-size: 40px;
   width: 40px;
@@ -25,9 +39,10 @@
   color: #4a289e;
   transition: color 0.35s ease, background-color 0.35s ease;
   border-radius: 5px;
+
 }
 
-.menu-button:hover {
+.menu-ico:hover {
   color: #ffffff;
   background-color: #4a289e;
 }

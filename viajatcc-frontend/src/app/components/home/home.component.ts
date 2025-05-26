@@ -22,7 +22,10 @@ export class HomeComponent {
   user!: user;
   token: string | null = '';
   onClick(bol: boolean) {
-    this.menu = bol;
+    const sidebar: any = document.getElementById('sidebar');
+    const sidebarNav: any = document.getElementById('sidebar-nav');
+    sidebar.classList.toggle('closed');
+    sidebarNav.classList.toggle('closed');
   }
 
   constructor(
