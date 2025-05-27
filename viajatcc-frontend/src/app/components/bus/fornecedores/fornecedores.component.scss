@@ -1,14 +1,21 @@
 .suppliers-container {
     padding: 2rem;
     max-width: 100%;
-    margin: 0 auto;
+    margin:  85px;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12); //sombra para destaque
+    align-items: center;
+    display: auto;
     justify-content: center;
     align-items: center;
-  
+
     h1 {
       margin-bottom: 1.5rem;
-      font-size: 2rem;
+      font-size: 2.4rem;
       text-align: center;
+      color: white;
+      font-weight: bold;
     }
     a {
       text-align: center;
@@ -28,6 +35,9 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      background-color: white;
+      border-radius: 12px;        // Adiciona bordas arredondadas ao contêiner da tabela
+      overflow: hidden;  
     }
   
     .suppliers-table {
@@ -43,20 +53,13 @@
       }
   
       &.row:hover {
-        background-color: #f9f9f9;
+        background-color: #C6C2F4;
       }
   
       span {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-      }
-
-      .viewDetail {
-        cursor: pointer;
-      }
-      .viewDetail:hover {
-        font-weight: 600;
       }
   
       .actions {
@@ -71,13 +74,13 @@
           cursor: pointer;
   
           &:nth-child(1) {
-            background-color: #007bff;
+            background-color: #6985E1;
             color: white;
           }
   
           &:nth-child(2) {
-            background-color: #ffc107;
-            color: black;
+            background-color: #132166;
+            color: white;
           }
   
           &.delete {
@@ -89,12 +92,13 @@
     }
   
     .button {
-      padding: 0.3rem 0.7rem;
-      font-size: 0.85rem;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.95rem;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      background-color: #4a289e;
+      background-color: #6985E1;
       color: white;
+      margin-bottom: 1rem; 
     }
   }
