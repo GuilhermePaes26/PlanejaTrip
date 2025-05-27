@@ -2,75 +2,72 @@
   <h1>{{ isEditMode ? "Editar Viagem" : "Criar Nova Viagem" }}</h1>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="nome">Destino</label>
-      <input id="nome" formControlName="nome" type="text" />
-    </div>
+    <mat-tab-group>
+      <mat-tab label="Viagem">
+        <mat-form-field class="matForm">
+          <mat-label>Destino</mat-label>
+          <input matInput id="nome" formControlName="nome" type="text" />
+        </mat-form-field>
 
-    <div class="form-group">
-      <label for="descricao">Descrição</label>
-      <textarea id="descricao" formControlName="descricao"></textarea>
-    </div>
+        <mat-form-field class="matForm">
+          <mat-label>Descrição</mat-label>
+          <textarea matInput id="descricao" formControlName="descricao"></textarea>
+        </mat-form-field>
 
-    <div class="form-group">
-      <label for="preco">Preço</label>
-      <input id="preco" formControlName="preco" type="number" step="0.01" />
-    </div>
+        <mat-form-field class="matForm">
+          <mat-label>Preço por passageiro</mat-label>
+          <input matInput id="preco" formControlName="preco" type="number" step="0.01" />
+        </mat-form-field>
+        <div class="form-group">
+          <label for="image">Imagem da viagem</label>
+          <input id="image" type="file" accept="image/*" (change)="onFileSelected($event)" />
+        </div>
+      </mat-tab>
+      <mat-tab label="Dados da partida">
+        <mat-form-field class="matForm">
+          <mat-label>Data de partida</mat-label>
+          <input matInput id="data" formControlName="data" type="date" />
+        </mat-form-field>
 
-    <div class="form-group">
-      <label for="data">Data</label>
-      <input id="data" formControlName="data" type="date" />
-    </div>
+        <mat-form-field class="matForm">
+          <mat-label for="pontoDePartida">{{
+            isEditMode
+            ? "Ponto de partida (não é possível alterar ponto de partida)"
+            : "Ponto de partida "
+            }}</mat-label>
+          <input matInput id="pontoDePartida" *ngIf="isEditMode" formControlName="startPoint.namePoint" type="text"
+            value="{{ this.form.value.startPoint.namePoint }}" readonly />
+          <div style="display: flex; flex-direction: row" *ngIf="!isEditMode">
+            <input matInput id="pontoDePartida" formControlName="startPoint.namePoint" type="text"
+              value="{{ this.form.value.startPoint.namePoint }}" readonly />
+            <button type="button" (click)="openMaps()">
+              <mat-icon class="big-icon">location_on</mat-icon>
+            </button>
+          </div>
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="Onibus e capacidade">
+        <mat-form-field class="matForm">
+          <mat-label for="onibus">Seleciona a capacidade do ônibus</mat-label>
+          <mat-select formControlName="onibus" id="">
+            <mat-option value="{{ bus._id }}" *ngFor="let bus of buses">
+              {{ bus.capacidade }} - R$ {{ bus.valor }} -
+              {{ bus.fornecedor_id.nome }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p>
+          Onibus ainda não cadastrado? <a href="/home/bus/list">Clique aqui!</a>
+        </p>
+      </mat-tab>
+    </mat-tab-group>
 
-    <div class="form-group">
-      <label for="pontoDePartida">{{
-        isEditMode
-          ? "Ponto de partida (não é possível alterar ponto de partida)"
-          : "Ponto de partida "
-      }}</label>
-      <input
-        id="pontoDePartida"
-        *ngIf="isEditMode"
-        formControlName="startPoint.namePoint"
-        type="text"
-        value="{{ this.form.value.startPoint.namePoint }}"
-        readonly
-      />
-      <div style="display: flex; flex-direction: row" *ngIf="!isEditMode">
-        <input
-          id="pontoDePartida"
-          formControlName="startPoint.namePoint"
-          type="text"
-          value="{{ this.form.value.startPoint.namePoint }}"
-          readonly
-        />
-        <button type="button" (click)="openMaps()">
-          <mat-icon class="big-icon">location_on</mat-icon>
-        </button>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <label for="onibus">Seleciona a capacidade do ônibus</label>
-      <select formControlName="onibus" id="">
-        <option value="{{ bus._id }}" *ngFor="let bus of buses">
-          {{ bus.capacidade }} - R$ {{ bus.valor }} -
-          {{ bus.fornecedor_id.nome }}
-        </option>
-      </select>
-      <p>
-        Onibus ainda não cadastrado? <a href="/home/bus/list">Clique aqui!</a>
-      </p>
-    </div>
-    <div class="form-group">
-      <label for="image">Imagem da viagem</label>
-      <input
-        id="image"
-        type="file"
-        accept="image/*"
-        (change)="onFileSelected($event)"
-      />
-    </div>
+
+
+
+
+
     <button type="submit" class="button" [disabled]="form.invalid">
       {{ isEditMode ? "Salvar Alterações" : "Criar Viagem" }}
     </button>

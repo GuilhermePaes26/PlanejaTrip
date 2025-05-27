@@ -13,11 +13,15 @@ import { HttpClient } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMapsComponent } from '../dialog-maps/dialog-maps.component';
+import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-form-trip',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatIconModule],
+  imports: [CommonModule, ReactiveFormsModule, MatIconModule, MatTabGroup, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule],
   templateUrl: './form-trip.component.html',
   styleUrls: ['./form-trip.component.scss'],
 })

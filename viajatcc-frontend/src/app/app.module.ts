@@ -36,6 +36,7 @@ import { DialogCreateBusComponent } from './components/bus/dialog-create-bus/dia
 import { DialogMapsComponent } from './components/trips/form/dialog-maps/dialog-maps.component';
 import {NgChartsModule} from 'ng2-charts'
 import { MatProgressBar } from '@angular/material/progress-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,8 @@ import { MatProgressBar } from '@angular/material/progress-bar';
     MatProgressSpinnerModule,
     NgChartsModule,
     MatDialogModule,
-    MatProgressBar
+    MatProgressBar,
+    MatTabsModule
   ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],
