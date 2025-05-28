@@ -3,24 +3,32 @@
     <!-- <button (click)="onClick(false)">
       <mat-icon class="menu-button-sidebar">close</mat-icon>
     </button> -->
-    <app-sidebar class="sidebar"  [user]="user"></app-sidebar>
+    <app-sidebar class="sidebar" [user]="user"></app-sidebar>
   </div>
 
   <div class="home">
-    <div class="topbar">
-      <div class="menu-button">
-        <button (click)="onClick(true)">
-          <mat-icon class="menu-ico">menu</mat-icon>
-        </button>
-      </div>
-      <div class="user-info">
-        <div class="user-text">
-          <span class="username">Olá, {{ nome }}</span>
-          <button class="signout" (click)="logout()">Sair</button>
+    <div style="flex: 1">
+      <div class="topbar">
+        <div class="menu-button">
+          <button (click)="onClick(true)">
+            <mat-icon class="menu-ico">menu</mat-icon>
+          </button>
         </div>
-        <img [src]="imageUser" alt="Avatar do Usuário" class="avatar-small" />
+        <div class="user-info">
+          <div class="user-text">
+            <span class="username">Olá, {{ nome }}</span>
+            <button class="signout" (click)="logout()">Sair</button>
+          </div>
+          <img [src]="imageUser" alt="Avatar do Usuário" class="avatar-small" />
+        </div>
       </div>
+      <router-outlet></router-outlet>
     </div>
-    <router-outlet></router-outlet>
+    <footer class="bg-white text-indigo-700 px-6 py-8 border-t border-gray-200">
+
+      <div class="text-center text-xs mt-6 text-indigo-400">
+        © 2025 PlanejaTrip. Todos os direitos reservados.
+      </div>
+    </footer>
   </div>
 </div>
