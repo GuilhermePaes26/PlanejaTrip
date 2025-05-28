@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Image } from "react-native";
 
 export default function SignIn({ navigation }) {
   const [name, setName] = useState("");
@@ -39,26 +40,28 @@ export default function SignIn({ navigation }) {
   };
 
   return (
+
+    
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
 
-      <View style={styles.decoration}>
-        <View style={styles.alinhamento}>
-          <Text style={styles.label}>Email de Usuário</Text>
-          <TextInput style={styles.input} value={name} onChangeText={setName} />
+  <Text style={styles.title}>Login</Text>
 
-          <Text style={styles.label}>Senha</Text>
-          <TextInput style={styles.input} value={Senha} onChangeText={setSenha} secureTextEntry />
+     <View style={{ backgroundColor: "#fff", borderRadius: 8, padding: 20, elevation: 3 }}>
+  <Text style={styles.label}>Email</Text>
+  <TextInput style={styles.input} />
 
-          <Text style={styles.textLinkCadastro} onPress={vaiParaCadastro}>
-            Cadastrar uma conta
-          </Text>
+  <Text style={styles.label}>Senha</Text>
+  <TextInput style={styles.input} secureTextEntry />
 
-          <TouchableOpacity style={styles.button} onPress={login}>
-            <Text style={styles.buttonText}>Entrar</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+  <TouchableOpacity style={styles.button}>
+    <Text style={styles.buttonText}>Entrar</Text>
+  </TouchableOpacity>
+
+  <Text style={styles.textLinkCadastro} onPress={vaiParaCadastro}>
+    Cadastrar uma conta
+  </Text>
+</View>
+
     </View>
   );
 }
@@ -66,63 +69,51 @@ export default function SignIn({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: "#ACD2FF",
-    alignItems: "center",
+    backgroundColor: "#F0F2F5",
     justifyContent: "center",
-  },
-  input: {
-    width: 200,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    marginBottom: 15,
-    paddingHorizontal: 10,
-    borderRadius: 3,
-    backgroundColor: "#fff",
-    color: "grey",
-    alignItems: "center",
-    display: "flex",
+    padding: 20,
   },
   title: {
-    display: "flex",
-    fontSize: 36,
+    fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 15,
-    color: "#FFFFFF",
+    color: "#2C3E50",
+    marginBottom: 30,
     textAlign: "center",
-    backgroundColor: "#132166",
-    paddingVertical: 10,
-    paddingHorizontal: 80,
-    borderRadius: 5,
+  },
+  input: {
+    height: 50,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 6,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+    borderColor: "#D0D0D0",
+    borderWidth: 1,
+    fontSize: 16,
+    color: "#333",
   },
   label: {
-    display: "flex",
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 15,
-    textAlign: "center",
-    color: "#FFFFFF",
+    fontSize: 16,
+    color: "#2C3E50",
+    marginBottom: 5,
+    fontWeight: "600",
   },
   button: {
-    fontSize: 16,
-    backgroundColor: "lightblue",
-    padding: 10,
-    borderRadius: 5,
-    width: "50%",
-    margin: "auto",
+    backgroundColor: "#1A237E",
+    paddingVertical: 15,
+    borderRadius: 6,
+    alignItems: "center",
+    marginTop: 10,
   },
   buttonText: {
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 18,
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "600",
   },
   textLinkCadastro: {
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 5,
-    fontSize: 15,
-    color: "#FFBB12",
+    fontSize: 14,
+    color: "#1A237E",
+    marginTop: 10,
+    textAlign: "center",
     textDecorationLine: "underline",
   },
-
 });
