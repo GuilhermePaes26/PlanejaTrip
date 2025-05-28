@@ -1,9 +1,9 @@
-
 .form-trip-container {
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  background: linear-gradient(180deg, #1c2b64, #1f62b3);
+  color: #f5f5f5;
+  background-color: #2c3e50;
   border-radius: 8px;
 
   a {
@@ -14,17 +14,18 @@
   h1 {
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #0053ac;
+    color: #ffffff;
     font-size: 24px;
     font-weight: 450;
   }
+
   .matForm {
     width: 100%;
   }
 
   .form-group {
     margin-bottom: 1rem;
-    background-color: rgb(73, 73, 73);
+    background-color: #f0f2f5;
     border-radius: 3px;
     padding: 2px 15px;
     border-bottom: 1px solid white;
@@ -32,16 +33,20 @@
     label {
       display: block;
       margin-bottom: 0.5rem;
-      font-weight: 300;
-      color: white;
+      font-size: 16px;
+      font-weight: 450;
+      color: rgba(11, 0, 229, 0.488);
     }
+
     label:hover {
 
-      color: rgb(255, 139, 255);
+      color: rgb(58, 78, 232);
     }
 
     input,
-    textarea, option, select {
+    textarea,
+    option,
+    select {
       width: 100%;
       padding: 0.6rem;
       border-radius: 4px;
@@ -55,7 +60,7 @@
   .button {
     width: 100%;
     padding: 0.8rem;
-    background-color: #007bff;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
     color: white;
     font-weight: bold;
     border: none;
@@ -63,11 +68,13 @@
     cursor: pointer;
 
     &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      opacity: 0.6; // se quiser manter o efeito "desativado"
+      cursor:not-allowed
     }
   }
 }
+
 .big-icon {
   background-color: #007bff;
   color: black;
@@ -79,8 +86,8 @@
   border-radius: 50%;
   transition: .2s ease, color .2s ease;
 }
+
 .big-icon:hover {
   background-color: #0053ac;
   color: white;
 }
-

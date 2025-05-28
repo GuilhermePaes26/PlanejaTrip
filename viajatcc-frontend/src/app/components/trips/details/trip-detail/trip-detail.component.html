@@ -8,6 +8,7 @@
 
   <!-- 🔹 Informações Gerais -->
   <div class="info-card">
+    <img src="{{trip.imgLink}}" alt="">
     <h2>{{ trip.nome }}</h2>
     <p><strong>Data:</strong> {{ trip.data | date: 'dd/MM/yyyy' }}</p>
     <p><strong>Preço por passageiro:</strong> R$ {{ trip.preco | number: '1.2-2' }}</p>

@@ -7,8 +7,22 @@
     track-color: rgb(0, 0, 0),
     active-indicator-height: 12px,
     track-height: 12px,
-  ));
+    ));
+    @include mat.tabs-overrides((
+      divider-color: red,
+      active-indicator-color: white,
+      active-label-text-color: white,
+    ));
+
 }
+
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mdc-tab__text-label{
+  font-size: 20px;
+  color: white;
+  
+}
