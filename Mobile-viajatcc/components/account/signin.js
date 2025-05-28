@@ -40,28 +40,26 @@ export default function SignIn({ navigation }) {
   };
 
   return (
-
-    
     <View style={styles.container}>
+      <Text style={styles.title}>Login</Text>
 
-  <Text style={styles.title}>Login</Text>
+      <View style={styles.decoration}>
+        <View style={styles.alinhamento}>
+          <Text style={styles.label}>Email de Usuário</Text>
+          <TextInput style={styles.input} value={name} onChangeText={setName} />
 
-     <View style={{ backgroundColor: "#fff", borderRadius: 8, padding: 20, elevation: 3 }}>
-  <Text style={styles.label}>Email</Text>
-  <TextInput style={styles.input} />
+          <Text style={styles.label}>Senha</Text>
+          <TextInput style={styles.input} value={Senha} onChangeText={setSenha} secureTextEntry />
 
-  <Text style={styles.label}>Senha</Text>
-  <TextInput style={styles.input} secureTextEntry />
+          <Text style={styles.textLinkCadastro} onPress={vaiParaCadastro}>
+            Cadastrar uma conta
+          </Text>
 
-  <TouchableOpacity style={styles.button}>
-    <Text style={styles.buttonText}>Entrar</Text>
-  </TouchableOpacity>
-
-  <Text style={styles.textLinkCadastro} onPress={vaiParaCadastro}>
-    Cadastrar uma conta
-  </Text>
-</View>
-
+          <TouchableOpacity style={styles.button} onPress={login}>
+            <Text style={styles.buttonText}>Entrar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
