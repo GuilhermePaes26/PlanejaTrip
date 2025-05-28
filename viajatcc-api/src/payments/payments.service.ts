@@ -100,6 +100,7 @@ export class PaymentsService {
       session.endSession();
       return saved;
     } catch (error) {
+      console.log(error)
       await session.abortTransaction();
       session.endSession();
       throw new InternalServerErrorException(

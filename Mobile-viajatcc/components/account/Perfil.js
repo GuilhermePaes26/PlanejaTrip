@@ -39,10 +39,12 @@ export default function ProfileScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      
+      <Text style={styles.name}>Olá, {user.nome}!</Text>
       <Image source={{ uri: "https://randomuser.me/api/portraits/men/75.jpg" }} style={styles.avatar} />
-      <Text style={styles.name}>{user.nome}</Text>
-      <Text style={styles.senha}>{user.cpf}</Text>
+      
       <Text style={styles.email}>{user.email}</Text>
+      <Text style={styles.senha}>CPF: {user.cpf}</Text>
       <Text style={styles.idade}>Idade: {user.idade}</Text>
 
       <TouchableOpacity style={styles.button} onPress={logout}>
@@ -77,12 +79,14 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 60,
-    marginBottom: 20,
+    marginBottom: 10,
+    marginTop: 20,
   },
   name: {
     fontSize: 24,
     fontWeight: "bold",
     color: "#333",
+
   },
   senha: {
     fontSize: 16,

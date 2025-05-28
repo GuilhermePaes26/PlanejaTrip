@@ -22,7 +22,7 @@ function HomeStackScreen() {
 
 export default function AppTabs() {
   return (
-    <Tab.Navigator initialRouteName="Home" screenOptions={{ tabBarActiveTintColor: "#b94646" }}>
+    <Tab.Navigator initialRouteName="Home" screenOptions={{ tabBarActiveTintColor: "#0f376a" }}>
       <Tab.Screen
         name="Home"
         component={HomeStackScreen}

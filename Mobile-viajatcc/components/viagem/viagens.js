@@ -61,7 +61,12 @@ const Viagens = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         )}
-        ListEmptyComponent={<Text style={{ textAlign: "center", marginTop: 20 }}>Nenhuma viagem encontrada.</Text>}
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={styles.erroViagem}>Nenhuma viagem encontrada.</Text>
+          </View>
+        }
+        
       />
     </View>
   );
@@ -71,13 +76,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#A3CDFF",
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 15,
     textAlign: "center",
+    marginTop: 20,
   },
   viagemItem: {
     backgroundColor: "#fff",
@@ -119,6 +125,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
   },
+
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 600, 
+  },
+  erroViagem: {
+    fontSize: 18,
+    color: "#999",
+    textAlign: "center",
+  }
+  
 });
 
 export default Viagens;

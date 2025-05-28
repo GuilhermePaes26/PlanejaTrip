@@ -63,7 +63,6 @@ const MinhasViagens = () => {
         )}
       />
       <TouchableOpacity style={styles.butt}>
-        <Text>Ver mais</Text>
       </TouchableOpacity>
       <Modal visible={modalVisible} transparent animationType="slide" onRequestClose={() => setModalVisible(false)}>
         <View style={styles.modalBackground}>
@@ -87,13 +86,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#A3CDFF",
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 15,
     textAlign: "center",
+    marginTop: 20,
   },
   viagemItem: {
     backgroundColor: "#fff",

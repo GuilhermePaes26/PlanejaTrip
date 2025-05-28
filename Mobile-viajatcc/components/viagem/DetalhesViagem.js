@@ -52,6 +52,8 @@ export default function DetalhesViagem({ route, navigation }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+
+      console.log(res)
       if (!res.ok) throw new Error();
       Alert.alert("Sucesso", "Pagamento realizado!", [{ text: "OK", onPress: () => navigation.navigate("MinhasViagens") }]);
     } catch (err) {
@@ -72,9 +74,9 @@ export default function DetalhesViagem({ route, navigation }) {
         <Text style={styles.label}>Descrição:</Text>
         <Text style={styles.text}>{trip.descricao || "—"}</Text>
         <Image source={{ uri: trip.imgLink }} style={styles.image} />
-        <Text style={styles.label}>Data:</Text>
+        <Text style={styles.label}>Data de saída:</Text>
         <Text style={styles.text}>{trip.data}</Text>
-        <Text style={styles.label}>Preço:</Text>
+        <Text style={styles.label}>Valor total:</Text>
         <Text style={styles.text}>R${trip.preco}</Text>
 
         <Text style={[styles.label, { marginTop: 20 }]}>Dados do Cartão</Text>
@@ -100,7 +102,7 @@ export default function DetalhesViagem({ route, navigation }) {
         </View>
 
         <TouchableOpacity style={[styles.button, processing && styles.buttonDisabled]} onPress={handlePayment} disabled={processing}>
-          <Text style={styles.buttonText}>{processing ? "Processando..." : `Pagar R$${trip.preco}`}</Text>
+          <Text style={styles.buttonText}>{processing ? "Processando..." : `Pagar`}</Text>
         </TouchableOpacity>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -109,7 +111,7 @@ export default function DetalhesViagem({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: { padding: 20 },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
+  title: { fontSize: 24, fontWeight: "bold", marginBottom: 10, marginTop: 20, },
   label: { fontSize: 16, fontWeight: "600", marginTop: 12 },
   text: { fontSize: 14, color: "#333" },
   image: { width: "100%", height: 150, borderRadius: 8, marginVertical: 12 },

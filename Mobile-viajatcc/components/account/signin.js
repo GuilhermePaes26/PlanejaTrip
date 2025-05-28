@@ -72,8 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   input: {
-    width: "70%",
-    minHeight: " 5%",
+    width: 200,
     borderColor: "#ccc",
     borderWidth: 1,
     marginBottom: 15,
@@ -125,18 +124,5 @@ const styles = StyleSheet.create({
     color: "#FFBB12",
     textDecorationLine: "underline",
   },
-  decoration: {
-    backgroundColor: "blue",
-    width: 650,
-    height: 650,
-    borderRadius: "100%",
-    marginRight: 300,
-  },
-  alinhamento: {
-    display: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: "300",
-    marginVertical: "auto",
-  },
+
 });
