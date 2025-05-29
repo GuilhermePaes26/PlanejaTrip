@@ -53,9 +53,16 @@ export class UserComponent {
     this.userService.updateUser(this.user._id!, formData).subscribe({
       next: (updatedUser) => {
         this.user = updatedUser;
+        localStorage.setItem(
+          'imageUser',
+          updatedUser.imgLink || 'assets/default-avatar.jpg'
+        );
         this.snackBar.open('Foto de perfil atualizada!', 'OK', {
           duration: 2000,
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       },
       error: () => {
         this.snackBar.open('Erro ao atualizar foto. Tente novamente.', 'OK', {
