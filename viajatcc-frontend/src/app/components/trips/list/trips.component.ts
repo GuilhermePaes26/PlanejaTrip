@@ -28,10 +28,14 @@ export class TripsComponent implements OnInit {
   fetchTrips(): void {
     this.tripsService.getTrips().subscribe({
       next: (data: Trip[]) => {
+        console.log(data);
+        
         const hoje = new Date()
         data.forEach(trip => {
           const dataTrip = new Date(trip.data)
           if (dataTrip < hoje) {
+    
+            
             this.disabledTrips.push(trip)
           } else {
             this.trips.push(trip)
