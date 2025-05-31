@@ -12,6 +12,11 @@
   background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: #fff;
 }
+.card-viagens {
+  background: #1e3c72;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #000000;
+}
 
 /* ===== Cards Grid ===== */
 .cards-grid {
@@ -56,7 +61,7 @@
   }
 
   &-content {
-    padding: 1.5rem;
+    
     flex: 1;
     display: flex;
     flex-direction: column;

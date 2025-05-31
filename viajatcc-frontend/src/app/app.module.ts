@@ -37,6 +37,7 @@ import { DialogMapsComponent } from './components/trips/form/dialog-maps/dialog-
 import {NgChartsModule} from 'ng2-charts'
 import { MatProgressBar } from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     SnackbarComponent,
     SupplierDetailComponent,
     DialogCreateBusComponent,
-    DialogMapsComponent
+    DialogMapsComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

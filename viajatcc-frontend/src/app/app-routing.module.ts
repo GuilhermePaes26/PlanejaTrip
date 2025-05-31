@@ -15,6 +15,7 @@ import { UserComponent } from './components/user/user.component';
 import { FormFornecedorComponent } from './components/bus/form-fornecedor/form-fornecedor.component';
 import { BusRouterComponent } from './components/bus/bus-router/bus-router.component';
 import { SupplierDetailComponent } from './components/bus/supplier-detail/supplier-detail.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 const routes: Routes = [
   {
     path: 'auth',
@@ -25,7 +26,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona /auth → /auth/login
     ],
   },
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '', component: LandingPageComponent },
   {
     path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
       {path: 'dashboard', component:DashboardComponent},
