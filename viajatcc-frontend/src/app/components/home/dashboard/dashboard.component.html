@@ -1,75 +1,53 @@
-<!-- <div class="topbar">
-  <div class="user-info">
-    <span>Olá, testee</span>
-    <button class="logout">Sair</button>
-  </div>
-</div> -->
 <main class="dashboard">
-  <section class="card card-meta">
-    <header class="card-header">
-      <h3>Meta Mensal</h3>
-      <button class="card-close">×</button>
-    </header>
-    <div class="card-content">
-      <div class="valores">
-        <h4>R$ {{meta}}</h4>
-        <h4>R$ 16.000,00</h4>
+  <div class="meta" id="meta">
+    <section class="card card-meta" >
+      <header class="card-header">
+        <h3>Meta Mensal</h3>
+        <button class="card-close" (click)="close('meta')">×</button>
+      </header>
+      <div class="card-content">
+        <div class="valores" >
+          <h4>R$ {{meta}}</h4>
+          <h4>R$ 16.000,00</h4>
+        </div>
+        <mat-progress-bar class="progress" color="primary" mode="determinate" value="{{this.bar}}">
+        </mat-progress-bar>
       </div>
-      <mat-progress-bar
-        class="progress"
-        color="primary"
-        mode="determinate"
-        value="{{this.bar}}"
-      >
-      </mat-progress-bar>
-    </div>
-  </section>
+    </section>
+  </div>
+
+
 
   <section class="cards-grid">
-    <div class="card">
+    <div class="card" id="gastos">
       <header class="card-header">
         <h3>Distribuição de Gastos</h3>
-        <button class="card-close">×</button>
+        <button class="card-close" (click)="close('gastos')">×</button>
       </header>
       <div class="card-content">
-        <canvas
-          baseChart
-          [data]="pieChartData"
-          [options]="pieChartOptions"
-          type="pie"
-        >
+        <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" type="pie">
         </canvas>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" id="idade">
       <header class="card-header">
         <h3>Idade dos Passageiros</h3>
-        <button class="card-close">×</button>
+        <button class="card-close" (click)="close('idade')">×</button>
       </header>
       <div class="card-content">
-        <canvas
-          baseChart
-          [data]="barChartDataIdade"
-          [options]="barChartOptions"
-          [type]="'bar'"
-        >
+        <canvas baseChart [data]="barChartDataIdade" [options]="barChartOptions" [type]="'bar'">
         </canvas>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" id="lucro">
       <header class="card-header">
         <h3>Vendas vs Lucros</h3>
-        <button class="card-close">×</button>
+        <button class="card-close" (click)="close('lucro')">×</button>
       </header>
       <div class="card-content">
-        <canvas
-          baseChart
-          [data]="barChartData"
-          [options]="barChartOptions"
-          [type]="'bar'"
-        >
+        <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="'bar'">
         </canvas>
       </div>
     </div>

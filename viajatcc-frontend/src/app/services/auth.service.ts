@@ -43,7 +43,7 @@ export class AuthService {
       cpf,
       nome,
       email,
-      idade: 23
+      idade: 62
     }
     return this.http.post<any>(`${this.apiUrl}/users`, data)
   }

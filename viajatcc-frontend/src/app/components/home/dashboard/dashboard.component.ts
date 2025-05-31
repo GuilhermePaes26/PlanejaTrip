@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { user, UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth.service';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { payment, PaymentsService } from '../../../services/payments.service';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,34 +11,21 @@ import { payment, PaymentsService } from '../../../services/payments.service';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   user!: user
   meta: number = 0
   bar: number = 0
   idade01a18: user[] = []
-  idade01a18Length: number = 0
   idade19a30: user[] = []
   idade31a50: user[] = []
   idade50plus: user[] = []
+  barChartDataIdade: ChartConfiguration<'bar'>['data'] = {
+    labels: [],
+    datasets: []
+  };
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   token: string | null = ''
-  constructor(private userService: UserService, private authService: AuthService, private payments: PaymentsService) {
-    this.token = this.authService.getToken()
-    this.userService.getUser(this.token).subscribe({
-      next: (response) => {
-        this.user = response
-      }
-    })
-    this.payments.findAll().subscribe({
-      next: (payments: payment[]) => {
-        payments.forEach(payment => {
-
-          this.meta = this.meta + payment.valor
-        });
-        this.bar = this.meta * 100 / 16000
-        
-
-      }
-    })
+  ngOnInit(): void {
     this.userService.findAll().subscribe({
       next: (users: user[]) => {
         users.forEach(user => {
@@ -53,9 +41,39 @@ export class DashboardComponent {
           else {
             this.idade50plus.push(user)
           }
-           
         });
-        this.idade01a18Length = this.idade01a18.length
+        this.barChartDataIdade = {
+        labels: ['01 a 18', '19 a 30', '31 a 50', '50+'],
+        datasets: [
+          {
+            data: [this.idade01a18.length, this.idade19a30.length, this.idade31a50.length, this.idade50plus.length],
+            label: 'Idade dos passageiros',
+            backgroundColor: ['#132166']
+          },
+  
+        ]
+      };
+      }
+    })
+    
+
+  }
+  constructor(private userService: UserService, private authService: AuthService, private payments: PaymentsService) {
+    this.token = this.authService.getToken()
+    this.userService.getUser(this.token).subscribe({
+      next: (response) => {
+        this.user = response
+      }
+    })
+    this.payments.findAll().subscribe({
+      next: (payments: payment[]) => {
+        payments.forEach(payment => {
+
+          this.meta = this.meta + payment.valor
+        });
+        this.bar = this.meta * 100 / 16000
+
+
       }
     })
   }
@@ -71,13 +89,7 @@ export class DashboardComponent {
 
     ]
   };
-  barChartDataIdade = {
-    labels: ['01 a 18', '19 a 30', '31 a 50', '50+'],
-    datasets: [
-      { data: [this.idade01a18Length, this.idade19a30.length, this.idade31a50.length, this.idade50plus.length], label: 'Idade dos passageiros', backgroundColor: ['#132166'] },
 
-    ]
-  };
 
   pieChartData: ChartConfiguration<'pie'>['data'] = {
     labels: ['Hotel', 'Passagem', 'Passeio'],
@@ -94,4 +106,8 @@ export class DashboardComponent {
   };
 
   pieChartType: ChartType = 'pie';
+
+  close(id: string) {
+    document.getElementById(id)?.classList.toggle('d-none')
+  }
 }
