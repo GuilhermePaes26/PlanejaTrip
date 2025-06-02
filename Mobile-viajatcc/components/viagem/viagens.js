@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#132166",
     marginTop: 24,
+    marginBottom: 18,
     marginLeft: 20,
   },
   tripCard: {
