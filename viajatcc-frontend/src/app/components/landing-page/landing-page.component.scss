@@ -32,6 +32,13 @@ body, :host {
   letter-spacing: 1px;
 }
 
+.logo-img {
+      height: 45px; // ajuste conforme sua logo
+      width: auto;
+      display: block;
+      
+}
+
 .nav-links {
   list-style: none;
   display: flex;
@@ -61,7 +68,7 @@ body, :host {
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
-  margin-top: 56px; /* height of navbar */
+  margin-top: 77px; /* height of navbar */
 }
 
 .hero-banner .overlay {
