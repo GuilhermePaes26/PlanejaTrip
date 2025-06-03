@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'https://planejatrip.onrender.com';
   isBrowser!: boolean;
 
   private authChecked = new BehaviorSubject<boolean>(false);

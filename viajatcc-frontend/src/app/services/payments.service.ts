@@ -14,7 +14,7 @@ export interface payment {
   providedIn: 'root'
 })
 export class PaymentsService {
-  apiUrl: string = 'http://localhost:3000/payments'
+  apiUrl: string = 'https://planejatrip.onrender.com/payments'
   constructor(private httpClient: HttpClient) {}
 
   findAll() {

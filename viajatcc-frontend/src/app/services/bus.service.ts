@@ -21,8 +21,8 @@ export interface bus {
   providedIn: 'root'
 })
 export class BusService {
-  private readonly apiUrl = 'http://localhost:3000/suppliers';
-  private readonly apiUrlBus = 'http://localhost:3000/buses';
+  private readonly apiUrl = 'https://planejatrip.onrender.com/suppliers';
+  private readonly apiUrlBus = 'https://planejatrip.onrender.com/buses';
   constructor(private http: HttpClient) { }
   getSuppliers() {
     return this.http.get<supplier[]>(this.apiUrl)

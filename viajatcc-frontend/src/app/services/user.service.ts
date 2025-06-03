@@ -19,7 +19,7 @@ export interface user {
   providedIn: 'root',
 })
 export class UserService {
-  private readonly apiUrl = 'http://localhost:3000/users';
+  private readonly apiUrl = 'https://planejatrip.onrender.com/users';
   constructor(private http: HttpClient) {}
   getUser(id: string | null) {
     return this.http.get<user>(`${this.apiUrl}/${id}`);
