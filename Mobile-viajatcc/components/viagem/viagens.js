@@ -36,7 +36,7 @@ export default function Viagens({ navigation }) {
     React.useCallback(() => {
       (async () => {
         try {
-          const res = await fetch("http://10.0.2.2:3000/trips");
+          const res = await fetch("https://planejatrip.onrender.com/trips");
           if (!res.ok) throw new Error(`Status ${res.status}`);
           const data = await res.json();
           setTrips(data);
@@ -98,7 +98,7 @@ export default function Viagens({ navigation }) {
         <FlatList data={categoriesData} keyExtractor={(item) => item.id} renderItem={renderCategoryItem} numColumns={3} scrollEnabled={false} columnWrapperStyle={styles.columnWrapper} />
       </View>
 
-      <Text style={styles.popularTitle}>Popular Places</Text>
+      <Text style={styles.popularTitle}>Viagens Populares</Text>
       <FlatList
         data={trips}
         keyExtractor={(item) => item._id}

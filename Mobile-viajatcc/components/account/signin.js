@@ -17,7 +17,7 @@ export default function SignIn({ navigation }) {
     }
 
     try {
-      const res = await fetch("http://10.0.2.2:3000/users/login", {
+      const res = await fetch("https://planejatrip.onrender.com/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, password: senha }),
