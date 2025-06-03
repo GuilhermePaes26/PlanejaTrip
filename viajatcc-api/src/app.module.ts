@@ -12,7 +12,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRoot('mongodb://localhost:27017/viajatcc'),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     UsersModule,
     TripsModule,
     PaymentsModule,
