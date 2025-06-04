@@ -83,17 +83,32 @@
 
 
         &:nth-child(1) {
-          background-color: #6985E1;
+          background-color: #4dabf7;
+          color: white;
+          transition: .3s;
+        }
+        &:nth-child(1):hover {
+          background-color: #27567c;
           color: white;
         }
 
         &:nth-child(2) {
-          background-color: #132166;
+          background-color: #f59f00;
+          color: white;
+          transition: .3s;
+        }
+        &:nth-child(2):hover {
+          background-color: #7d5200;
           color: white;
         }
 
         &.delete {
           background-color: #dc3545;
+          color: white;
+          transition: .3s;
+        }
+        &.delete:hover {
+          background-color: #761515;
           color: white;
         }
       }
@@ -110,10 +125,13 @@
     &.header {
       font-weight: bold;
       background-color: #f1f1f1;
+      &.span {
+        text-align: center;
+        
+      }
     }
 
     &.row {
-
       background-color: #bababa;
     }
 
@@ -170,4 +188,20 @@
     margin-bottom: 10rem;
 
   }
+}
+mat-icon{
+  font-size: 35px;
+  width: 35px;
+  height: 35px;
+}
+
+.search-bar {
+  margin: 1rem 0;
+}
+
+.search-bar input {
+  padding: 0.5rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 20px;
 }

@@ -1,7 +1,10 @@
 <div class="trips-container">
-  <h1>Viagens Disponíveis</h1>
+  <h1><mat-icon>flight</mat-icon> Viagens</h1>
+  
+  <div class="search-bar">
+    <input type="text" placeholder="Pesquisar viagem..." (ngModelChange)="filteredTrips()" [(ngModel)]="searchTerm" />
+  </div>
   <a href="/home/trips/create" class="button">Criar viagem</a>
-
   <div *ngIf="isLoading" class="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
   <div *ngIf="error" class="error">{{ error }}</div>
 
@@ -14,7 +17,7 @@
       <span>Ações</span>
     </div>
 
-    <div class="trips-table row" *ngFor="let trip of trips">
+    <div class="trips-table row" *ngFor="let trip of filteredTrips()">
       <span>{{ trip.nome }}</span>
       <span>{{ trip.data | date : "dd/MM/yyyy" }}</span>
       <span>R$ {{ trip.preco | number : "1.2-2" }}</span>

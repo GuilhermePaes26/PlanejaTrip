@@ -25,7 +25,7 @@
 
   .form-group {
     margin-bottom: 1rem;
-    background-color: #f0f2f5;
+    background-color: #000000;
     border-radius: 3px;
     padding: 2px 15px;
     border-bottom: 1px solid white;
@@ -66,11 +66,15 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: .3s;
 
     &:disabled {
       background: linear-gradient(to right, #6a11cb, #2575fc);
       opacity: 0.6; // se quiser manter o efeito "desativado"
       cursor:not-allowed
+    }
+    &:hover {
+      background: linear-gradient(to right, #8319f4, #5694ff);
     }
   }
 }

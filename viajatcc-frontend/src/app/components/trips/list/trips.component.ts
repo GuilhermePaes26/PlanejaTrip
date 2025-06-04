@@ -5,11 +5,13 @@ import { TripsService, Trip } from '../../../services/trips.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-trips',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatProgressBar],
+  imports: [CommonModule, RouterModule, MatProgressBar, MatIcon, FormsModule],
   templateUrl: './trips.component.html',
   styleUrls: ['./trips.component.scss'],
 })
@@ -18,6 +20,7 @@ export class TripsComponent implements OnInit {
   disabledTrips: Trip[] = []
   isLoading = true;
   error = '';
+  searchTerm: string = '';
 
   constructor(private tripsService: TripsService, private router: Router, private dialog: MatDialog) {}
 
@@ -74,4 +77,13 @@ export class TripsComponent implements OnInit {
       });
     }
   }
+  
+filteredTrips(): Trip[] {
+  if (!this.searchTerm?.trim()) return this.trips
+  
+  return this.trips.filter(trip =>
+    trip.nome.toLowerCase().includes(this.searchTerm.toLowerCase())
+  );
+  
+}
 }
