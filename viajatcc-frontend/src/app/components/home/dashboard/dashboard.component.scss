@@ -46,6 +46,7 @@
       margin: 0;
       font-size: 1.1rem;
       font-weight: 600;
+      text-align: center;
     }
     .card-close {
       background: none;
@@ -110,7 +111,7 @@
 
   .trips-table {
     display: grid;
-    grid-template-columns: 2fr 1.5fr 1fr 1fr 2fr;
+    grid-template-columns: 3fr 2fr 1fr 1fr 2fr;
     align-items: center;
     padding: 0.75rem 1rem;
     border-bottom: 1px solid #ddd;
@@ -128,6 +129,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    a {
+      color: blue;
+      text-decoration: underline;
+      font-size: 16px;
     }
 
     .actions {
@@ -180,7 +187,7 @@
 
   .trips-table-disabled {
     display: grid;
-    grid-template-columns: 2fr 1.5fr 1fr 1fr 2fr;
+    grid-template-columns: 3fr 2fr 1fr 1fr 2fr;
     align-items: center;
     padding: 0.75rem 1rem;
     border-bottom: 1px solid #676767;
@@ -203,6 +210,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    a {
+      color: blue;
+      text-decoration: underline;
+      font-size: 16px;
     }
 
     .actions {

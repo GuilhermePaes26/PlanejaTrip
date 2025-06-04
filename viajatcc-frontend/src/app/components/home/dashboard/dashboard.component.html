@@ -21,7 +21,7 @@
   <section class="cards-grid">
     <div class="card" id="gastos">
       <header class="card-header">
-        <h3>Distribuição de Gastos</h3>
+        <h3>Possíveis Lucros</h3>
         <button class="card-close" (click)="close('gastos')">×</button>
       </header>
       <div class="card-content">
@@ -52,10 +52,10 @@
       </div>
     </div>
   </section>
-  <section class="card card-viagens">
+  <section class="card card-viagens" id="viagem">
     <header class="card-header">
-      <h3>Ultimas viagens</h3>
-      <button class="card-close" (click)="close('meta')">×</button>
+      <h3>Últimas 5 Viagens</h3>
+      <button class="card-close" (click)="close('viagem')">×</button>
     </header>
     <div class="trips-table-wrapper" *ngIf="trips.length > 0">
       <div class="trips-table header">
@@ -63,6 +63,7 @@
         <span>Data</span>
         <span>Preço</span>
         <span>Passageiros</span>
+        <span>Detalhes</span>
       </div>
 
       <div class="trips-table row" *ngFor="let trip of trips">
@@ -70,6 +71,7 @@
         <span>{{ trip.data | date : "dd/MM/yyyy" }}</span>
         <span>R$ {{ trip.preco | number : "1.2-2" }}</span>
         <span>{{ trip.passageiros.length }}</span>
+        <span><a href="/home/trips/{{trip._id}}">Acessar</a></span>
         
       </div>
       <div class="trips-table-disabled row" *ngFor="let trip of disabledTrips">
@@ -77,7 +79,7 @@
         <span>{{ trip.data | date : "dd/MM/yyyy" }}</span>
         <span>R$ {{ trip.preco | number : "1.2-2" }}</span>
         <span>{{ trip.passageiros.length }}</span>
-        
+        <span><a href="/home/trips/{{trip._id}}">Acessar</a></span>
       </div>
     </div>
   </section>

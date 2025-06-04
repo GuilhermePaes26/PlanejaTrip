@@ -5,6 +5,7 @@ import { ChartConfiguration, ChartType } from 'chart.js';
 import { payment, PaymentsService } from '../../../services/payments.service';
 import { BaseChartDirective } from 'ng2-charts';
 import { Trip, TripsService } from '../../../services/trips.service';
+import { bus, BusService } from '../../../services/bus.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,15 +15,31 @@ import { Trip, TripsService } from '../../../services/trips.service';
 })
 export class DashboardComponent implements OnInit {
   user!: user
+
+  // dados da meta
   meta: number = 0
   bar: number = 0
+
+  // dados ultimas viagens
+  top5Trips: Trip[] = []
   trips: Trip[] = [];
   disabledTrips: Trip[] = []
+
+  // dados grafico de idade
   idade01a18: user[] = []
   idade19a30: user[] = []
   idade31a50: user[] = []
   idade50plus: user[] = []
   barChartDataIdade: ChartConfiguration<'bar'>['data'] = {
+    labels: [],
+    datasets: []
+  };
+
+  //dados grafico pizza p. lucros
+  valorOnibus: number = 0
+  valorVendas: number = 0
+  valorLucro: number = 0
+  pieChartData: ChartConfiguration<'pie'>['data'] = {
     labels: [],
     datasets: []
   };
@@ -59,15 +76,17 @@ export class DashboardComponent implements OnInit {
       }
     })
     this.fetchTrips();
+    this.chartPieCalc()
 
   }
   fetchTrips(): void {
     this.tripsService.getTrips().subscribe({
       next: (data: Trip[]) => {
-        console.log(data);
+
+        this.top5Trips.push(data[(data.length - 5)], data[data.length - 4], data[data.length - 3], data[data.length - 2], data[data.length - 1])
 
         const hoje = new Date()
-        data.forEach(trip => {
+        this.top5Trips.forEach(trip => {
           const dataTrip = new Date(trip.data)
           if (dataTrip < hoje) {
 
@@ -85,7 +104,11 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
-  constructor(private userService: UserService, private authService: AuthService, private payments: PaymentsService, private tripsService: TripsService) {
+  constructor(private userService: UserService,
+    private authService: AuthService,
+    private payments: PaymentsService,
+    private tripsService: TripsService,
+    private busService: BusService,) {
     this.token = this.authService.getToken()
     this.userService.getUser(this.token).subscribe({
       next: (response) => {
@@ -118,15 +141,15 @@ export class DashboardComponent implements OnInit {
   };
 
 
-  pieChartData: ChartConfiguration<'pie'>['data'] = {
-    labels: ['Hotel', 'Passagem', 'Passeio'],
-    datasets: [
-      {
-        data: [1200, 500, 300],
-        backgroundColor: ['#132166', '#233DFF', '#4a289e']
-      }
-    ]
-  };
+  // pieChartData: ChartConfiguration<'pie'>['data'] = {
+  //   labels: ['Vendas', 'ônibus', 'Lucro'],
+  //   datasets: [
+  //     {
+  //       data: [1200, 500, 300],
+  //       backgroundColor: ['#132166', '#233DFF', '#4a289e']
+  //     }
+  //   ]
+  // };
 
   pieChartOptions: ChartConfiguration<'pie'>['options'] = {
     responsive: true,
@@ -137,4 +160,39 @@ export class DashboardComponent implements OnInit {
   close(id: string) {
     document.getElementById(id)?.classList.toggle('d-none')
   }
+
+  async chartPieCalc() {
+    await this.busService.findBus().subscribe({
+      next: (buses: bus[]) => {
+        buses.forEach(bus => {
+
+          this.valorOnibus = this.valorOnibus + bus.valor
+          console.log(this.valorOnibus);
+
+        })
+      }
+    })
+    this.payments.findAll().subscribe({
+      next: (payments) => {
+        payments.forEach(payment => {
+
+          this.valorVendas = this.valorVendas + payment.valor
+        });
+        this.valorLucro = this.valorVendas - this.valorOnibus
+        console.log(this.valorLucro);
+
+        this.pieChartData = {
+        labels: ['Vendas', 'ônibus', 'Lucro'],
+        datasets: [
+          {
+            data: [this.valorVendas, this.valorOnibus, this.valorLucro],
+            backgroundColor: ['#132166', '#233DFF', '#4a289e']
+          }
+        ]
+      };
+      },
+  })
+
+
+}
 }
