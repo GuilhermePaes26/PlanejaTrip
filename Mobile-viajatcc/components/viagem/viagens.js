@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerText: {
+    fontFamily: "Poppins-Bold",
     fontSize: 24,
-    fontWeight: "bold",
     color: "#FFF",
   },
 
@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   categoryLabel: {
+    fontFamily: "Poppins-Bold",
     marginTop: 6,
     fontSize: 12,
     fontWeight: "600",
@@ -180,8 +181,8 @@ const styles = StyleSheet.create({
   },
 
   popularTitle: {
+    fontFamily: "Poppins-Bold",
     fontSize: 20,
-    fontWeight: "bold",
     color: "#132166",
     marginTop: 24,
     marginBottom: 18,
@@ -209,6 +210,7 @@ const styles = StyleSheet.create({
     paddingTop: 8,
   },
   tripName: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 16,
     fontWeight: "600",
     color: "#333",

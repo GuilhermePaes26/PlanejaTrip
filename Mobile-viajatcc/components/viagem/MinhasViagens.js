@@ -139,8 +139,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 24,
-    fontWeight: "bold",
     color: "#132166",
     textAlign: "center",
     marginBottom: 16,
@@ -167,8 +167,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   viagemName: {
+    fontFamily: "Montserrat-Regular",
     fontSize: 18,
-    fontWeight: "600",
     color: "#132166",
     marginBottom: 4,
   },
@@ -240,8 +240,8 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   modalTitle: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 20,
-    fontWeight: "bold",
     color: "#132166",
     marginBottom: 8,
     textAlign: "center",
@@ -253,18 +253,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   modalDetailText: {
+    fontFamily: "Montserrat-Bold",
     marginLeft: 6,
     fontSize: 14,
     color: "#666",
   },
   modalSectionTitle: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 18,
-    fontWeight: "600",
     color: "#132166",
     marginTop: 16,
     marginBottom: 6,
   },
   modalDescription: {
+    fontFamily: "Montserrat-Regular",
     fontSize: 14,
     color: "#555",
     lineHeight: 20,

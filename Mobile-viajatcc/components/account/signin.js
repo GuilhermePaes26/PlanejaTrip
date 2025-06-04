@@ -1,6 +1,6 @@
 // SignIn.js
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, Platform } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, Image, Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SignIn({ navigation }) {
@@ -43,6 +43,7 @@ export default function SignIn({ navigation }) {
       <View style={styles.overlay} />
 
       <View style={styles.header}>
+        <Image source={require("../../assets/logo-Planeja.png")} style={styles.logo} resizeMode="contain" />
         <Text style={styles.title}>WELCOME{"\n"}BACK</Text>
       </View>
 
@@ -88,12 +89,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: Platform.select({ ios: 100, android: 80 }),
   },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 12,
+  },
   title: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 36,
-    fontWeight: "bold",
     color: "#FFFFFF",
     textAlign: "center",
-    // fontFamily: "Montserrat-Bold",
     lineHeight: 42,
   },
   card: {
@@ -113,12 +118,14 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   cardSubtitle: {
+    fontFamily: "Montserrat-Regular",
     fontSize: 16,
     color: "#444",
     textAlign: "center",
     marginBottom: 20,
   },
   label: {
+    fontFamily: "Montserrat-Regular",
     fontSize: 14,
     fontWeight: "600",
     color: "#132166",
@@ -127,6 +134,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   input: {
+    fontFamily: "Montserrat-Regular",
     width: "100%",
     height: Platform.select({ ios: 44, android: 48 }),
     backgroundColor: "#E3F2FD",
@@ -137,6 +145,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   linkCadastro: {
+    fontFamily: "Montserrat-Regular",
     alignSelf: "center",
     marginTop: 8,
     marginBottom: 18,
@@ -154,10 +163,8 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   buttonText: {
+    fontFamily: "Montserrat-Bold",
     color: "#FFF",
     fontSize: 18,
-    fontWeight: "700",
-    // Caso queira outra fonte, adicione fontFamily aqui também:
-    // fontFamily: "Montserrat-SemiBold",
   },
 });

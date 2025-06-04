@@ -144,8 +144,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerTitle: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 28,
-    fontWeight: "bold",
     color: "#FFF",
   },
   avatarContainer: {
@@ -193,8 +193,9 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   infoText: {
+    fontFamily: "Montserrat-Regular",
     marginLeft: 12,
-    fontSize: 16,
+    fontSize: 15,
     color: "#333",
     flexShrink: 1,
   },
@@ -212,8 +213,8 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   logoutButtonText: {
+    fontFamily: "Montserrat-Bold",
     color: "#FFF",
     fontSize: 16,
-    fontWeight: "600",
   },
 });

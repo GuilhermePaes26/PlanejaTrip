@@ -27,7 +27,7 @@ const Login = ({ navigation }) => {
       };
 
       checkLoginStatus();
-    }, []) // ✅ dependências vazias aqui
+    }, [])
   );
   console.log(initialRoute);
 

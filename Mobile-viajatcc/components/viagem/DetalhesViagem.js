@@ -244,10 +244,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   tripName: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 24,
-    fontWeight: "bold",
     color: "#132166",
-    marginBottom: 8,
+    marginBottom: 2,
   },
   locationRow: {
     flexDirection: "row",
@@ -255,6 +255,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   locationText: {
+    fontFamily: "Montserrat-Regular",
     marginLeft: 6,
     fontSize: 14,
     color: "#666",
@@ -266,8 +267,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   priceText: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 20,
-    fontWeight: "bold",
     color: "#0288D1",
   },
   starsRow: {
@@ -288,24 +289,28 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   infoItemText: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 16,
     fontWeight: "600",
     color: "#132166",
     marginTop: 6,
   },
   infoItemLabel: {
+    fontFamily: "Montserrat-Regular",
     fontSize: 11,
     color: "#888",
     marginTop: 2,
   },
 
   sectionTitle: {
+    fontFamily: "Poppins-Bold",
     fontSize: 18,
     fontWeight: "600",
     color: "#132166",
     marginBottom: 6,
   },
   descriptionText: {
+    fontFamily: "Montserrat-Regular",
     fontSize: 14,
     color: "#555",
     lineHeight: 20,

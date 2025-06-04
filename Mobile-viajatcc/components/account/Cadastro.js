@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerTitle: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 28,
-    fontWeight: "bold",
     color: "#FFF",
     textAlign: "center",
   },
@@ -125,8 +125,8 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   label: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 14,
-    fontWeight: "600",
     color: "#132166",
     marginBottom: 6,
     marginTop: 12,
@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E3F2FD",
     borderRadius: 6,
     paddingHorizontal: 12,
+    fontFamily: "Montserrat-Regular",
     fontSize: 16,
     color: "#333",
   },
