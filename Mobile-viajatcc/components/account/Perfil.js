@@ -37,13 +37,13 @@ export default function ProfileScreen({ navigation }) {
     const localUri = result.assets[0].uri;
     const filename = localUri.split("/").pop();
     const match = /\.(\w+)$/.exec(filename || "");
-    const type = match ? `image/${match[1]}` : "image";
+    const mimeType = match ? `image/${match[1]}` : "image";
 
     const formData = new FormData();
     formData.append("image", {
       uri: localUri,
       name: filename,
-      type,
+      type: mimeType,
     });
 
     try {
@@ -52,7 +52,10 @@ export default function ProfileScreen({ navigation }) {
         method: "PUT",
         body: formData,
       });
-      if (!res.ok) throw new Error(`Status ${res.status}`);
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Erro ao atualizar foto: ${errorText}`);
+      }
       const updated = await res.json();
 
       setUser(updated);
