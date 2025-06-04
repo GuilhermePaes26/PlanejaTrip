@@ -9,10 +9,15 @@ import {
   Param,
   UploadedFile,
   UseInterceptors,
+  BadRequestException,
+  NotFoundException,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
 
 @Controller('users')
 export class UsersController {
@@ -22,14 +27,25 @@ export class UsersController {
   ) {}
 
   @Post()
-  @UseInterceptors(FileInterceptor('image', { dest: './uploads' }))
+  @UseInterceptors(FileInterceptor('image', { storage: memoryStorage() }))
   async create(
     @UploadedFile() file: Express.Multer.File,
     @Body() createUserDto: any,
   ) {
     if (file) {
-      const url = await this.cloudinary.uploadImage(file.path);
-      createUserDto.imgLink = url;
+      try {
+        const secureUrl = await this.cloudinary.uploadImageBuffer(file.buffer);
+        createUserDto.imgLink = secureUrl;
+      } catch {
+        throw new HttpException(
+          'Erro ao processar imagem no create.',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
+      }
+    }
+
+    if (!createUserDto.email || !createUserDto.senha) {
+      throw new BadRequestException('Email e senha são obrigatórios');
     }
     return this.usersService.create(createUserDto);
   }
@@ -38,34 +54,60 @@ export class UsersController {
   async findAll() {
     return this.usersService.findAll();
   }
+
   @Post('login')
   async login(@Body() loginDto: any) {
-    console.log('chegou aqui');
     const { email, password } = loginDto;
-    const user = await this.usersService.findEmail(email);
-    if (user.senha == password) {
-      return user;
-    } else {
-      return false;
+    if (!email || !password) {
+      throw new BadRequestException('Email e senha são obrigatórios');
     }
+
+    const user = await this.usersService.findEmail(email);
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+    if (user.senha !== password) {
+      throw new HttpException('Credenciais inválidas', HttpStatus.UNAUTHORIZED);
+    }
+    return user;
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return this.usersService.findOne(id);
+    const user = await this.usersService.findOne(id);
+    if (!user) {
+      throw new NotFoundException(`Usuário ${id} não encontrado`);
+    }
+    return user;
   }
 
   @Put(':id')
-  @UseInterceptors(FileInterceptor('image', { dest: './uploads' }))
+  @UseInterceptors(FileInterceptor('image', { storage: memoryStorage() }))
   async update(
     @Param('id') id: string,
     @UploadedFile() file: Express.Multer.File,
     @Body() updateUserDto: any,
   ) {
-    if (file) {
-      updateUserDto.imgLink = await this.cloudinary.uploadImage(file.path);
+    if (!file) {
+      throw new BadRequestException("Campo 'image' ausente no formulário.");
     }
-    return this.usersService.update(id, updateUserDto);
+
+    let secureUrl: string;
+    try {
+      secureUrl = await this.cloudinary.uploadImageBuffer(file.buffer);
+    } catch {
+      throw new HttpException(
+        'Erro ao processar imagem no update.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+
+    updateUserDto.imgLink = secureUrl;
+    const updatedUser = await this.usersService.update(id, updateUserDto);
+    if (!updatedUser) {
+      throw new NotFoundException(`Usuário ${id} não encontrado`);
+    }
+    return updatedUser;
   }
 
   @Delete(':id')

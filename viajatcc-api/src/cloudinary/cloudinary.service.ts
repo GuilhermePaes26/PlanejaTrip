@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { v2 as cloudinary } from 'cloudinary';
 import { ConfigService } from '@nestjs/config';
+import { Readable } from 'stream';
 
 @Injectable()
 export class CloudinaryService {
@@ -20,5 +21,25 @@ export class CloudinaryService {
       unique_filename: false,
     });
     return res.secure_url;
+  }
+  async uploadImageBuffer(buffer: Buffer): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: 'trips',
+          use_filename: true,
+          unique_filename: false,
+        },
+        (error, result) => {
+          if (error) return reject(error);
+          resolve(result.secure_url);
+        },
+      );
+      const readable = new Readable();
+      readable._read = () => {};
+      readable.push(buffer);
+      readable.push(null);
+      readable.pipe(uploadStream);
+    });
   }
 }

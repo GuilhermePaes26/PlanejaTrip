@@ -1,25 +1,10 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  mongodb:
-    image: mongo:6.0
-    container_name: mongodb
-    restart: always
+  api:
+    build: .
+    container_name: nest-api
     ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-      - ./init-rs.js:/docker-entrypoint-initdb.d/init-rs.js:ro
-    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
-
-  mongo-init:
-    image: mongo:6.0
-    container_name: mongo-init
-    depends_on:
-      - mongodb
-    entrypoint: >
-      bash -c "sleep 10;
-               mongo --host mongodb --eval \"load('/docker-entrypoint-initdb.d/init-rs.js')\""
-               
-volumes:
-  mongo-data:
+      - '3000:3000'
+    env_file:
+      - .env

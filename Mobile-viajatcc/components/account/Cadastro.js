@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
 export default function Cadastro({ navigation }) {
@@ -19,8 +19,7 @@ export default function Cadastro({ navigation }) {
       return Alert.alert("Erro", "Você deve aceitar os termos");
     }
     try {
-      // Trocar ip, ip etec: http://10.67.168.160:3000/users
-      const res = await fetch("http://10.0.2.2:3000/users", {
+      const res = await fetch("https://planejatrip.onrender.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nome, email, senha, cpf, idade: Number(idade) }),
@@ -33,35 +32,51 @@ export default function Cadastro({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.fullContainer}>
+      <ImageBackground source={require("../../assets/header-cadastro.webp")} style={styles.headerBackground} resizeMode="cover">
+        <View style={styles.headerOverlay}>
+          <Text style={styles.headerTitle}>Criar Conta</Text>
+        </View>
+      </ImageBackground>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
-          <Text style={styles.title}>Criar Conta</Text>
-          <Field label="Nome" value={nome} onChange={setNome} />
-          <Field label="Email" value={email} onChange={setEmail} keyboardType="email-address" />
-          <View style={styles.field}>
-            <Text style={styles.label}>Senha:</Text>
-            <View style={styles.passwordContainer}>
-              <TextInput style={styles.input} placeholder="••••••••" placeholderTextColor="#999" secureTextEntry={!senhaVisivel} value={senha} onChangeText={setSenha} />
-              <Entypo name={senhaVisivel ? "eye-with-line" : "eye"} size={20} color="#666" style={styles.eyeIcon} onPress={() => setSenhaVisivel((v) => !v)} />
-            </View>
-          </View>
-          <Field label="CPF" value={cpf} onChange={setCpf} keyboardType="numeric" />
-          <Field label="Idade" value={idade} onChange={setIdade} keyboardType="numeric" />
-          <View style={styles.termsContainer}>
-            <TouchableOpacity style={styles.checkbox} onPress={() => setTermos((t) => !t)}>
-              {termos && <View style={styles.checkboxChecked} />}
-            </TouchableOpacity>
-            <Text style={styles.termsText}>Concordo com os Termos e Condições</Text>
-          </View>
-          <View style={styles.actionsContainer}>
-            <TouchableOpacity style={[styles.button, !termos && styles.buttonDisabled]} onPress={handleRegister} disabled={!termos}>
-              <Text style={styles.buttonText}>Cadastrar Conta</Text>
-            </TouchableOpacity>
+          <View style={styles.card}>
+            <Text style={styles.label}>Nome</Text>
+            <TextInput style={styles.input} placeholder="Digite seu nome" placeholderTextColor="#666" value={nome} onChangeText={setNome} autoCapitalize="words" />
 
-            <TouchableOpacity style={styles.linkButton} onPress={() => navigation.replace("SignIn")}>
-              <Text style={styles.linkButtonText}>Já tenho conta</Text>
-            </TouchableOpacity>
+            <Text style={styles.label}>Email</Text>
+            <TextInput style={styles.input} placeholder="Digite seu email" placeholderTextColor="#666" keyboardType="email-address" autoCapitalize="none" value={email} onChangeText={setEmail} />
+
+            <Text style={styles.label}>Senha</Text>
+            <View style={styles.passwordContainer}>
+              <TextInput style={styles.input} placeholder="••••••••" placeholderTextColor="#666" secureTextEntry={!senhaVisivel} value={senha} onChangeText={setSenha} />
+              <TouchableOpacity style={styles.eyeIcon} onPress={() => setSenhaVisivel((v) => !v)}>
+                <Entypo name={senhaVisivel ? "eye-with-line" : "eye"} size={20} color="#666" />
+              </TouchableOpacity>
+            </View>
+
+            <Text style={styles.label}>CPF</Text>
+            <TextInput style={styles.input} placeholder="Digite seu CPF" placeholderTextColor="#666" keyboardType="numeric" value={cpf} onChangeText={setCpf} />
+
+            <Text style={styles.label}>Idade</Text>
+            <TextInput style={styles.input} placeholder="Digite sua idade" placeholderTextColor="#666" keyboardType="numeric" value={idade} onChangeText={setIdade} />
+
+            <View style={styles.termsContainer}>
+              <TouchableOpacity style={styles.checkbox} onPress={() => setTermos((t) => !t)}>
+                {termos && <View style={styles.checkboxChecked} />}
+              </TouchableOpacity>
+              <Text style={styles.termsText}>Concordo com os Termos e Condições</Text>
+            </View>
+
+            <View style={styles.actionsContainer}>
+              <TouchableOpacity style={[styles.button, !termos && styles.buttonDisabled]} onPress={handleRegister} disabled={!termos}>
+                <Text style={styles.buttonText}>Cadastrar Conta</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.linkButton} onPress={() => navigation.replace("SignIn")}>
+                <Text style={styles.linkButtonText}>Já tenho conta</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -69,50 +84,62 @@ export default function Cadastro({ navigation }) {
   );
 }
 
-// componente auxiliar para campo simples
-function Field({ label, value, onChange, keyboardType }) {
-  return (
-    <View style={styles.field}>
-      <Text style={styles.label}>{label}:</Text>
-      <TextInput style={styles.input} placeholder={label} placeholderTextColor="#999" keyboardType={keyboardType || "default"} value={value} onChangeText={onChange} />
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
-  container: {
+  fullContainer: {
     flex: 1,
-    backgroundColor: "#233DDF",
+    backgroundColor: "#E5F1FF",
+  },
+  headerBackground: {
+    width: "100%",
+    height: 180,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  headerOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,0,0,0.3)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  headerTitle: {
+    fontFamily: "Montserrat-Bold",
+    fontSize: 28,
+    color: "#FFF",
+    textAlign: "center",
   },
   scrollContent: {
     padding: 20,
     paddingBottom: 40,
+    paddingTop: -40,
   },
-  title: {
-    fontSize: 24,
-    color: "#fff",
-    textAlign: "center",
-    fontWeight: "bold",
-    marginBottom: 30,
-  },
-  field: {
-    marginBottom: 20,
+  card: {
+    backgroundColor: "#FFF",
+    marginTop: 20,
+    borderRadius: 12,
+    paddingVertical: 24,
+    paddingHorizontal: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 4,
   },
   label: {
-    color: "#fff",
+    fontFamily: "Montserrat-Bold",
+    fontSize: 14,
+    color: "#132166",
     marginBottom: 6,
-    fontSize: 16,
+    marginTop: 12,
   },
   input: {
     width: "100%",
-    height: 50,
-    backgroundColor: "#F9F8F6",
-    borderRadius: 5,
+    height: Platform.select({ ios: 44, android: 48 }),
+    backgroundColor: "#E3F2FD",
+    borderRadius: 6,
     paddingHorizontal: 12,
+    fontFamily: "Montserrat-Regular",
     fontSize: 16,
-    color: "#000",
-    borderWidth: 1,
-    borderColor: "#D2CEC5",
+    color: "#333",
   },
   passwordContainer: {
     position: "relative",
@@ -120,20 +147,20 @@ const styles = StyleSheet.create({
   eyeIcon: {
     position: "absolute",
     right: 12,
-    top: 15,
+    top: Platform.select({ ios: 12, android: 14 }),
   },
   termsContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 30,
+    marginTop: 16,
+    marginBottom: 24,
   },
   checkbox: {
-    marginLeft: 5,
     width: 20,
     height: 20,
     borderWidth: 1,
-    borderColor: "#fff",
-    borderRadius: 3,
+    borderColor: "#132166",
+    borderRadius: 4,
     marginRight: 10,
     justifyContent: "center",
     alignItems: "center",
@@ -141,22 +168,23 @@ const styles = StyleSheet.create({
   checkboxChecked: {
     width: 14,
     height: 14,
-    backgroundColor: "#FFBB12",
+    backgroundColor: "#0288D1",
+    borderRadius: 2,
   },
   termsText: {
-    color: "#fff",
     fontSize: 14,
+    color: "#132166",
   },
   actionsContainer: {
-    marginLeft: 5,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 10,
   },
   button: {
     flex: 1,
-    backgroundColor: "#FFBB12",
-    borderRadius: 5,
+    backgroundColor: "#0288D1",
+    borderRadius: 6,
     paddingVertical: 14,
     alignItems: "center",
     marginRight: 10,
@@ -165,16 +193,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#AAA",
   },
   buttonText: {
-    color: "#233DDF",
+    color: "#FFF",
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   linkButton: {
     paddingVertical: 14,
-    paddingHorizontal: 12,
+    paddingHorizontal: 8,
   },
   linkButtonText: {
-    color: "#FFF",
+    color: "#0288D1",
     fontSize: 16,
     textDecorationLine: "underline",
   },
