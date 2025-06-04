@@ -33,8 +33,6 @@ export class TripsService {
   }
 
   createTrip(trip: FormData): Observable<Trip> {
-    console.log(trip);
-
     return this.http.post<Trip>(this.apiUrl, trip);
   }
 

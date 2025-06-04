@@ -112,8 +112,6 @@ export class FormTripComponent implements OnInit {
     // monta multipart/form-data
     const formData = new FormData();
     const trip = this.form.value;
-    console.log(trip);
-    
     formData.append('nome', trip.nome);
     formData.append('descricao', trip.descricao);
     formData.append('preco', trip.preco.toString());
@@ -122,9 +120,6 @@ export class FormTripComponent implements OnInit {
     formData.append('startPoint[namePoint]', trip.startPoint.namePoint);
     formData.append('startPoint[lat]', trip.startPoint.lat.toString());
     formData.append('startPoint[lng]', trip.startPoint.lng.toString());
-
-    console.log(formData);
-    
     if (this.selectedFile) {
       formData.append('image', this.selectedFile, this.selectedFile.name);
     }

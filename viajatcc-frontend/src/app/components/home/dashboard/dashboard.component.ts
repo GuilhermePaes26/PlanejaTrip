@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { payment, PaymentsService } from '../../../services/payments.service';
 import { BaseChartDirective } from 'ng2-charts';
+import { Trip, TripsService } from '../../../services/trips.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +16,8 @@ export class DashboardComponent implements OnInit {
   user!: user
   meta: number = 0
   bar: number = 0
+  trips: Trip[] = [];
+  disabledTrips: Trip[] = []
   idade01a18: user[] = []
   idade19a30: user[] = []
   idade31a50: user[] = []
@@ -43,22 +46,46 @@ export class DashboardComponent implements OnInit {
           }
         });
         this.barChartDataIdade = {
-        labels: ['01 a 18', '19 a 30', '31 a 50', '50+'],
-        datasets: [
-          {
-            data: [this.idade01a18.length, this.idade19a30.length, this.idade31a50.length, this.idade50plus.length],
-            label: 'Idade dos passageiros',
-            backgroundColor: ['#132166']
-          },
-  
-        ]
-      };
+          labels: ['01 a 18', '19 a 30', '31 a 50', '50+'],
+          datasets: [
+            {
+              data: [this.idade01a18.length, this.idade19a30.length, this.idade31a50.length, this.idade50plus.length],
+              label: 'Idade dos passageiros',
+              backgroundColor: ['#132166']
+            },
+
+          ]
+        };
       }
     })
-    
+    this.fetchTrips();
 
   }
-  constructor(private userService: UserService, private authService: AuthService, private payments: PaymentsService) {
+  fetchTrips(): void {
+    this.tripsService.getTrips().subscribe({
+      next: (data: Trip[]) => {
+        console.log(data);
+
+        const hoje = new Date()
+        data.forEach(trip => {
+          const dataTrip = new Date(trip.data)
+          if (dataTrip < hoje) {
+
+
+            this.disabledTrips.push(trip)
+          } else {
+            this.trips.push(trip)
+          }
+
+
+        });
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+  constructor(private userService: UserService, private authService: AuthService, private payments: PaymentsService, private tripsService: TripsService) {
     this.token = this.authService.getToken()
     this.userService.getUser(this.token).subscribe({
       next: (response) => {

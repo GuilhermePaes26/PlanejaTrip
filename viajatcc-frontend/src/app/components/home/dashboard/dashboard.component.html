@@ -1,12 +1,12 @@
 <main class="dashboard">
   <div class="meta" id="meta">
-    <section class="card card-meta" >
+    <section class="card card-meta">
       <header class="card-header">
         <h3>Meta Mensal</h3>
         <button class="card-close" (click)="close('meta')">×</button>
       </header>
       <div class="card-content">
-        <div class="valores" >
+        <div class="valores">
           <h4>R$ {{meta}}</h4>
           <h4>R$ 16.000,00</h4>
         </div>
@@ -52,11 +52,33 @@
       </div>
     </div>
   </section>
-  <section class="card card-viagens" >
-      <header class="card-header">
-        <h3>Ultimas viagens</h3>
-        <button class="card-close" (click)="close('meta')">×</button>
-      </header>
-      <app-trips></app-trips>
-    </section>
+  <section class="card card-viagens">
+    <header class="card-header">
+      <h3>Ultimas viagens</h3>
+      <button class="card-close" (click)="close('meta')">×</button>
+    </header>
+    <div class="trips-table-wrapper" *ngIf="trips.length > 0">
+      <div class="trips-table header">
+        <span>Viagem</span>
+        <span>Data</span>
+        <span>Preço</span>
+        <span>Passageiros</span>
+      </div>
+
+      <div class="trips-table row" *ngFor="let trip of trips">
+        <span>{{ trip.nome }}</span>
+        <span>{{ trip.data | date : "dd/MM/yyyy" }}</span>
+        <span>R$ {{ trip.preco | number : "1.2-2" }}</span>
+        <span>{{ trip.passageiros.length }}</span>
+        
+      </div>
+      <div class="trips-table-disabled row" *ngFor="let trip of disabledTrips">
+        <span>{{ trip.nome }}</span>
+        <span>{{ trip.data | date : "dd/MM/yyyy" }}</span>
+        <span>R$ {{ trip.preco | number : "1.2-2" }}</span>
+        <span>{{ trip.passageiros.length }}</span>
+        
+      </div>
+    </div>
+  </section>
 </main>

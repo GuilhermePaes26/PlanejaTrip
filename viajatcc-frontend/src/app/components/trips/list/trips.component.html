@@ -4,7 +4,10 @@
   <div class="search-bar">
     <input type="text" placeholder="Pesquisar viagem..." (ngModelChange)="filteredTrips()" [(ngModel)]="searchTerm" />
   </div>
-  <a href="/home/trips/create" class="button">Criar viagem</a>
+  <div class="margin button">
+
+    <mat-icon>add</mat-icon><a href="/home/trips/create" class=""> Criar viagem</a>
+  </div>
   <div *ngIf="isLoading" class="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
   <div *ngIf="error" class="error">{{ error }}</div>
 

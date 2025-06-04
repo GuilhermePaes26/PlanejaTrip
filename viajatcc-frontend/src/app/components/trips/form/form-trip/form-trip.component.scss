@@ -69,12 +69,12 @@
     transition: .3s;
 
     &:disabled {
-      background: linear-gradient(to right, #6a11cb, #2575fc);
+      background: rgb(182, 182, 182);
       opacity: 0.6; // se quiser manter o efeito "desativado"
       cursor:not-allowed
     }
     &:hover {
-      background: linear-gradient(to right, #8319f4, #5694ff);
+      background: linear-gradient(to right, #7b00ff, #005eff);
     }
   }
 }
