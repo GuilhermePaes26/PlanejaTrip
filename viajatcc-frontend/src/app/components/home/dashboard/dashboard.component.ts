@@ -160,6 +160,8 @@ export class DashboardComponent implements OnInit {
 
   close(id: string) {
     document.getElementById(id)?.classList.toggle('d-none')
+    document.getElementById(id + 'volta')?.classList.toggle('d-none')
+    document.getElementById('buttonsVolta')?.classList.remove('d-none')
   }
 
   async chartPieCalc() {

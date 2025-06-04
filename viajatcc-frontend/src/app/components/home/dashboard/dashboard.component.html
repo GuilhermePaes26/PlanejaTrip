@@ -1,4 +1,46 @@
 <main class="dashboard">
+  <div class="card-Row d-none" id="buttonsVolta">
+    <div class="meta d-none" id="metavolta" style="max-width: fit-content;">
+      <section class="card card-meta">
+        <header class="card-header">
+          <h3>Meta Mensal</h3>
+          <button class="card-close" (click)="close('meta')">×</button>
+        </header>
+      </section>
+    </div>
+    <div class="meta d-none" id="gastosvolta" style="max-width: fit-content;">
+      <section class="card card-meta">
+        <header class="card-header">
+          <h3>Possíveis Lucros</h3>
+          <button class="card-close" (click)="close('gastos')">×</button>
+        </header>
+      </section>
+    </div>
+    <div class="meta d-none" id="idadevolta" style="max-width: fit-content;">
+      <section class="card card-meta">
+        <header class="card-header">
+          <h3>Idade dos passageiros</h3>
+          <button class="card-close" (click)="close('idade')">×</button>
+        </header>
+      </section>
+    </div>
+    <div class="meta d-none" id="lucrovolta" style="max-width: fit-content;">
+      <section class="card card-meta">
+        <header class="card-header">
+          <h3>Quantidade de Viagens</h3>
+          <button class="card-close" (click)="close('lucro')">×</button>
+        </header>
+      </section>
+    </div>
+    <div class="meta d-none" id="viagemvolta" style="max-width: fit-content;">
+      <section class="card card-meta">
+        <header class="card-header">
+          <h3>Últimas Viagens</h3>
+          <button class="card-close" (click)="close('viagem')">×</button>
+        </header>
+      </section>
+    </div>
+  </div>
   <div class="meta" id="meta">
     <section class="card card-meta">
       <header class="card-header">
@@ -43,7 +85,7 @@
 
     <div class="card" id="lucro">
       <header class="card-header">
-        <h3>Vendas vs Lucros</h3>
+        <h3>Quantidade de Viagens</h3>
         <button class="card-close" (click)="close('lucro')">×</button>
       </header>
       <div class="card-content">
@@ -72,7 +114,7 @@
         <span>R$ {{ trip.preco | number : "1.2-2" }}</span>
         <span>{{ trip.passageiros.length }} / {{trip.onibus.capacidade}}</span>
         <span><a href="/home/trips/{{trip._id}}">Acessar</a></span>
-        
+
       </div>
       <div class="trips-table-disabled row" *ngFor="let trip of disabledTrips">
         <span>{{ trip.nome }}</span>
