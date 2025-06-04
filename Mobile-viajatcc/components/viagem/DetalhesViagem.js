@@ -146,7 +146,10 @@ export default function DetalhesViagem({ route, navigation }) {
               <Text style={styles.readMoreText}>Ler mais</Text>
             </TouchableOpacity>
           )}
-
+          <Text style={styles.sectionTitle2}>Ponto de Partida</Text>
+          <Text style={styles.descriptionText} numberOfLines={descExpanded ? null : MAX_DESC_LINES}>
+            {trip.startPoint.namePoint || "Ainda não há ponto de partida disponível para este destino."}
+          </Text>
           <View style={{ height: 20 }} />
 
           <Text style={[styles.sectionTitle, { marginTop: 0 }]}>Dados do Cartão</Text>
@@ -308,6 +311,14 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#132166",
     marginBottom: 6,
+  },
+  sectionTitle2: {
+    fontFamily: "Poppins-Bold",
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#132166",
+    marginBottom: 6,
+    marginTop: 6
   },
   descriptionText: {
     fontFamily: "Montserrat-Regular",

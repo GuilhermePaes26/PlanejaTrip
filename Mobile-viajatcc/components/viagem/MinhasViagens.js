@@ -111,6 +111,8 @@ const MinhasViagens = () => {
                   </View>
                   <Text style={styles.modalSectionTitle}>Descrição</Text>
                   <Text style={styles.modalDescription}>{viagemSelecionada.descricao || "Não há descrição disponível para este destino."}</Text>
+                  <Text style={styles.modalSectionTitle}>Ponto de partida</Text>
+                  <Text style={styles.modalDescription}>{viagemSelecionada.startPoint.namePoint || "Não há ponto de partida disponível para este destino."}</Text>
                   <View style={{ height: 20 }} />
                   <TouchableOpacity style={styles.modalCloseFooter} onPress={() => setModalVisible(false)}>
                     <Text style={styles.modalCloseFooterText}>Fechar</Text>

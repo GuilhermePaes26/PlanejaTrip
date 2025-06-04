@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit {
 
           this.meta = this.meta + payment.valor
         });
-        this.bar = this.meta * 100 / 16000
+        this.bar = this.meta * 100 / 35000
 
 
       }
