@@ -70,7 +70,7 @@
         <span>{{ trip.nome }}</span>
         <span>{{ trip.data | date : "dd/MM/yyyy" }}</span>
         <span>R$ {{ trip.preco | number : "1.2-2" }}</span>
-        <span>{{ trip.passageiros.length }}</span>
+        <span>{{ trip.passageiros.length }} / {{trip.onibus.capacidade}}</span>
         <span><a href="/home/trips/{{trip._id}}">Acessar</a></span>
         
       </div>
@@ -78,7 +78,7 @@
         <span>{{ trip.nome }}</span>
         <span>{{ trip.data | date : "dd/MM/yyyy" }}</span>
         <span>R$ {{ trip.preco | number : "1.2-2" }}</span>
-        <span>{{ trip.passageiros.length }}</span>
+        <span>{{ trip.passageiros.length }} / {{trip.onibus.capacidade}}</span>
         <span><a href="/home/trips/{{trip._id}}">Acessar</a></span>
       </div>
     </div>

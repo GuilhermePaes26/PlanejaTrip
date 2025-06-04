@@ -27,6 +27,9 @@
         <mat-form-field class="matForm">
           <mat-label>Data de partida</mat-label>
           <input matInput id="data" formControlName="data" type="date" />
+          <div *ngIf="form.get('data')?.hasError('notFutureDate') && form.get('data')?.touched" style="color: black;">
+            A data deve ser maior que hoje.
+          </div>
         </mat-form-field>
 
         <mat-form-field class="matForm">

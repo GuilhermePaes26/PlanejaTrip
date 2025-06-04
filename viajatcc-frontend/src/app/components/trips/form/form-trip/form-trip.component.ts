@@ -17,6 +17,7 @@ import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { futureDateValidator } from '../../../../utils/futureValidator';
 
 @Component({
   selector: 'app-form-trip',
@@ -46,7 +47,7 @@ export class FormTripComponent implements OnInit {
       nome: ['', Validators.required],
       descricao: [''],
       preco: [0, [Validators.required, Validators.min(0)]],
-      data: ['', Validators.required],
+      data: ['', [Validators.required, futureDateValidator()]],
       startPoint: [{ namePoint: '', lat: 0, lng: 0 }],
       onibus: ['', Validators.required],
     });
