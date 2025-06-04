@@ -43,6 +43,14 @@ export class DashboardComponent implements OnInit {
     labels: [],
     datasets: []
   };
+
+  //dados grafico viagens proximos meses
+  viagemPorData: {} = {}
+  mesUm: string = ''
+  mesDois: string = ''
+  mesTres: string = ''
+  meses: any =[]
+
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   token: string | null = ''
   ngOnInit(): void {
@@ -77,7 +85,7 @@ export class DashboardComponent implements OnInit {
     })
     this.fetchTrips();
     this.chartPieCalc()
-
+    this.chartBarTripsForMounth()
   }
   fetchTrips(): void {
     this.tripsService.getTrips().subscribe({
@@ -140,17 +148,6 @@ export class DashboardComponent implements OnInit {
     ]
   };
 
-
-  // pieChartData: ChartConfiguration<'pie'>['data'] = {
-  //   labels: ['Vendas', 'ônibus', 'Lucro'],
-  //   datasets: [
-  //     {
-  //       data: [1200, 500, 300],
-  //       backgroundColor: ['#132166', '#233DFF', '#4a289e']
-  //     }
-  //   ]
-  // };
-
   pieChartOptions: ChartConfiguration<'pie'>['options'] = {
     responsive: true,
   };
@@ -179,20 +176,53 @@ export class DashboardComponent implements OnInit {
           this.valorVendas = this.valorVendas + payment.valor
         });
         this.valorLucro = this.valorVendas - this.valorOnibus
-        console.log(this.valorLucro);
 
         this.pieChartData = {
-        labels: ['Vendas', 'ônibus', 'Lucro'],
-        datasets: [
-          {
-            data: [this.valorVendas, this.valorOnibus, this.valorLucro],
-            backgroundColor: ['#132166', '#233DFF', '#4a289e']
-          }
-        ]
-      };
+          labels: ['Vendas', 'ônibus', 'Lucro'],
+          datasets: [
+            {
+              data: [this.valorVendas, this.valorOnibus, this.valorLucro],
+              backgroundColor: ['#132166', '#233DFF', '#4a289e']
+            }
+          ]
+        };
       },
-  })
+    })
 
 
-}
+  }
+
+  chartBarTripsForMounth() {
+    this.tripsService.getTrips().subscribe({
+      next: (trips) => {
+        const hoje = new Date();
+        const tresMesesDepois = new Date();
+        tresMesesDepois.setMonth(hoje.getMonth() + 3);
+
+        const proximasViagens = trips.filter(trip => {
+          const data = new Date(trip.data);
+          return data >= hoje && data <= tresMesesDepois;
+        });
+
+        const listMeses: any[] = [] // getMonth vai de 0 (Jan) a 11 (Dez)
+        this.viagemPorData = proximasViagens.reduce((acc, trip) => {
+          const data = new Date(trip.data);
+          const mes = data.getMonth() + 1;
+          listMeses.push(mes)
+          
+
+          if (!acc[mes]) {
+            acc[mes] = 1;
+          } else {
+            acc[mes]++;
+          }
+
+          return acc;
+        }, {} as Record<number, number>);
+        const sortMeses = listMeses.sort()
+        this.meses = new Set(sortMeses)
+        console.log(this.meses);
+      },
+    })
+  }
 }
