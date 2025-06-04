@@ -64,6 +64,8 @@ export class FormTripComponent implements OnInit {
     this.tripId = this.route.snapshot.paramMap.get('id');
     this.busService.findBus().subscribe({
       next: (response) => {
+        console.log(response);
+        
         const bus = response.filter((bus) => bus.fornecedor_id !== null);
         this.buses = bus;
       },

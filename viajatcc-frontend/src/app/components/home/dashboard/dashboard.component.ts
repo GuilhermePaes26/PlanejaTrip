@@ -6,6 +6,7 @@ import { payment, PaymentsService } from '../../../services/payments.service';
 import { BaseChartDirective } from 'ng2-charts';
 import { Trip, TripsService } from '../../../services/trips.service';
 import { bus, BusService } from '../../../services/bus.service';
+import { getMounthString } from '../../../utils/getMeses';
 
 @Component({
   selector: 'app-dashboard',
@@ -45,11 +46,15 @@ export class DashboardComponent implements OnInit {
   };
 
   //dados grafico viagens proximos meses
-  viagemPorData: {} = {}
-  mesUm: string = ''
+  viagemPorData: any = {}
+  mesUm: any = ''
   mesDois: string = ''
   mesTres: string = ''
-  meses: any =[]
+  meses: any = []
+  barChartData: ChartConfiguration<'bar'>['data'] = {
+    labels: [],
+    datasets: []
+  };
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   token: string | null = ''
@@ -139,14 +144,13 @@ export class DashboardComponent implements OnInit {
     responsive: true,
   };
 
-  barChartData = {
-    labels: ['Janeiro', 'Fevereiro', 'Março'],
-    datasets: [
-      { data: [65, 59, 80], label: 'Vendas', backgroundColor: ['#132166'] },
-      { data: [28, 48, 40], label: 'Lucros', backgroundColor: ['#233DFF'] },
+  // barChartData = {
+  //   labels: ['Janeiro', 'Fevereiro', 'Março'],
+  //   datasets: [
+  //     { data: [28, 48, 40], label: 'Lucros', backgroundColor: ['#233DFF'] },
 
-    ]
-  };
+  //   ]
+  // };
 
   pieChartOptions: ChartConfiguration<'pie'>['options'] = {
     responsive: true,
@@ -164,7 +168,6 @@ export class DashboardComponent implements OnInit {
         buses.forEach(bus => {
 
           this.valorOnibus = this.valorOnibus + bus.valor
-          console.log(this.valorOnibus);
 
         })
       }
@@ -192,8 +195,8 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  chartBarTripsForMounth() {
-    this.tripsService.getTrips().subscribe({
+  async chartBarTripsForMounth() {
+    await this.tripsService.getTrips().subscribe({
       next: (trips) => {
         const hoje = new Date();
         const tresMesesDepois = new Date();
@@ -208,20 +211,34 @@ export class DashboardComponent implements OnInit {
         this.viagemPorData = proximasViagens.reduce((acc, trip) => {
           const data = new Date(trip.data);
           const mes = data.getMonth() + 1;
+          const nomeMes: any = getMounthString(mes);
           listMeses.push(mes)
-          
 
-          if (!acc[mes]) {
-            acc[mes] = 1;
+
+          if (!acc[nomeMes]) {
+            acc[nomeMes] = 1;
           } else {
-            acc[mes]++;
+            acc[nomeMes]++;
           }
 
           return acc;
         }, {} as Record<number, number>);
         const sortMeses = listMeses.sort()
-        this.meses = new Set(sortMeses)
-        console.log(this.meses);
+        this.meses = new Set(sortMeses); // remove duplicados
+        const mesesArray: any = Array.from(this.meses); // converte para array
+        this.mesUm = getMounthString(mesesArray[0]);
+        this.mesDois = getMounthString(mesesArray[1]);
+        this.mesTres = getMounthString(mesesArray[2]);
+
+        const dadosMesesArray: any = Object.values(this.viagemPorData)
+
+        this.barChartData = {
+          labels: [this.mesUm, this.mesDois, this.mesTres],
+          datasets: [
+            { data: [dadosMesesArray[2], dadosMesesArray[0], dadosMesesArray[1]], label: 'Viagens planejadas', backgroundColor: ['#233DFF'] },
+
+          ]
+        };
       },
     })
   }

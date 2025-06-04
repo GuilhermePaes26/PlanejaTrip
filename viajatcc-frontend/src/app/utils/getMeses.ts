@@ -1,4 +1,4 @@
-export function getMounthString(mounthNumber: number): any {
+export function getMounthString(mounthNumber: number) {
     switch(mounthNumber) {
         case (6):
             return 'junho'
