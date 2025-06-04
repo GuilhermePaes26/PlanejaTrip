@@ -17,6 +17,7 @@ import {
 import { UsersService } from './users.service';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
 
 @Controller('users')
 export class UsersController {
@@ -26,14 +27,14 @@ export class UsersController {
   ) {}
 
   @Post()
-  @UseInterceptors(FileInterceptor('image', { dest: './uploads' }))
+  @UseInterceptors(FileInterceptor('image', { storage: memoryStorage() }))
   async create(
     @UploadedFile() file: Express.Multer.File,
     @Body() createUserDto: any,
   ) {
     if (file) {
       try {
-        const secureUrl = await this.cloudinary.uploadImage(file.path);
+        const secureUrl = await this.cloudinary.uploadImageBuffer(file.buffer);
         createUserDto.imgLink = secureUrl;
       } catch {
         throw new HttpException(
@@ -81,7 +82,7 @@ export class UsersController {
   }
 
   @Put(':id')
-  @UseInterceptors(FileInterceptor('image', { dest: './uploads' }))
+  @UseInterceptors(FileInterceptor('image', { storage: memoryStorage() }))
   async update(
     @Param('id') id: string,
     @UploadedFile() file: Express.Multer.File,
@@ -93,7 +94,7 @@ export class UsersController {
 
     let secureUrl: string;
     try {
-      secureUrl = await this.cloudinary.uploadImage(file.path);
+      secureUrl = await this.cloudinary.uploadImageBuffer(file.buffer);
     } catch {
       throw new HttpException(
         'Erro ao processar imagem no update.',
