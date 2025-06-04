@@ -1,0 +1,42 @@
+// .logo-img {
+//     width: 100%;
+//   max-width: 600px;
+//   height: auto;
+//   display: block;
+//   margin: 0 auto; // centraliza horizontalmente
+//     //   height: 300px; // ajuste conforme sua logo
+//     //   width: auto;
+//     // //   display: block;
+//     //   align-items: center;
+    
+// }
+
+// .text {
+//     font-size: 1rem;
+//     align-items: center;
+// }
+
+// .img {
+//     margin: 0;
+// }
+
+// Deixe o visual clean, complementando o Tailwind
+:host ::ng-deep {
+  .max-h-40 {
+    max-height: 10rem;
+  }
+
+  @media (max-width: 768px) {
+    .max-w-4xl {
+      flex-direction: column !important;
+    }
+    .md\:w-1\/2 {
+      width: 100% !important;
+      border-right: none !important;
+      border-bottom: 1px solid #e5e7eb !important; // gray-200
+    }
+    .p-8 {
+      padding: 2rem 1rem !important;
+    }
+  }
+}

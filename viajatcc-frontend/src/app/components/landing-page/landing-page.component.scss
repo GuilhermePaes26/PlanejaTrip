@@ -68,14 +68,13 @@ body, :host {
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
-  margin-top: 77px; /* height of navbar */
+  margin-top: 75px; /* height of navbar */
 }
 
 .hero-banner .overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(20, 40, 80, 0.70);
-  // background: rgba(25, 118, 210, 0.45);
   z-index: 1;
   border-radius: 0 0 18px 18px;
 }
@@ -106,10 +105,11 @@ body, :host {
   background: var(--light-blue);
   min-height: 60vh;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  padding: 0;
+  // padding: 0;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  margin-bottom: 0.5rem;
 }
 
 .container {
@@ -120,7 +120,7 @@ body, :host {
   max-width: 1300px;
   width: 100%;
   margin-top: 50px; /* para sobrepor o banner */
-  
+    
 }
 
 header {
@@ -150,12 +150,12 @@ article h2 {
   font-weight: 600;
 }
 
-article p,
-article ul {
+p, ul {
   color: var(--text);
-  font-size: .97rem;
+  font-size: 1.1rem;
   line-height: 1.55;
   margin-bottom: 1.1rem;
+  text-align: justify;
 }
 
 article ul {
