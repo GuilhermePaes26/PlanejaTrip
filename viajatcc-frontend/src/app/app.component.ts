@@ -8,19 +8,20 @@ import {
   NavigationError,
   Event,
 } from '@angular/router';
+import { SpinnerService } from './services/spinner.service';
 
 @Component({
   standalone: false,
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   loading = false;
   isBrowser = false;
-  private _timer: any;
 
   constructor(
+    private spinner: SpinnerService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
@@ -28,15 +29,16 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.spinner.loading$.subscribe((l) => (this.loading = l));
+
     this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationStart) {
-        this._timer = setTimeout(() => (this.loading = true), 200);
+        this.loading = true;
       } else if (
         e instanceof NavigationEnd ||
         e instanceof NavigationCancel ||
         e instanceof NavigationError
       ) {
-        clearTimeout(this._timer);
         this.loading = false;
       }
     });
