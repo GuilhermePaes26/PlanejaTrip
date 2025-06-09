@@ -1,27 +1,38 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  PLATFORM_ID,
+  OnDestroy,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { AuthService } from './services/auth.service';
+import { first } from 'rxjs/operators';
 import {
   Router,
+  Event,
   NavigationStart,
   NavigationEnd,
   NavigationCancel,
   NavigationError,
-  Event,
 } from '@angular/router';
-import { SpinnerService } from './services/spinner.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   standalone: false,
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  initialLoading = true;
   loading = false;
   isBrowser = false;
 
+  private navSub?: Subscription;
+
   constructor(
-    private spinner: SpinnerService,
+    private auth: AuthService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
@@ -29,18 +40,24 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.spinner.loading$.subscribe((l) => (this.loading = l));
+    this.auth.authChecked$.pipe(first()).subscribe((isAuth) => {
+      this.initialLoading = false;
 
-    this.router.events.subscribe((e: Event) => {
-      if (e instanceof NavigationStart) {
-        this.loading = true;
-      } else if (
-        e instanceof NavigationEnd ||
-        e instanceof NavigationCancel ||
-        e instanceof NavigationError
-      ) {
-        this.loading = false;
-      }
+      this.navSub = this.router.events.subscribe((e: Event) => {
+        if (e instanceof NavigationStart) {
+          this.loading = true;
+        } else if (
+          e instanceof NavigationEnd ||
+          e instanceof NavigationCancel ||
+          e instanceof NavigationError
+        ) {
+          this.loading = false;
+        }
+      });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.navSub?.unsubscribe();
   }
 }

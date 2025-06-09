@@ -19,7 +19,16 @@ export class AuthService {
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
-    this.authChecked.next(this.isBrowser && !!this.getToken());
+    // não faz next() aqui
+  }
+
+  /** Será chamado pelo APP_INITIALIZER antes do bootstrap */
+  init(): Promise<void> {
+    return new Promise((resolve) => {
+      const token = this.isBrowser ? sessionStorage.getItem('authToken') : null;
+      this.authChecked.next(!!token);
+      resolve();
+    });
   }
 
   login(email: string, senha: string): Observable<LoginResponse> {

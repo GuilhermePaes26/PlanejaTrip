@@ -1,15 +1,58 @@
-<nav class="sidebar-nav" id="sidebar-nav">
+<nav class="sidebar-nav" [class.closed]="isClosed">
   <div class="ico">
-    <img src="https://res.cloudinary.com/dsadhjxa4/image/upload/v1749009696/Adobe_Express_-_file_o7rrru.png" alt="" >
+    <img
+      src="https://res.cloudinary.com/dsadhjxa4/image/upload/v1749009696/Adobe_Express_-_file_o7rrru.png"
+      alt="Logo"
+    />
+    <!-- Ícone para abrir/fechar -->
+    <button class="toggle-btn" (click)="toggleSidebar()">
+      <mat-icon>{{ isClosed ? "menu" : "close" }}</mat-icon>
+    </button>
   </div>
+
   <div class="nav-links">
     <ul>
-      <li><a href="/home/dashboard"><mat-icon>home</mat-icon><h2>Dashboard</h2></a></li>
-      <li><a href="/home/trips/list"><mat-icon>flight</mat-icon><h2>Viagens</h2></a></li>
-      <li><a href="/home/bus/list"><span class="material-symbols-outlined">directions_bus</span><h2>Ônibus</h2></a></li>
+      <li>
+        <a
+          [routerLink]="['/home', 'dashboard']"
+          routerLinkActive="active"
+          (click)="toggleSidebar()"
+        >
+          <mat-icon>home</mat-icon>
+          <h2>Dashboard</h2>
+        </a>
+      </li>
+      <li>
+        <a
+          [routerLink]="['/home', 'trips', 'list']"
+          routerLinkActive="active"
+          (click)="toggleSidebar()"
+        >
+          <mat-icon>flight</mat-icon>
+          <h2>Viagens</h2></a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="['/home', 'bus', 'list']"
+          routerLinkActive="active"
+          (click)="toggleSidebar()"
+        >
+          <span class="material-symbols-outlined">directions_bus</span>
+          <h2>Ônibus</h2>
+        </a>
+      </li>
     </ul>
   </div>
+
   <div class="account">
-    <a href="/home/users/"><mat-icon>person</mat-icon><h2>Minha Conta</h2></a>
+    <a
+      [routerLink]="['/home', 'users']"
+      routerLinkActive="active"
+      (click)="toggleSidebar()"
+    >
+      <mat-icon>person</mat-icon>
+      <h2>Minha Conta</h2>
+    </a>
   </div>
 </nav>
