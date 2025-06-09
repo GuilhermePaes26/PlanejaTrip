@@ -9,11 +9,14 @@ import {
   Param,
   UploadedFile,
   UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { TripsService } from './trips.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('trips')
 export class TripsController {
   constructor(

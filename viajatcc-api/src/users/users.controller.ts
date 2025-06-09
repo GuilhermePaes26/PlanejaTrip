@@ -13,11 +13,13 @@ import {
   NotFoundException,
   HttpException,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 export class UsersController {
@@ -50,28 +52,13 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   async findAll() {
     return this.usersService.findAll();
   }
 
-  @Post('login')
-  async login(@Body() loginDto: any) {
-    const { email, password } = loginDto;
-    if (!email || !password) {
-      throw new BadRequestException('Email e senha são obrigatórios');
-    }
-
-    const user = await this.usersService.findEmail(email);
-    if (!user) {
-      throw new NotFoundException('Usuário não encontrado');
-    }
-    if (user.senha !== password) {
-      throw new HttpException('Credenciais inválidas', HttpStatus.UNAUTHORIZED);
-    }
-    return user;
-  }
-
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const user = await this.usersService.findOne(id);
@@ -81,6 +68,7 @@ export class UsersController {
     return user;
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Put(':id')
   @UseInterceptors(FileInterceptor('image', { storage: memoryStorage() }))
   async update(
@@ -110,6 +98,7 @@ export class UsersController {
     return updatedUser;
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.usersService.remove(id);

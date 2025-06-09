@@ -7,9 +7,12 @@ import {
   Delete,
   Body,
   Param,
+  UseGuards,
 } from '@nestjs/common';
 import { BusesService } from './buses.service';
+import { AuthGuard } from '@nestjs/passport';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('buses')
 export class BusesController {
   constructor(private readonly busesService: BusesService) {}

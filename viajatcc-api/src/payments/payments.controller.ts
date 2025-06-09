@@ -8,12 +8,15 @@ import {
   Body,
   Param,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { PaymentsService } from './payments.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { CreatePaymentIntentDto } from './dto/create-payment-intent.dto';
 import { ProcessPaymentDto } from './dto/process-payment.dto';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('payments')
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}

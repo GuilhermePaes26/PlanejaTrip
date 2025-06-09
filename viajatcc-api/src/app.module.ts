@@ -8,6 +8,7 @@ import { PaymentsModule } from './payments/payments.module';
 import { BusesModule } from './buses/buses.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     BusesModule,
     SuppliersModule,
     CloudinaryModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
