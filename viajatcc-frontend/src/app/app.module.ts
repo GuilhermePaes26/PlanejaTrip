@@ -11,18 +11,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { AuthComponent } from './components/auth/auth.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { TripsComponent } from './components/trips/list/trips.component';
 import { TripDetailComponent } from './components/trips/details/trip-detail/trip-detail.component';
 import { FormTripComponent } from './components/trips/form/form-trip/form-trip.component';
 import { SidebarComponent } from './components/home/sidebar/sidebar.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from './components/home/dashboard/dashboard.component';
 import { TripRouterComponent } from './components/trips/trip-router/trip-router.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FornecedoresComponent } from './components/bus/fornecedores/fornecedores.component';
 import { UserComponent } from './components/user/user.component';
 import { CnpjPipe } from './cnpj.pipe';
@@ -34,10 +34,12 @@ import { SnackbarComponent } from './shared/components/snackbar/snackbar.compone
 import { SupplierDetailComponent } from './components/bus/supplier-detail/supplier-detail.component';
 import { DialogCreateBusComponent } from './components/bus/dialog-create-bus/dialog-create-bus.component';
 import { DialogMapsComponent } from './components/trips/form/dialog-maps/dialog-maps.component';
-import {NgChartsModule} from 'ng2-charts'
+import { NgChartsModule } from 'ng2-charts';
 import { MatProgressBar } from '@angular/material/progress-bar';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +59,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     SupplierDetailComponent,
     DialogCreateBusComponent,
     DialogMapsComponent,
-    LandingPageComponent
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,9 +78,16 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     NgChartsModule,
     MatDialogModule,
     MatProgressBar,
-    MatTabsModule
+    MatTabsModule,
   ],
-  providers: [provideClientHydration(withEventReplay())],
+  providers: [
+    provideClientHydration(withEventReplay()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

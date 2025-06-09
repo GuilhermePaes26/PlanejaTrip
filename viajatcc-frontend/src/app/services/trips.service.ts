@@ -20,7 +20,7 @@ export interface Trip {
   providedIn: 'root',
 })
 export class TripsService {
-  private readonly apiUrl = 'https://planejatrip.onrender.com/trips';
+  private readonly apiUrl = 'http://localhost:3000/trips';
 
   constructor(private http: HttpClient) {}
 

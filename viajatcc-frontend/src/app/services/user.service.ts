@@ -19,13 +19,15 @@ export interface user {
   providedIn: 'root',
 })
 export class UserService {
-  private readonly apiUrl = 'https://planejatrip.onrender.com/users';
+  // private readonly apiUrl = 'https://planejatrip.onrender.com/users';
+  private readonly apiUrl = 'http://localhost:3000/users';
   constructor(private http: HttpClient) {}
   getUser(id: string | null) {
+    console.log(`Fetching user with ID: ${id}`);
     return this.http.get<user>(`${this.apiUrl}/${id}`);
   }
   findAll() {
-    return this.http.get<user[]>(`${this.apiUrl}`)
+    return this.http.get<user[]>(`${this.apiUrl}`);
   }
   updateUser(id: string, data: FormData): Observable<user> {
     return this.http.put<user>(`${this.apiUrl}/${id}`, data);

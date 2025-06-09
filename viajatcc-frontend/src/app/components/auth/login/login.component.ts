@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { UserService, user } from '../../../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,48 +10,55 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
-  logForm!: FormGroup; // Defina a variável do FormGroup
-  errorMessage: string = '';
-  isBrowser!: boolean;
-  token: string | null = '';
+export class LoginComponent implements OnInit {
+  logForm!: FormGroup;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private route: Router
+    private usersService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    // Inicialize o formulário com os controles e validadores
     this.logForm = this.fb.group({
-      username: ['', [Validators.required]], // Adicionando validadores
-      password: ['', [Validators.required]], // Adicionando validadores
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', Validators.required],
     });
   }
 
-  // Função que será chamada no submit do formulário
   onLogin() {
-    if (this.logForm.valid) {
-      const { username, password } = this.logForm.value;
-      this.authService.login(username, password).subscribe({
-        next: (response) => {
-          if (response) {
-            console.log(response);
-            this.authService.saveToken(response._id);
-            localStorage.setItem('userName', response.nome);
+    if (this.logForm.invalid) {
+      this.errorMessage = 'Preencha todos os campos corretamente!';
+      return;
+    }
+
+    const { email, senha } = this.logForm.value;
+    this.authService.login(email, senha).subscribe({
+      next: ({ access_token }) => {
+        this.authService.saveToken(access_token);
+
+        const payload = JSON.parse(atob(access_token.split('.')[1]));
+        const userId = payload.sub as string;
+
+        this.usersService.getUser(userId).subscribe({
+          next: (user: user) => {
+            localStorage.setItem('userName', user.nome);
             localStorage.setItem(
               'imageUser',
-              response.imgLink || 'assets/default-avatar.jpg'
+              user.imgLink ?? 'assets/default-avatar.jpg'
             );
-            this.route.navigate(['/home/dashboard']);
-          } else {
-            this.errorMessage = 'Usuário ou senha incorreto';
-          }
-        },
-      });
-    } else {
-      this.errorMessage = 'Preencha todos os campos corretamente!';
-    }
+            this.router.navigate(['/home/dashboard']);
+          },
+          error: () => {
+            this.errorMessage = 'Não foi possível carregar dados do usuário.';
+          },
+        });
+      },
+      error: () => {
+        this.errorMessage = 'Usuário ou senha incorretos';
+      },
+    });
   }
 }

@@ -21,32 +21,44 @@ const routes: Routes = [
     path: 'auth',
     component: AuthComponent,
     children: [
-      { path: 'login', component: LoginComponent, canActivate: [AlreadyLoggedGuard] },
-      { path: 'signup', component: SignupComponent, canActivate: [AlreadyLoggedGuard] },
+      {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [AlreadyLoggedGuard],
+      },
+      {
+        path: 'signup',
+        component: SignupComponent,
+        canActivate: [AlreadyLoggedGuard],
+      },
       { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona /auth → /auth/login
     ],
   },
   { path: '', component: LandingPageComponent },
   {
-    path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
-      {path: 'dashboard', component:DashboardComponent},
-      {path: 'users', component:UserComponent},
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'users', component: UserComponent },
       {
-        path: 'trips', children: [
+        path: 'trips',
+        children: [
           {
             path: '',
-            component: TripRouterComponent
+            component: TripRouterComponent,
           },
           {
             path: 'list',
-            component: TripsComponent
+            component: TripsComponent,
           },
           {
             path: 'create',
             loadComponent: () =>
-              import('./components/trips/form/form-trip/form-trip.component').then(
-                (m) => m.FormTripComponent
-              ),
+              import(
+                './components/trips/form/form-trip/form-trip.component'
+              ).then((m) => m.FormTripComponent),
           },
           {
             path: ':id',
@@ -58,38 +70,40 @@ const routes: Routes = [
           {
             path: 'edit/:id',
             loadComponent: () =>
-              import('./components/trips/form/form-trip/form-trip.component').then(
-                (m) => m.FormTripComponent
-              ),
+              import(
+                './components/trips/form/form-trip/form-trip.component'
+              ).then((m) => m.FormTripComponent),
           },
         ],
       },
       {
-        path: 'bus', children: [
+        path: 'bus',
+        children: [
           {
             path: '',
-            component: BusRouterComponent
+            component: BusRouterComponent,
           },
           {
             path: 'list',
-            component: FornecedoresComponent
+            component: FornecedoresComponent,
           },
           {
             path: 'create',
             loadComponent: () =>
-              import('./components/bus/form-fornecedor/form-fornecedor.component').then(
-                (m) => m.FormFornecedorComponent),
+              import(
+                './components/bus/form-fornecedor/form-fornecedor.component'
+              ).then((m) => m.FormFornecedorComponent),
           },
           {
             path: ':id',
-            component: SupplierDetailComponent
+            component: SupplierDetailComponent,
           },
           {
             path: 'edit/:id',
             loadComponent: () =>
-              import('./components/trips/form/form-trip/form-trip.component').then(
-                (m) => m.FormTripComponent
-              ),
+              import(
+                './components/trips/form/form-trip/form-trip.component'
+              ).then((m) => m.FormTripComponent),
           },
         ],
       },
@@ -101,4 +115,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

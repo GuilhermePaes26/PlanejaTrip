@@ -1,69 +1,63 @@
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+interface LoginResponse {
+  access_token: string;
+}
+
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'https://planejatrip.onrender.com';
-  isBrowser!: boolean;
-
+  private apiUrl = 'http://localhost:3000';
   private authChecked = new BehaviorSubject<boolean>(false);
   authChecked$ = this.authChecked.asObservable();
+  private isBrowser: boolean;
 
-  constructor(private http: HttpClient) { 
-    this.isBrowser = typeof window !== 'undefined';
-    if (this.isBrowser) {
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+    this.authChecked.next(this.isBrowser && !!this.getToken());
+  }
 
-      this.checkAuth();
-    }
-  }
-  
-  checkAuth() {
-    // Simula verificação (ex: token no storage)
-    const token = sessionStorage.getItem('authToken');
-    if (token) {
-      // pode fazer algo como validar na API se quiser
-    }
-    // Após checar, avisamos que terminou a verificação
-    this.authChecked.next(true);
-  }
-  
-  login(email: string, password: string) {
-    const data = {
+  login(email: string, senha: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, {
       email,
-      password
-    }
-    return this.http.post<any>(`${this.apiUrl}/users/login`, data)
-  }
-  signin(senha: string, cpf: string, nome: string, email: string) {
-    const data = {
       senha,
-      cpf,
-      nome,
-      email,
-      idade: 62
-    }
-    return this.http.post<any>(`${this.apiUrl}/users`, data)
+    });
   }
-  saveToken(id: string) {
+
+  signup(data: {
+    nome: string;
+    email: string;
+    senha: string;
+    cpf: string;
+    idade: number;
+  }) {
+    return this.http.post(`${this.apiUrl}/users`, data);
+  }
+
+  saveToken(token: string): void {
     if (this.isBrowser) {
-      sessionStorage.setItem('authToken', id);
+      sessionStorage.setItem('authToken', token);
+      this.authChecked.next(true);
     }
   }
+
   getToken(): string | null {
-    if (this.isBrowser) {
-      return sessionStorage.getItem('authToken');
-    }
-    return null;
+    return this.isBrowser ? sessionStorage.getItem('authToken') : null;
   }
 
   isAuthenticated(): boolean {
+    return this.isBrowser && !!sessionStorage.getItem('authToken');
+  }
+
+  logout(): void {
     if (this.isBrowser) {
-      return !!sessionStorage.getItem('authToken');
-    } else {
-      return false
+      sessionStorage.removeItem('authToken');
+      this.authChecked.next(false);
     }
   }
 }
