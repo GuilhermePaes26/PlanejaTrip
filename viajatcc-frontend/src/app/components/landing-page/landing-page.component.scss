@@ -1,6 +1,6 @@
 :root {
   --main-blue: #1976d2;
-  --light-blue: #e3f2fd;
+  --light-blue: #f0f2f5;
   --text: #222;
   --subtitle: #1976d2cc;
 }
@@ -117,7 +117,7 @@ body, :host {
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(25, 118, 210, 0.08);
   padding: 2.2rem 1.8rem;
-  max-width: 1300px;
+  max-width: 1100px;
   width: 100%;
   margin-top: 50px; /* para sobrepor o banner */
     
@@ -177,6 +177,11 @@ article ul li {
   color: #0d47a1;
 }
 
+.background {
+  background-color: #7272721e;
+}
+
+
 @media (max-width: 800px) {
   .navbar { padding: 0.5rem 1rem; }
   .container { padding: 1.1rem 0.5rem; }
@@ -186,3 +191,4 @@ article ul li {
   header h1 { font-size: 1.25rem; }
   article h2 { font-size: 1rem; }
 }
+

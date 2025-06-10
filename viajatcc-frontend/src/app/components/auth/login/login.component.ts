@@ -53,4 +53,7 @@ export class LoginComponent {
       this.errorMessage = 'Preencha todos os campos corretamente!';
     }
   }
+
 }
+
+
