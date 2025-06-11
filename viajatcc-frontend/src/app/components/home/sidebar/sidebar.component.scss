@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: width 0.3s ease;
 }
 .sidebar-nav.closed {
   width: 0;
@@ -44,7 +45,7 @@
   gap: 8px;
   padding: 18px 10px;
   text-decoration: none;
-  color: #138bec;
+  color: #ffffff;
   transition: all 0.3s ease;
   border-bottom: 1px solid rgba(38, 112, 173, 0.3);
 }
@@ -63,7 +64,7 @@
   font-size: 1em;
   font-weight: 600;
   margin: 0;
-  color: #138bec;
+  color: #ffffff;
 }
 /* "Minha conta" no fim */
 .sidebar-nav .account {
@@ -77,7 +78,7 @@
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    color: #138bec;
+    color: #ffffff;
     transition: all 0.3s ease;
 
     &:hover {
@@ -96,7 +97,7 @@
     font-size: 18px;
     font-weight: 600;
     margin: 0;
-    color: #138bec;
+    color: #ffffff;
   }
 }
 .ico {
