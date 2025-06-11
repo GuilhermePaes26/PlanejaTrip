@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
   //dados grafico pizza p. lucros
   valorOnibus: number = 0
   valorVendas: number = 0
+  valorComissao: number = 0
   valorLucro: number = 0
   pieChartData: ChartConfiguration<'pie'>['data'] = {
     labels: [],
@@ -134,8 +135,8 @@ export class DashboardComponent implements OnInit {
 
           this.meta = this.meta + payment.valor
         });
-        this.bar = this.meta * 100 / 35000
-
+        this.bar = this.meta * 100 / 350000
+        this.valorComissao = this.meta * 0.1
 
       }
     })
@@ -180,13 +181,13 @@ export class DashboardComponent implements OnInit {
 
           this.valorVendas = this.valorVendas + payment.valor
         });
-        this.valorLucro = this.valorVendas - this.valorOnibus
+        this.valorLucro = this.valorVendas - this.valorOnibus - this.valorComissao
 
         this.pieChartData = {
-          labels: ['Vendas', 'ônibus', 'Lucro'],
+          labels: ['Comissão', 'ônibus', 'Lucro'],
           datasets: [
             {
-              data: [this.valorVendas, this.valorOnibus, this.valorLucro],
+              data: [this.valorComissao, this.valorOnibus, this.valorLucro],
               backgroundColor: ['#132166', '#233DFF', '#4a289e']
             }
           ]

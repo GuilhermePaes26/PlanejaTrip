@@ -49,8 +49,8 @@
       </header>
       <div class="card-content">
         <div class="valores">
-          <h4>R$ {{meta}}</h4>
-          <h4>R$ 35.000,00</h4>
+          <h4>{{meta | currency: "BRL"}}</h4>
+          <h4>R$350,000.00</h4>
         </div>
         <mat-progress-bar class="progress" color="primary" mode="determinate" value="{{this.bar}}">
         </mat-progress-bar>
